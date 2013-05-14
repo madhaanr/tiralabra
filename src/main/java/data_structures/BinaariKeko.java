@@ -9,8 +9,7 @@ public class BinaariKeko {
     public BinaariKeko(int[] binKeko) {
         this.binKeko=buildHeap(binKeko);
     }
-    
-
+   
     public int parent(int i) {
         return i / 2;
     }
