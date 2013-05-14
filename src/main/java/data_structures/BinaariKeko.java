@@ -3,6 +3,7 @@ package data_structures;
 /* @author mhaanran */
 public class BinaariKeko {
 
+    
     private int[] binKeko;
     private int heapSize;
     
