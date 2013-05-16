@@ -10,12 +10,14 @@ public class Vertailija {
         BinaariKeko binaariKeko = new BinaariKeko(binKeko2);
         System.out.println(binaariKeko);
         System.out.println(binaariKeko.heapMin(binKeko2));
-        binaariKeko.deleteMin(binKeko2);
-        binaariKeko.deleteMin(binKeko2);
-        binaariKeko.deleteMin(binKeko2);
-        binaariKeko.deleteMin(binKeko2);
-        binaariKeko.deleteMin(binKeko2);
-        binaariKeko.heapInsert(binKeko2, 8);
+        binaariKeko.heapInsert(2);
+        binaariKeko.heapInsert(1);
+        binaariKeko.heapInsert(4);
+        System.out.println(binaariKeko);
+        binaariKeko.deleteMin();
+        binaariKeko.deleteMin();
+        binaariKeko.deleteMin();
+        binaariKeko.deleteMin();
         System.out.println(binaariKeko);
 //        System.out.println(binaariKeko.parent(2)+"::"+binaariKeko.left(3)+"::"+binaariKeko.right(3)); 
     }

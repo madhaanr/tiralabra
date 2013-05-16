@@ -76,5 +76,14 @@ public class BinaariKekoTest{
         String konstruktoriKutsunAntamaJarjestys = ""+binaariKeko2;
         assertEquals(oikeaJarjestys,konstruktoriKutsunAntamaJarjestys);      
     }
+    @Test
+    public void deleteMinToimiiKunPoistetaanYksi() {
+        int[] binKeko2 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
+        BinaariKeko binaariKeko2 = new BinaariKeko(binKeko2);
+        String oikeaJarjestys=" 3 5 6 8 11 7 9 10 114 20 100 54 100 111 112 113 118 115 117";
+        binaariKeko2.deleteMin();
+        String konstruktoriKutsunAntamaJarjestys = ""+binaariKeko2;
+        assertEquals(oikeaJarjestys,konstruktoriKutsunAntamaJarjestys);    
+    }
     
 }

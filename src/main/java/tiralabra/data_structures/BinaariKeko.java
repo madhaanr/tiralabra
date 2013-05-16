@@ -1,11 +1,20 @@
 package tiralabra.data_structures;
 
-/* @author mhaanran */
+/**
+ *
+ * @author mhaanran
+ * Luokka toteuttaa minimi binäärikeon.
+ */
 public class BinaariKeko {
     
     private int[] binKeko;
     private int heapSize;
     
+    
+    /**
+     * Luodaan syötteenä saadusta taulukosta minimi binäärikeko.
+     * @param binKeko
+     */
     public BinaariKeko(int[] binKeko) {
         this.binKeko=buildHeap(binKeko);
     }
@@ -25,41 +34,56 @@ public class BinaariKeko {
     public int getHeapSize() {
         return heapSize;
     }
-
-    public int[] increaseHeapSize() {
-        int[] binKeko2 = new int[heapSize+1];
-        binKeko2 = binKeko;
-        return binKeko2;
-    }
-    public int[] decreaseHeapSize() {
-        int[] binKeko2 = new int[heapSize-1];
-        binKeko2=binKeko;
-        return binKeko2;
-    }
     
     public int heapMin(int[] binKeko) {
         return binKeko[0];
     }
     
-    public int deleteMin(int[] binKeko) {
+    /**
+     * Poistaa pienimmän arvon keosta. Käyttää apumetodina decreaseHeapSizea 
+     * joka pienentää keon kokoa yhdellä ja kopioi muut paitsi viimeisenä keossa
+     * olevan alkion uuteen kekoon
+     * @return poistettava arvo
+     */
+    public int deleteMin() {
         int min = binKeko[0];
+//        System.out.println(binKeko[heapSize-1]+"::"+heapSize);
         binKeko[0]=binKeko[heapSize-1];
-        heapSize = heapSize-1;
-//        binKeko=decreaseHeapSize();
+        binKeko=decreaseHeapSize();
         minHeapify(binKeko,0);
         return min;
     }
-    public void heapInsert(int[] binKeko,int k) {
-        heapSize = heapSize+1;
-//        binKeko=increaseHeapSize();
-        int i=heapSize;
-        System.out.println(binKeko[parent(i)]);
+    private int[] decreaseHeapSize() {
+        heapSize=heapSize-1;
+        int[] binKeko2 = new int[heapSize];
+        for (int i = 0; i < binKeko2.length; i++) {
+            binKeko2[i]=binKeko[i];
+        }          
+        return binKeko2;
+    }
+    /**
+     * Lisää arvon keokoon. Käyttää apumetodina increaseHeapSizea 
+     * joka kasvattaa keon kokoa yhdellä ja kopioi alkiot kekoon
+     * @return poistettava arvo
+     */
+    public void heapInsert(int k) {
+        binKeko=increaseHeapSize();
+        int i=heapSize-1;
+//        System.out.println(this.binKeko.length+"--");
         while(i>0 && binKeko[parent(i)]>k) {
             binKeko[i]=binKeko[parent(i)];
             i=parent(i);
-            System.out.println(binKeko[i]);
         }
         binKeko[i]=k;
+    }
+    private int[] increaseHeapSize() {
+        heapSize=heapSize+1;
+        int[] binKeko2 = new int[heapSize];
+//        System.out.println(binKeko2.length+"--");
+        for (int i = 0; i < binKeko.length; i++) {
+            binKeko2[i] = binKeko[i];
+        } 
+        return binKeko2;
     }
     
     private int[] buildHeap(int[] binKeko) {
