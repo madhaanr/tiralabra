@@ -22,6 +22,26 @@ public class BinaariKeko {
         return 2 * i + 1;
     }
     
+    public int heapMin(int[] binKeko) {
+        return binKeko[0];
+    }
+    public int deleteMin(int[] binKeko) {
+        int max = binKeko[0];
+        binKeko[0]=binKeko[heapSize];
+        heapSize = heapSize -1;
+        minHeapify(binKeko,0);
+        return max;
+    }
+    public void heapInsert(int[] binKeko,int k) {
+        heapSize = heapSize+1;
+        int i=heapSize;
+        while(i>0 && binKeko[parent(i)]<k) {
+            binKeko[i]=binKeko[parent(i)];
+            i=parent(i);
+        }
+        binKeko[i]=k;
+    }
+    
     private int[] buildHeap(int[] binKeko) {
         heapSize=binKeko.length;
         for(int i=binKeko.length/2; i>=0;--i ) {
