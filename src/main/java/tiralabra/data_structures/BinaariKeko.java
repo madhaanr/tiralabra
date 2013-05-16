@@ -12,7 +12,9 @@ public class BinaariKeko {
     
     
     /**
-     * Luodaan syötteenä saadusta taulukosta minimi binäärikeko.
+     * Luodaan syötteenä saadusta taulukosta minimi binäärikeko. buildHeap
+     * käyttää apumetodina heapifyMin metodia joka korjaa tarvittaessa keon
+     * sääntöjen mukaiseksi.
      * @param binKeko
      */
     public BinaariKeko(int[] binKeko) {
@@ -29,10 +31,6 @@ public class BinaariKeko {
 
     public int right(int i) {
         return 2 * i + 1;
-    }
-
-    public int getHeapSize() {
-        return heapSize;
     }
     
     public int heapMin(int[] binKeko) {
