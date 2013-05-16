@@ -2,9 +2,11 @@ Aiheeni on tietorakennevertailu.
 
 Toteutan työssäni binäärikeon, fibonaccin keon ja lisäksi joko kaksi muuta kekoa tai yhden keon ja AVL-puun.
 
-Toteuttamani tietorakenteet mahdollistavat O(nlogn) ajassa tapahtuvan alkion lisäämisen ja poistamisen. Sekä joko vakioajassa tai O(nlogn) tapahtuvan pienimmän alkion hakemisen.
+Toteuttamani tietorakenteet mahdollistavat O(nlogn) ajassa tapahtuvan alkion lisäämisen ja poistamisen. 
+Sekä joko vakioajassa tai O(nlogn) tapahtuvan pienimmän alkion hakemisen.
 
 Ohjelma saa olion luomisvaiheessa syötteenä taulukon josta tehdään keko tai puu riippuen algoritmista.
-Eri metodit käyttävät tätä samaa taulukkoa ja pyrin mittaamaan miten paljon algoritmien välille tulee nopeus eroa kun lisätään vaikkapa kymmenen tuhatta tai miljoona käänteisessä järjestetyksessä olevaa arvoa tietorakenteeseen. 
+Eri metodit käyttävät tätä samaa taulukkoa ja pyrin mittaamaan miten paljon algoritmien välille tulee nopeus 
+eroa kun lisätään vaikkapa kymmenen tuhatta tai miljoona käänteisessä/satunnaisessa järjestetyksessä olevaa alkiota 
+tietorakenteeseen. 
 Vertailen myös miten paljon aikaa pienimmän alkion poistaminen. 
-
