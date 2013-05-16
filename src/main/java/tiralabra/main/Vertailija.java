@@ -1,6 +1,6 @@
-package main;
+package tiralabra.main;
 
-import data_structures.BinaariKeko;
+import tiralabra.data_structures.BinaariKeko;
 
 /* @author mhaanran */
 public class Vertailija {
@@ -10,7 +10,12 @@ public class Vertailija {
         BinaariKeko binaariKeko = new BinaariKeko(binKeko2);
         System.out.println(binaariKeko);
         System.out.println(binaariKeko.heapMin(binKeko2));
-        System.out.println("");
+        binaariKeko.deleteMin(binKeko2);
+        binaariKeko.deleteMin(binKeko2);
+        binaariKeko.deleteMin(binKeko2);
+        binaariKeko.deleteMin(binKeko2);
+        binaariKeko.deleteMin(binKeko2);
+        System.out.println(binaariKeko);
 //        System.out.println(binaariKeko.parent(2)+"::"+binaariKeko.left(3)+"::"+binaariKeko.right(3)); 
     }
 }

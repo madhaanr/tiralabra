@@ -1,4 +1,4 @@
-package data_structures;
+package tiralabra.data_structures;
 
 /* @author mhaanran */
 public class BinaariKeko {
@@ -26,11 +26,11 @@ public class BinaariKeko {
         return binKeko[0];
     }
     public int deleteMin(int[] binKeko) {
-        int max = binKeko[0];
-        binKeko[0]=binKeko[heapSize];
+        int min = binKeko[0];
+        binKeko[0]=binKeko[heapSize-1];
         heapSize = heapSize -1;
         minHeapify(binKeko,0);
-        return max;
+        return min;
     }
     public void heapInsert(int[] binKeko,int k) {
         heapSize = heapSize+1;
