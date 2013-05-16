@@ -53,6 +53,7 @@ public class BinaariKeko {
         heapSize = heapSize+1;
 //        binKeko=increaseHeapSize();
         int i=heapSize;
+        System.out.println(binKeko[parent(i)]);
         while(i>0 && binKeko[parent(i)]>k) {
             binKeko[i]=binKeko[parent(i)];
             i=parent(i);
@@ -75,33 +76,6 @@ public class BinaariKeko {
         return binKeko;
     }
     
-
-    private int[] maxHeapify(int[] binKeko, int i) {
-        int left = left(i);
-        int right = right(i);
-        int largest;
-        if (right <= heapSize-1) {
-            if (binKeko[left] > binKeko[right]) {
-                largest = left;
-            } else {
-                largest = right;
-            }
-            if (binKeko[i] < binKeko[largest]) {
-//                System.out.println(i+":#:"+smallest);
-                int apu = binKeko[i];
-                binKeko[i] = binKeko[largest];
-                binKeko[largest] = apu;      
-//                System.out.println(binKeko[i] +"::"+ binKeko[smallest]);
-                maxHeapify(binKeko, largest);
-            }
-        } else if (left == heapSize-1 && binKeko[i] < binKeko[left]) {
-            int apu = binKeko[i];
-            binKeko[i] = binKeko[left];
-            binKeko[left] = apu; 
-            
-        }
-        return binKeko;
-    }
     private int[] minHeapify(int[] binKeko, int i) {
         int left = left(i);
         int right = right(i);
@@ -127,16 +101,41 @@ public class BinaariKeko {
             
         }
         return binKeko;
-    }
-
-    
+    } 
 
     @Override
     public String toString() {
         String k = "";
         for (int i = 0; i < heapSize; i++) {
-            k += " : "+binKeko[i];
+            k += " "+binKeko[i];
         }
         return k;
     }
+    
+//    private int[] maxHeapify(int[] binKeko, int i) {
+//        int left = left(i);
+//        int right = right(i);
+//        int largest;
+//        if (right <= heapSize-1) {
+//            if (binKeko[left] > binKeko[right]) {
+//                largest = left;
+//            } else {
+//                largest = right;
+//            }
+//            if (binKeko[i] < binKeko[largest]) {
+////                System.out.println(i+":#:"+smallest);
+//                int apu = binKeko[i];
+//                binKeko[i] = binKeko[largest];
+//                binKeko[largest] = apu;      
+////                System.out.println(binKeko[i] +"::"+ binKeko[smallest]);
+//                maxHeapify(binKeko, largest);
+//            }
+//        } else if (left == heapSize-1 && binKeko[i] < binKeko[left]) {
+//            int apu = binKeko[i];
+//            binKeko[i] = binKeko[left];
+//            binKeko[left] = apu; 
+//            
+//        }
+//        return binKeko;
+//    }
 }
