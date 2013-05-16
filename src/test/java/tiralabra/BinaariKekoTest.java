@@ -85,5 +85,14 @@ public class BinaariKekoTest{
         String konstruktoriKutsunAntamaJarjestys = ""+binaariKeko2;
         assertEquals(oikeaJarjestys,konstruktoriKutsunAntamaJarjestys);    
     }
+    @Test
+    public void heapInsertLisaaYhdenAlkion() {
+        int[] binKeko2 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
+        BinaariKeko binaariKeko2 = new BinaariKeko(binKeko2);
+        String oikeaJarjestys=" 1 3 5 8 6 7 9 10 11 20 44 54 100 111 112 113 114 115 117 118 100";
+        binaariKeko2.heapInsert(44);
+        String konstruktoriKutsunAntamaJarjestys = ""+binaariKeko2;
+        assertEquals(oikeaJarjestys,konstruktoriKutsunAntamaJarjestys); 
+    }
     
 }
