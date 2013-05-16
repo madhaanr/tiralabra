@@ -7,3 +7,4 @@ Toteuttamani tietorakenteet mahdollistavat O(nlogn) ajassa tapahtuvan alkion lis
 Ohjelma saa olion luomisvaiheessa syötteenä taulukon josta tehdään keko tai puu riippuen algoritmista.
 Eri metodit käyttävät tätä samaa taulukkoa ja pyrin mittaamaan miten paljon algoritmien välille tulee nopeus eroa kun lisätään vaikkapa kymmenen tuhatta tai miljoona käänteisessä järjestetyksessä olevaa arvoa tietorakenteeseen. 
 Vertailen myös miten paljon aikaa pienimmän alkion poistaminen. 
+
