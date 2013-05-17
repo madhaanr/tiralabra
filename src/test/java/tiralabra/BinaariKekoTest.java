@@ -30,6 +30,10 @@ public class BinaariKekoTest {
         assertEquals(3,binaariKeko.parent(7));
     }
     @Test
+    public void parentPalauttaaOikeinKunLapsiOnOikea2() {
+        assertEquals(1,binaariKeko.parent(3));
+    }
+    @Test
     public void parentPalauttaaOikeinKunLapsiOnVasen() {
         assertEquals(2,binaariKeko.parent(4));
     }

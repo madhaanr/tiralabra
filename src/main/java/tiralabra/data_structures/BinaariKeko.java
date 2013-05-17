@@ -126,15 +126,15 @@ public class BinaariKeko {
                 smallest = right;
             }
             if (binKeko[i] > binKeko[smallest]) {
-                swap(binKeko, i, smallest);      
+                swapSmallestwithI(binKeko, i, smallest);      
                 minHeapify(binKeko, smallest);
             }
         } else if (left == heapSize-1 && binKeko[i] > binKeko[left]) {
-            swap(binKeko, i, left);         
+            swapSmallestwithI(binKeko, i, left);         
         }
         return binKeko;
     } 
-    private void swap(int[] binKeko, int i, int smallest) {
+    private void swapSmallestwithI(int[] binKeko, int i, int smallest) {
         int apu = binKeko[i];
         binKeko[i] = binKeko[smallest];
         binKeko[smallest] = apu;
