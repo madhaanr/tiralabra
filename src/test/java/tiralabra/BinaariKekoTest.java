@@ -12,26 +12,19 @@ import tiralabra.data_structures.BinaariKeko;
  *
  * @author mhaanran
  */
-public class BinaariKekoTest{
+public class BinaariKekoTest {
     
-    int[] binKeko ={20,5,3,9,6,7,8,10,11};
     BinaariKeko binaariKeko;
-    
+    int[] binKeko ={20,5,3,9,6,7,8,10,11};
+      
     public BinaariKekoTest() {    
         this.binaariKeko = new BinaariKeko(binKeko);
     }
     
-    
-    protected void setUp() throws Exception {
-        
+    protected void setUp() throws Exception {       
+      
     }
     
-   
-    protected void tearDown() throws Exception {
-        
-    }
-    // TODO add test methods here. The name must begin with 'test'. For example:
-    // public void testHello() {}
     @Test
     public void parentPalauttaaOikeinKunLapsiOnOikea() {
         assertEquals(3,binaariKeko.parent(7));
@@ -78,11 +71,11 @@ public class BinaariKekoTest{
     }
     @Test
     public void deleteMinToimiiKunPoistetaanYksi() {
-        int[] binKeko2 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
-        BinaariKeko binaariKeko2 = new BinaariKeko(binKeko2);
+        int[] binKeko3 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
+        BinaariKeko binaariKeko3 = new BinaariKeko(binKeko3);
         String oikeaJarjestys=" 3 5 6 8 11 7 9 10 114 20 100 54 100 111 112 113 118 115 117";
-        binaariKeko2.deleteMin();
-        String konstruktoriKutsunAntamaJarjestys = ""+binaariKeko2;
+        binaariKeko3.deleteMin();
+        String konstruktoriKutsunAntamaJarjestys = ""+binaariKeko3;
         assertEquals(oikeaJarjestys,konstruktoriKutsunAntamaJarjestys);    
     }
     @Test

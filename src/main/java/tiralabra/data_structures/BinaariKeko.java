@@ -9,8 +9,7 @@ public class BinaariKeko {
     
     private int[] binKeko;
     private int heapSize;
-    
-    
+       
     /**
      * Luodaan syötteenä saadusta taulukosta minimi binäärikeko.
      * @param binKeko
@@ -19,14 +18,32 @@ public class BinaariKeko {
         this.binKeko=buildHeap(binKeko);
     }
    
+    /**
+     * Metodi palauttaa syötteenä annetun indeksin parentin eli keossa 
+     * ylemmällä tasolla olevan arvon indeksin.
+     * @param i alkion indeksi.
+     * @return indeksi jaettuna kahdella.
+     */
     public int parent(int i) {
         return i / 2;
     }
 
+    /**
+     * Metodi palauttaa ylemmän tason indeksiä alemmalla tasolla olevan 
+     * lapsen indeksin. Tässä tapauksessa vasemman lapsen indeksin.
+     * @param i alkion indeksi.
+     * @return indeksi i*2.
+     */
     public int left(int i) {
         return 2 * i;
     }
 
+    /**
+     * Metodi palauttaa ylemmän tason indeksiä alemmalla tasolla olevan 
+     * lapsen indeksin. Tässä tapauksessa oikean lapsen indeksin.
+     * @param i alkion indeksi.
+     * @return indeksi*2+1
+     */
     public int right(int i) {
         return 2 * i + 1;
     }
@@ -35,6 +52,12 @@ public class BinaariKeko {
         return heapSize;
     }
     
+    /**
+     * Metodi palauttaa keon pienimmän alkion.
+     * Minimi keon pienin alkio on indeksissä 0.
+     * @param binKeko 
+     * @return 
+     */
     public int heapMin(int[] binKeko) {
         return binKeko[0];
     }
@@ -43,11 +66,10 @@ public class BinaariKeko {
      * Poistaa pienimmän arvon keosta. Käyttää apumetodina decreaseHeapSizea 
      * joka pienentää keon kokoa yhdellä ja kopioi muut paitsi viimeisenä keossa
      * olevan alkion uuteen kekoon
-     * @return poistettava arvo
+     * @return poistettava, keon pienin arvo.
      */
     public int deleteMin() {
         int min = binKeko[0];
-//        System.out.println(binKeko[heapSize-1]+"::"+heapSize);
         binKeko[0]=binKeko[heapSize-1];
         binKeko=decreaseHeapSize();
         minHeapify(binKeko,0);
@@ -61,6 +83,7 @@ public class BinaariKeko {
         }          
         return binKeko2;
     }
+    
     /**
      * Lisää arvon keokoon. Käyttää apumetodina increaseHeapSizea 
      * joka kasvattaa keon kokoa yhdellä ja kopioi alkiot kekoon
@@ -69,7 +92,6 @@ public class BinaariKeko {
     public void heapInsert(int k) {
         binKeko=increaseHeapSize();
         int i=heapSize-1;
-//        System.out.println(this.binKeko.length+"--");
         while(i>0 && binKeko[parent(i)]>k) {
             binKeko[i]=binKeko[parent(i)];
             i=parent(i);
@@ -79,7 +101,6 @@ public class BinaariKeko {
     private int[] increaseHeapSize() {
         heapSize=heapSize+1;
         int[] binKeko2 = new int[heapSize];
-//        System.out.println(binKeko2.length+"--");
         for (int i = 0; i < binKeko.length; i++) {
             binKeko2[i] = binKeko[i];
         } 
@@ -89,12 +110,6 @@ public class BinaariKeko {
     private int[] buildHeap(int[] binKeko) {
         heapSize=binKeko.length;
         for(int i=binKeko.length/2; i>=0;--i ) {
-//            System.out.println("i="+i);
-//            String k = "";
-//            for (int l = 0; l < heapSize; l++) {
-//                k += binKeko[l];
-//            }
-//            System.out.println(k);
             minHeapify(binKeko,i);
         }
         return binKeko;
@@ -111,21 +126,19 @@ public class BinaariKeko {
                 smallest = right;
             }
             if (binKeko[i] > binKeko[smallest]) {
-//                System.out.println(i+":#:"+smallest);
-                int apu = binKeko[i];
-                binKeko[i] = binKeko[smallest];
-                binKeko[smallest] = apu;      
-//                System.out.println(binKeko[i] +"::"+ binKeko[smallest]);
+                swap(binKeko, i, smallest);      
                 minHeapify(binKeko, smallest);
             }
         } else if (left == heapSize-1 && binKeko[i] > binKeko[left]) {
-            int apu = binKeko[i];
-            binKeko[i] = binKeko[left];
-            binKeko[left] = apu; 
-            
+            swap(binKeko, i, left);         
         }
         return binKeko;
     } 
+    private void swap(int[] binKeko, int i, int smallest) {
+        int apu = binKeko[i];
+        binKeko[i] = binKeko[smallest];
+        binKeko[smallest] = apu;
+    }
 
     @Override
     public String toString() {
