@@ -96,7 +96,7 @@ public class BinaariKekoTest {
         assertEquals(oikeaJarjestys,konstruktoriKutsunAntamaJarjestys); 
     }
     @Test
-    public void heapInsertLisaaYhdenAlkion2() {
+    public void heapInsertLisaaPienimmanAlkion() {
         int[] binKeko2 ={20,5,3,9,6,7,8,10,11,100,54,100,111,112,113,114,115,117,118};
         BinaariKeko binaariKeko2 = new BinaariKeko(binKeko2);
         String oikeaJarjestys=" 1 3 5 8 6 7 9 10 20 11 54 100 111 112 113 114 115 117 118 100";
