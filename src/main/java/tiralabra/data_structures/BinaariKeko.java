@@ -148,31 +148,4 @@ public class BinaariKeko {
         }
         return k;
     }
-    
-//    private int[] maxHeapify(int[] binKeko, int i) {
-//        int left = left(i);
-//        int right = right(i);
-//        int largest;
-//        if (right <= heapSize-1) {
-//            if (binKeko[left] > binKeko[right]) {
-//                largest = left;
-//            } else {
-//                largest = right;
-//            }
-//            if (binKeko[i] < binKeko[largest]) {
-////                System.out.println(i+":#:"+smallest);
-//                int apu = binKeko[i];
-//                binKeko[i] = binKeko[largest];
-//                binKeko[largest] = apu;      
-////                System.out.println(binKeko[i] +"::"+ binKeko[smallest]);
-//                maxHeapify(binKeko, largest);
-//            }
-//        } else if (left == heapSize-1 && binKeko[i] < binKeko[left]) {
-//            int apu = binKeko[i];
-//            binKeko[i] = binKeko[left];
-//            binKeko[left] = apu; 
-//            
-//        }
-//        return binKeko;
-//    }
 }

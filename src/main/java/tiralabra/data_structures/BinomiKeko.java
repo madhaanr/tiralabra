@@ -1,14 +1,28 @@
 package tiralabra.data_structures;
 
-/* @author mhaanran */
+/**
+ * Luokka toteuttaa binomikeon.
+ * @author mhaanran
+ */
 public class BinomiKeko {
 
-    private Link head;
+    private LinkitettyLista lista;
     
-    public BinomiKeko() {
-        head=null;
+    /**
+     * Make-Binomial-Heap
+     */
+    public BinomiKeko(int key) {
+        lista=new LinkitettyLista();
+        lista.lisaa(key);
     }
     
+    /**
+     * Binomial-Heap-Minimum(Heap)
+     * @return
+     */
+    public int min() {
+       return 0; 
+    }
     public void insert(Link x) {
         
     }

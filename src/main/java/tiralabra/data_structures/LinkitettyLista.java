@@ -27,6 +27,9 @@ public class LinkitettyLista {
             vikaLink=lisattava;
         }
     }
+    public void poista(int key) {
+        
+    }
     
     /*
      * lisaa(Linkki lisattava)
