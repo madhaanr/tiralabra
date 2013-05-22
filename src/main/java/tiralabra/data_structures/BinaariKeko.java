@@ -134,6 +134,7 @@ public class BinaariKeko {
         }
         return binKeko;
     } 
+    
     private void swapSmallestwithI(int[] binKeko, int i, int smallest) {
         int apu = binKeko[i];
         binKeko[i] = binKeko[smallest];

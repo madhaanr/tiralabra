@@ -20,7 +20,22 @@ public class BinomiKeko {
      * @return
      */
     public int min() {
-       return 0; 
+        int min;
+        if (head == null) {
+            min=Integer.MIN_VALUE;
+        }
+
+        Node node1 = head;
+        Node node2 = node1.getSibling();
+
+        while (node2 != null) {
+            if (node2.getKey() < node1.getKey()) {
+                node1 = node2;
+            }
+            node2 = node2.getSibling();
+        }
+        min=node1.getKey();
+        return min;
     }
     
     public boolean isEmpty() {
@@ -83,20 +98,20 @@ public class BinomiKeko {
             return keko1.head;
         }
         else {
-            Node head;
+            Node headL;
             Node tail;
             Node keko1Next=keko1.head;
             Node keko2Next=keko2.head;
             
             if(keko1.head.getDegree()<=keko2.head.getDegree()) {
-                head=keko1.head;
+                headL=keko1.head;
                 keko1Next=keko1Next.getSibling();
             }
             else {
-                head=keko2.head;
+                headL=keko2.head;
                 keko2Next=keko2Next.getSibling();
             }
-            tail=head;
+            tail=headL;
             
             while(keko1Next!=null&&keko2Next!=null) {
                 if(keko1Next.getDegree()<=keko2Next.getDegree()) {
@@ -115,18 +130,24 @@ public class BinomiKeko {
             else {
                 tail.setSibling(keko2Next);
             }
-            return head;
+            return headL;
         }   
     }
     private void pair(Node eka, Node toka) {
         eka.setParent(toka);
         eka.setSibling(toka.getChild());
         toka.setChild(eka);
-        toka.setDegree(+1);
+        toka.setDegree(toka.getDegree()+1);
     }
+    
+    /**
+     * Metodi poistaa ja palauttaa keon pienimmän alkion.
+     * @return 
+     */
     public int removeMin() {
+        int min;
         if (head == null) {
-            return -1;
+            min=Integer.MIN_VALUE;
         }
 
         Node node1 = head;
@@ -143,7 +164,7 @@ public class BinomiKeko {
             node2 = node2.getSibling();
         }
    
-        int min=node1.getKey();
+        min=node1.getKey();
         if (node1 == head) {
             head = node1.getSibling();
         }
@@ -162,6 +183,20 @@ public class BinomiKeko {
         }
         BinomiKeko newH = this.mergeHeap(keko);
         head = newH.head;
+        if(min!=Integer.MIN_VALUE) {
+            return min;
+        }
+        else {
+            System.out.println("Keko on tyhjä");
+        }
         return min;
+    }
+    @Override
+    public String toString() {
+        String keko="";
+        while(head!=null) {
+            keko+=removeMin()+" ";
+        }    
+        return keko;
     }
 }
