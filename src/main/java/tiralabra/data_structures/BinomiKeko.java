@@ -26,6 +26,10 @@ public class BinomiKeko {
 
     /**
      * Metodilla voi lisätä kekoon nodeja.
+     * Aluksi luodaan uusi keko, jonka headiksi laitetaan lisättävä node
+     * Tämän jälkeen mergetään tämä keko jo olemassa olevan keon kanssa ja
+     * yhdistetty keko talletetaan uusikeko nimellä. Lopuksi luokkamuuttuja
+     * head pistetään osoittamaan uuden keon headiin.
      * @param lisattava on lisättävä node
      */
     public void insert(Node lisattava) {
@@ -35,9 +39,14 @@ public class BinomiKeko {
         head = uusiKeko.head;
     }
 
+    /**
+     * Metodi yhdistää kaksi kekoa yhdeksi keoksi.
+     * @param keko2
+     * @return
+     */
     public BinomiKeko mergeHeap(BinomiKeko keko2) {
         BinomiKeko keko = new BinomiKeko();
-        keko.head = mergeRootList(this, keko2);
+        keko.head = mergeJuuriLista(this, keko2);
         head = null;
         keko2.head = null;
 
@@ -51,7 +60,9 @@ public class BinomiKeko {
 
         while (nextNode != null) {
             if (node.getDegree() != nextNode.getDegree()
-                    || (nextNode.getSibling() != null && nextNode.getSibling().getDegree() == node.getDegree())) {
+            || (nextNode.getSibling() != null 
+            &&  nextNode.getSibling().getDegree() == node.getDegree())
+                ) {
                 prevNode = node;
                 node = nextNode;
             } else {
@@ -73,7 +84,7 @@ public class BinomiKeko {
         return keko;
     }
 
-    private Node mergeRootList(BinomiKeko keko1, BinomiKeko keko2) {
+    private Node mergeJuuriLista(BinomiKeko keko1, BinomiKeko keko2) {
         if (keko1.head == null) {
             return keko2.head;
         } else if (keko2.head == null) {
