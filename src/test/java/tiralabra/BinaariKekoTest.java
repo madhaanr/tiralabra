@@ -5,6 +5,7 @@
 package tiralabra;
 
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
 import tiralabra.data_structures.BinaariKeko;
 
@@ -20,9 +21,9 @@ public class BinaariKekoTest {
     public BinaariKekoTest() {    
         this.binaariKeko = new BinaariKeko(binKeko);
     }
-    
-    protected void setUp() throws Exception {       
-      
+    @Before
+    public void setUp() {
+        
     }
     
     @Test

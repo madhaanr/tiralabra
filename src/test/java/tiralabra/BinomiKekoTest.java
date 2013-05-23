@@ -5,11 +5,9 @@
 package tiralabra;
 
 import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 import tiralabra.data_structures.BinomiKeko;
 import tiralabra.data_structures.Node;
 
@@ -22,7 +20,7 @@ public class BinomiKekoTest {
     private BinomiKeko binomiKeko = new BinomiKeko();
     private int[] numeroita = {100, 20, 10, 5, 3, 2, 1, 7, 8, 9, 11, 15, 17, 19, 21, 101, 102, 66, 33, 99, 1000};
     private Node[] nodet = new Node[numeroita.length];
-    
+
     public BinomiKekoTest() {
         for (int i = 0; i < numeroita.length; i++) {
             nodet[i] = new Node(numeroita[i]);
@@ -56,13 +54,53 @@ public class BinomiKekoTest {
         Node node = new Node(100);
         BinomiKeko binomiKeko3 = new BinomiKeko();
         binomiKeko3.insert(node);
-        assertEquals(100+" ",binomiKeko3.toString());
+        assertEquals(100 + " ", binomiKeko3.toString());
     }
+
     @Test
     public void kekoonVoiLisataUseitaAlkoitaInsertilla() {
-        Node node = new Node(100);
+        Node node1 = new Node(100);
+        Node node2 = new Node(99);
+        Node node3 = new Node(555);
+        Node node4 = new Node(1);
+        Node node5 = new Node(100);
         BinomiKeko binomiKeko3 = new BinomiKeko();
-        binomiKeko3.insert(node);
-        assertEquals(100+" ",binomiKeko3.toString());
+        binomiKeko3.insert(node1);
+        binomiKeko3.insert(node2);
+        binomiKeko3.insert(node3);
+        binomiKeko3.insert(node4);
+        binomiKeko3.insert(node5);
+        String lisatty = "1 99 100 100 555 ";
+        assertEquals(lisatty, binomiKeko3.toString());
+    }
+    
+    @Test
+    public void keostaVoiPoistaaPienimmanAlkion() {
+        binomiKeko.removeMin();
+        assertEquals(2,binomiKeko.min());
+    }
+    @Test
+    public void keostaVoiPoistaaUseitaPienimpiaAlkioita() {
+        for (int i = 0; i < 10; i++) {
+            binomiKeko.removeMin();
+        }
+        assertEquals(17,binomiKeko.min());
+    }
+    @Test
+    public void removeMinMetodiPalauttaaMinIntegerKunKekoOnTyhja() {
+        Node node = null;
+        BinomiKeko binomiKeko4 = new BinomiKeko();
+        binomiKeko4.insert(node);
+        int min = binomiKeko4.removeMin();
+        assertEquals(Integer.MIN_VALUE, min);
+    }
+    @Test
+    public void isEmptyPalauttaaTrueKunKekoOnTyhja() {
+        BinomiKeko binomiKeko4 = new BinomiKeko();
+        assertTrue(binomiKeko4.isEmpty());
+    }
+    @Test
+    public void isEmptyPalauttaaFalseKunKekoEiOleTyhja() {
+        assertFalse(binomiKeko.isEmpty());
     }
 }
