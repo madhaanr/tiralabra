@@ -1,16 +1,25 @@
 pe 17.5
 Koodin refactorointia palautteen mukaiseksi ja muutakin koodin refactorointia. 
-Fibonaccin keon tutkiminen ja koodauksen aloittaminen.
+Fibonaccinkeon tutkiminen ja koodauksen aloittaminen.
 
 la 18.5.
-Fibonaccin keon tutkiminen.
+Fibonaccinkeon tutkiminen.
 
 ma 20.5
-Fibonaccin kekoa varten tarvittavan linkitetyn listan tutkiminen ja toteutus. Seuraavan keon toteutuksen vaihto binomi
-keoksi ja binomi keon tutkiminen.
+Fibonaccinkekoa varten tarvittavan linkitetyn listan tutkiminen ja toteutus. Seuraavan keon toteutuksen vaihto
+binomikeoksi ja binomikeon tutkiminen.
 
 ti 21.5
 Binomikeon tutkiminen jatkuu.
 
 ke 22.5
 Binomikeko toteutus jo melko valmis ja testien kirjoittaminen aloitettu.
+
+to 23.5
+Binomikeko valmis ja testit tehty.
+Binaarikeon ja binomikeon testailua. Muunmuassa 10 miljoonan alkion lisääminen ja siihen kuluvan ajan selvittäminen.
+Koska tekemäni binaarikeko toteutus kasvattaa aputietorakenteena käyttämänsä taulukon kokoa yksi pykälä kerrallaan
+niin suurilla alkio määrillä keon kasvattaminen vie kohtuuttomasti aikaa ja tästä syystä luokkaa 100 000 alkiota on
+maksimimäärä jonka voin lisätä kohtuullisessa ajassa. Binäärikekoni toteutusta siis pitää refactoroida niin että apu
+tietorakenteena olevaa taulukkoa kasvatetaan vaikkapa aina tuplaamalla sen koko ja vastaavasti jos keosta poistetaan
+alkioita niin taulukon kokoa voidaan pienentää vastaavalla tavalla.
