@@ -16,6 +16,10 @@ public class BinomiKeko {
         head = null;
     }
 
+    /**
+     * Metodilla voi tarkistaa onko keko tyhjä.
+     * @return palauttaa true jos keko on tyhjä ja muuten false.
+     */
     public boolean isEmpty() {
         return head == null;
     }

@@ -100,7 +100,32 @@ public class BinomiKekoTest {
         assertTrue(binomiKeko4.isEmpty());
     }
     @Test
+    public void isEmptyPalauttaaTrueKunKekoonOnLisattyJaPoistettuAlkio() {
+        Node node = new Node(100);
+        BinomiKeko binomiKeko4 = new BinomiKeko();
+        binomiKeko4.insert(node);
+        binomiKeko4.removeMin();
+        assertTrue(binomiKeko4.isEmpty());
+    }
+    @Test
     public void isEmptyPalauttaaFalseKunKekoEiOleTyhja() {
         assertFalse(binomiKeko.isEmpty());
     }
+    @Test
+    public void kekoonVoiLisataKymmenenMiljoonaaAlkiota() {
+        Node[] kymmenenMiljoonaa = new Node[10000000];
+        int[] numeroita2=new int[10000000];
+        for (int i = 0; i < 10000000; i++) {
+            numeroita2[i]=i;         
+        }
+        BinomiKeko binomiKeko5 = new BinomiKeko();
+        int vahenna=9999999;
+        for (int i = 0; i < 10000000; ++i) {
+            kymmenenMiljoonaa[i]=new Node(numeroita2[vahenna]);
+            binomiKeko5.insert(kymmenenMiljoonaa[i]); 
+            --vahenna;
+        }
+        assertEquals(0,binomiKeko5.min());
+    }
+    
 }

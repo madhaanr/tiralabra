@@ -105,5 +105,19 @@ public class BinaariKekoTest {
         String konstruktoriKutsunAntamaJarjestys = ""+binaariKeko2;
         assertEquals(oikeaJarjestys,konstruktoriKutsunAntamaJarjestys); 
     }
+    @Test
+    public void kekoonVoiLisataKymmenenMiljoonaaAlkiota() {
+        int[] numeroita2=new int[100000];
+        for (int i = 1; i< 100000; ++i) {
+            numeroita2[i]=i;         
+        }
+        int[] nolla = {0};
+        BinaariKeko binaariKeko5 = new BinaariKeko(nolla);
+        for (int i = 1; i < 100000; ++i) {
+            binaariKeko5.heapInsert(numeroita2[i]); 
+      
+        }
+        assertEquals(0,binaariKeko5.heapMin(numeroita2));
+    }
     
 }
