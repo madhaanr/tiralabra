@@ -22,7 +22,7 @@ public class BinomiKeko {
     public int min() {
         int min;
         if (head == null) {
-            min=Integer.MIN_VALUE;
+            return Integer.MIN_VALUE;
         }
 
         Node node1 = head;

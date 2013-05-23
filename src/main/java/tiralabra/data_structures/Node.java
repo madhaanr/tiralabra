@@ -17,6 +17,9 @@ public class Node {
         this.degree=0;
                 
     }
+    public Node() {
+        
+    }
 
     public int getKey() {
         return key;
