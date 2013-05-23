@@ -10,6 +10,8 @@ public class BinomiKeko {
     private Node head;
 
     /**
+     * Konstructorissa luodaan uusi tyhjä keko. head osoittaa binomikeon 
+     * juurilistan ensimmäiseen alkioon ja se asetetaan arvoon null.
      * Make-Binomial-Heap
      */
     public BinomiKeko() {
@@ -40,9 +42,11 @@ public class BinomiKeko {
     }
 
     /**
-     * Metodi yhdistää kaksi kekoa yhdeksi keoksi.
+     * Metodi yhdistää kaksi kekoa yhdeksi keoksi. Käyetään muunmuassa kun
+     * kekoon lisätään alkioita. Käyttää apumetodina mergeJuuriLista ja pair 
+     * metodeita. 
      * @param keko2
-     * @return
+     * @return palauttaa yhdistetyn keon.
      */
     public BinomiKeko mergeHeap(BinomiKeko keko2) {
         BinomiKeko keko = new BinomiKeko();
@@ -129,9 +133,36 @@ public class BinomiKeko {
         toka.setChild(eka);
         toka.setDegree(toka.getDegree() + 1);
     }
+    
+     /**
+     * Binomial-Heap-Minimum(Heap)
+     * Metodi palauttaa keon pienimmän alkion key arvon. Binomikeon pienin
+     * arvon on juurilistan pienin arvon eli tarvitsee käydä läpi vain 
+     * juurilista. 
+     * @return palautetaan node1.key eli keon pienin arvo.
+     */
+    public int min() {
+        if (head == null) {
+            return Integer.MIN_VALUE;
+        }
+
+        Node node1 = head;
+        Node node2 = node1.getSibling();
+
+        while (node2 != null) {
+            if (node2.getKey() < node1.getKey()) {
+                node1 = node2;
+            }
+            node2 = node2.getSibling();
+        }      
+        return node1.getKey();
+    }
 
     /**
-     * Metodi poistaa ja palauttaa keon pienimmän alkion.
+     * Metodi poistaa ja palauttaa keon pienimmän alkion. Toteutus on 
+     * aluksi melkein saman kuin pelkässä minimi alkion palautuksessa. Mutta
+     * nykyistä node1.keytä pienemmän arvon löytyessä pidetään myös kirjaa
+     * mistä sinne tultiin.
      *
      * @return
      */
@@ -171,31 +202,9 @@ public class BinomiKeko {
             keko.head = node3;
             node3 = next;
         }
-        BinomiKeko newH = this.mergeHeap(keko);
-        head = newH.head;      
+        BinomiKeko uusiKeko = this.mergeHeap(keko);
+        head = uusiKeko.head;      
         return min;
-    }
-
-    /**
-     * Binomial-Heap-Minimum(Heap)
-     *
-     * @return
-     */
-    public int min() {
-        if (head == null) {
-            return Integer.MIN_VALUE;
-        }
-
-        Node node1 = head;
-        Node node2 = node1.getSibling();
-
-        while (node2 != null) {
-            if (node2.getKey() < node1.getKey()) {
-                node1 = node2;
-            }
-            node2 = node2.getSibling();
-        }      
-        return node1.getKey();
     }
 
     @Override
