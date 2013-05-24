@@ -9,6 +9,7 @@ public class BinaariKeko {
     
     private int[] binKeko;
     private int heapSize;
+    private int taulukonKoko=100;
        
     /**
      * Luodaan syötteenä saadusta taulukosta minimi binäärikeko.
@@ -16,6 +17,9 @@ public class BinaariKeko {
      */
     public BinaariKeko(int[] binKeko) {
         this.binKeko=buildHeap(binKeko);
+    }
+    public BinaariKeko() {
+        this.binKeko = new int[taulukonKoko];
     }
    
     /**
@@ -75,13 +79,18 @@ public class BinaariKeko {
         minHeapify(binKeko,0);
         return min;
     }
+    
     private int[] decreaseHeapSize() {
         heapSize=heapSize-1;
-        int[] binKeko2 = new int[heapSize];
-        for (int i = 0; i < binKeko2.length; i++) {
-            binKeko2[i]=binKeko[i];
-        }          
-        return binKeko2;
+        if(heapSize<taulukonKoko/2) {
+            taulukonKoko=taulukonKoko/2;
+            int[] binKeko2 = new int[taulukonKoko];
+            for (int i = 0; i < binKeko2.length; i++) {
+                 binKeko2[i]=binKeko[i];
+             }
+            return binKeko2;
+        }             
+        return binKeko;
     }
     
     /**
@@ -100,11 +109,16 @@ public class BinaariKeko {
     }
     private int[] increaseHeapSize() {
         heapSize=heapSize+1;
-        int[] binKeko2 = new int[heapSize];
-        for (int i = 0; i < binKeko.length; i++) {
-            binKeko2[i] = binKeko[i];
-        } 
-        return binKeko2;
+        if(taulukonKoko<heapSize) {
+            taulukonKoko=taulukonKoko*2;
+            int[] binKeko2 = new int[taulukonKoko];
+            for (int i = 0; i < binKeko.length; i++) {
+                binKeko2[i] = binKeko[i];
+            }
+            return binKeko2;
+        }  
+        
+        return binKeko;
     }
     
     private int[] buildHeap(int[] binKeko) {

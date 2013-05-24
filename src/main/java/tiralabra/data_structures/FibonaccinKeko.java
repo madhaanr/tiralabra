@@ -3,14 +3,13 @@ package tiralabra.data_structures;
 /* @author mhaanran */
 public class FibonaccinKeko {
     
-    private int[] fibKeko;
-    private int heapSize;
+    private FibNode head;
     
-    public FibonaccinKeko(int[] fibKeko) {
+    public FibonaccinKeko() {
         
     }
     
-    public void fibHeapInsert(int[] fibKeko, int x) {
+    public void insert(FibNode node) {
         
         
     }
