@@ -82,7 +82,7 @@ public class BinaariKeko {
     
     private int[] decreaseHeapSize() {
         heapSize=heapSize-1;
-        if(heapSize<taulukonKoko/2) {
+        if(heapSize<taulukonKoko/2&&heapSize>=100) {
             taulukonKoko=taulukonKoko/2;
             int[] binKeko2 = new int[taulukonKoko];
             for (int i = 0; i < binKeko2.length; i++) {
