@@ -45,7 +45,7 @@ public class BinomiKeko {
      * Metodi yhdistää kaksi kekoa yhdeksi keoksi. Käyetään muunmuassa kun
      * kekoon lisätään alkioita. Käyttää apumetodina mergeJuuriLista ja pair 
      * metodeita. 
-     * @param keko2 insertin parametrina annettu uusi keko.
+     * @param keko2 insertin parametrina annettu keko.
      * @return palauttaa yhdistetyn keon.
      */
     public BinomiKeko mergeHeap(BinomiKeko keko2) {

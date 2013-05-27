@@ -3,22 +3,19 @@ package tiralabra.data_structures;
 /* @author mhaanran */
 public class FibonaccinKeko {
 
-    private FibNode head;
     private FibNode min;
     private int heapSize;
-
-    
+  
     /**
-     * Konstruktori luo uuden tyhjän keon.
+     * Konstruktori luo uuden tyhjän Fibonaccin keon.
      */
     public FibonaccinKeko() {
-        head = null;
         min = null;
         heapSize = 0;
     }
     
     /**
-     * Metodi palauttaa keon pienimmän alkion
+     * Metodi palauttaa keon pienimmän alkion key kentän arvon.
      * @return pienin alkio on tallennettu min muuttujan arvoksi.
      */
     public int min() {
@@ -30,16 +27,18 @@ public class FibonaccinKeko {
      * @param lisattava kekoon lisätään FibNode.
      */
     public void insert(FibNode lisattava) {
-        FibonaccinKeko fibKeko = new FibonaccinKeko();
-        fibKeko.head = lisattava;
         if (min == null) {
-            head = fibKeko.head;
-            min = fibKeko.head;
-        } else {
-            head = fibKeko.head;
-            if (fibKeko.head.getKey() < min.getKey()) {
-               
-                min = fibKeko.head;
+            min=lisattava;         
+        } else {     
+            lisattava.setLeft(min);
+            lisattava.setRight(min.getRight());
+            min.setRight(lisattava);
+            FibNode node = lisattava.getRight();
+            if(node != null) {
+                node.setLeft(lisattava);
+            }
+            if (lisattava.getKey() < min.getKey()) {            
+                min = lisattava;
             }
         }
         heapSize = heapSize + 1;
@@ -50,7 +49,15 @@ public class FibonaccinKeko {
         
         return keko;
     }
+    
+    @Override
     public String toString() {
-        return ""+heapSize+"::"+min.getKey()+":"+head.getKey();
+        String keko="";
+        FibNode node = min;
+        while(node!=null) {
+            keko+=node.getKey();
+            node=node.getRight();
+        }
+        return min.getKey()+"--"+keko;
     }
 }
