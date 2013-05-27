@@ -18,6 +18,11 @@ public class BinaariKeko {
     public BinaariKeko(int[] binKeko) {
         this.binKeko=buildHeap(binKeko);
     }
+    
+    /**
+     * Konstruktori jolla luodaan parametrin taulukon koko suuruinen binääri
+     * taulukko binäärikeon tallentamista varten.
+     */
     public BinaariKeko() {
         this.binKeko = new int[taulukonKoko];
     }
@@ -52,15 +57,19 @@ public class BinaariKeko {
         return 2 * i + 1;
     }
 
+    /**
+     * Keon koon kyselemiseen.
+     * @return palauttaa keon koon joka on tallessa heapSize muuttujassa.
+     */
     public int getHeapSize() {
         return heapSize;
     }
     
     /**
      * Metodi palauttaa keon pienimmän alkion.
-     * Minimi keon pienin alkio on indeksissä 0.
      * @param binKeko 
-     * @return 
+     * @return Minimi keon pienin alkio on  taulukon indeksissä 0. 
+     * Eli palautetaan se.
      */
     public int heapMin(int[] binKeko) {
         return binKeko[0];

@@ -45,7 +45,7 @@ public class BinomiKeko {
      * Metodi yhdistää kaksi kekoa yhdeksi keoksi. Käyetään muunmuassa kun
      * kekoon lisätään alkioita. Käyttää apumetodina mergeJuuriLista ja pair 
      * metodeita. 
-     * @param keko2
+     * @param keko2 insertin parametrina annettu uusi keko.
      * @return palauttaa yhdistetyn keon.
      */
     public BinomiKeko mergeHeap(BinomiKeko keko2) {
@@ -163,8 +163,7 @@ public class BinomiKeko {
      * aluksi melkein saman kuin pelkässä minimi alkion palautuksessa. Mutta
      * nykyistä node1.keytä pienemmän arvon löytyessä pidetään myös kirjaa
      * mistä sinne tultiin.
-     *
-     * @return
+     * @return Palauttaa node1.key arvon.
      */
     public int removeMin() {
         int min;
