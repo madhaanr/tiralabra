@@ -7,12 +7,24 @@ public class FibonaccinKeko {
     private FibNode min;
     private int heapSize;
 
+    
+    /**
+     * Konstruktori luo uuden tyhjän keon.
+     */
     public FibonaccinKeko() {
         head = null;
         min = null;
         heapSize = 0;
     }
-
+    
+    /**
+     * Metodi palauttaa keon pienimmän alkion
+     * @return pienin alkio on tallennettu min muuttujan arvoksi.
+     */
+    public int min() {
+        return min.getKey();
+    }
+    
     /**
      * Metodilla lisätään fibonaccin kekoon uusia nodeja.
      * @param lisattava kekoon lisätään FibNode.
@@ -26,12 +38,19 @@ public class FibonaccinKeko {
         } else {
             head = fibKeko.head;
             if (fibKeko.head.getKey() < min.getKey()) {
+               
                 min = fibKeko.head;
             }
         }
         heapSize = heapSize + 1;
     }
+    public FibonaccinKeko union(FibonaccinKeko fibKeko) {
+        FibonaccinKeko keko = new FibonaccinKeko();
+        keko.min=fibKeko.min;
+        
+        return keko;
+    }
     public String toString() {
-        return ""+heapSize+"::"+min.getKey()+":"+head.getKey()+":"+head.getSibling();
+        return ""+heapSize+"::"+min.getKey()+":"+head.getKey();
     }
 }
