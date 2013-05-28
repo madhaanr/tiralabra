@@ -44,15 +44,25 @@ public class FibonaccinKeko {
         heapSize = heapSize + 1;
     }
     
+    /**
+     * Metodi poistaa pienimmän Fibonaccin keon alkion ja tekee käyttää
+     * apu metodina consolidate metodia. Consolidate metodi tekee keosta 
+     * Fibonaccin keon.
+     * @return palauttaa poistettavan alkion.
+     */
     public int removeMin() {
         FibNode minTalteen=min;
-        if(min.getDegree()==0) {
-            FibNode left=min.getLeft();
-            FibNode right=min.getRight();        
+        FibNode left=min.getLeft();
+        FibNode right=min.getRight(); 
+        if(left!=null) {
             left.setRight(right);
+        }
+        if(right!=null) {
             right.setLeft(left);
+        }
+        if(min.getDegree()==0) {  
             min=right;
-            while(left!=null) {
+            while(left!=null&&right!=null) {
                 if(left.getKey()<right.getKey()) {
                     min=left;         
                 }  
@@ -64,7 +74,22 @@ public class FibonaccinKeko {
                 }
                 right=right.getRight();
             }
-            
+        }
+        else {
+            FibNode minChild = min.getChild();
+            FibNode minChildLeft = min.getChild().getLeft();
+            FibNode minChildRight = min.getChild().getRight();
+            minChild.setParent(null);
+            if(minChildLeft==null&&minChildRight==null) {
+                minChild.setLeft(min.getLeft());
+                minChild.setRight(min.getRight());
+                min.getLeft().setRight(minChild);
+                min.getRight().setRight(minChild);
+            }
+            if(minChildLeft==null&&minChildRight!=null) {
+                 minChild.setLeft(min.getLeft());
+                 minChildRight.setRight(right);
+            }    
         }
         heapSize=heapSize-1;
         return minTalteen.getKey();
@@ -84,11 +109,14 @@ public class FibonaccinKeko {
             keko+=node.getKey();
             node=node.getRight();
         }
-        FibNode node2 = min.getLeft();
-        while(node2!=null) {
-            keko+=node.getKey();
-            node=node.getLeft();
+        if(min.getLeft()!=null) {
+            FibNode node2 = min.getLeft();
+            while(node2!=null) {
+                keko+=node2.getKey();
+                node2=node2.getLeft();
+            }
         }
+        
         return min.getKey()+"--"+keko+"--"+heapSize;
     }
 }

@@ -118,7 +118,7 @@ public class BinaariKeko {
     }
     private int[] increaseHeapSize() {
         heapSize=heapSize+1;
-        if(taulukonKoko<heapSize) {
+        if(taulukonKoko<=heapSize) {
             taulukonKoko=taulukonKoko*2;
             int[] binKeko2 = new int[taulukonKoko];
             for (int i = 0; i < binKeko.length; i++) {
@@ -132,6 +132,7 @@ public class BinaariKeko {
     
     private int[] buildHeap(int[] binKeko) {
         heapSize=binKeko.length;
+        taulukonKoko=heapSize;
         for(int i=binKeko.length/2; i>=0;--i ) {
             minHeapify(binKeko,i);
         }
