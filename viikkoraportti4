@@ -2,3 +2,5 @@ pe 24.5.
 PriorityQueue, binäärikeon ja binomikeon nopeusvertailua. Fibonaccin keon tutkimista.
 ma 27.5.
 Pieniä korjauksia ja fibonaccin keon toteuttamista.
+ti 28.5.
+Kekoon voi lisätä alkioita insert metodilla. RemoveMin metodin toteutus on päivän ohjelmassa.
