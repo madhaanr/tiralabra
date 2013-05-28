@@ -43,6 +43,32 @@ public class FibonaccinKeko {
         }
         heapSize = heapSize + 1;
     }
+    
+    public int removeMin() {
+        FibNode minTalteen=min;
+        if(min.getDegree()==0) {
+            FibNode left=min.getLeft();
+            FibNode right=min.getRight();        
+            left.setRight(right);
+            right.setLeft(left);
+            min=right;
+            while(left!=null) {
+                if(left.getKey()<right.getKey()) {
+                    min=left;         
+                }  
+                left=left.getLeft();
+            }
+            while(right!=null) {
+                if(right.getKey()<min.getKey()) {
+                    min=right;                 
+                }
+                right=right.getRight();
+            }
+            
+        }
+        heapSize=heapSize-1;
+        return minTalteen.getKey();
+    }
     public FibonaccinKeko union(FibonaccinKeko fibKeko) {
         FibonaccinKeko keko = new FibonaccinKeko();
         keko.min=fibKeko.min;
@@ -58,6 +84,11 @@ public class FibonaccinKeko {
             keko+=node.getKey();
             node=node.getRight();
         }
-        return min.getKey()+"--"+keko;
+        FibNode node2 = min.getLeft();
+        while(node2!=null) {
+            keko+=node.getKey();
+            node=node.getLeft();
+        }
+        return min.getKey()+"--"+keko+"--"+heapSize;
     }
 }
