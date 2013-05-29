@@ -42,9 +42,9 @@ public class BinomiKeko {
     }
 
     /**
-     * Metodi yhdistää kaksi kekoa yhdeksi keoksi. Käyetään muunmuassa kun
-     * kekoon lisätään alkioita. Käyttää apumetodina mergeJuuriLista ja pair 
-     * metodeita. 
+     * Metodi yhdistää kaksi kekoa yhdeksi keoksi. Käyetään muunmuassa 
+     * kunkekoon lisätään alkioita. Käyttää apumetodina mergeJuuriLista 
+     * ja pair metodeita. 
      * @param keko2 insertin parametrina annettu keko.
      * @return palauttaa yhdistetyn keon.
      */
@@ -134,11 +134,11 @@ public class BinomiKeko {
         toka.setDegree(toka.getDegree() + 1);
     }
     
-     /**
+    /**
      * Binomial-Heap-Minimum(Heap)
-     * Metodi palauttaa keon pienimmän alkion key arvon. Binomikeon pienin
-     * arvon on juurilistan pienin arvon eli tarvitsee käydä läpi vain 
-     * juurilista. 
+     * Metodi palauttaa keon pienimmän alkion key arvon. 
+     * Binomikeon pienin arvo on juurilistan pienin arvon eli tarvitsee 
+     * käydä läpi vain juurilista. 
      * @return palautetaan node1.key eli keon pienin arvo.
      */
     public int min() {
@@ -159,10 +159,10 @@ public class BinomiKeko {
     }
 
     /**
-     * Metodi poistaa ja palauttaa keon pienimmän alkion. Toteutus on 
-     * aluksi melkein saman kuin pelkässä minimi alkion palautuksessa. Mutta
-     * nykyistä node1.keytä pienemmän arvon löytyessä pidetään myös kirjaa
-     * mistä sinne tultiin.
+     * Metodi poistaa ja palauttaa keon pienimmän alkion. 
+     * Toteutus on aluksi melkein saman kuin pelkässä minimi alkion 
+     * palautuksessa. Mutta nykyistä node1.keytä pienemmän arvon 
+     * löytyessä pidetään myös kirjaa mistä sinne tultiin.
      * @return Palauttaa node1.key arvon.
      */
     public int removeMin() {

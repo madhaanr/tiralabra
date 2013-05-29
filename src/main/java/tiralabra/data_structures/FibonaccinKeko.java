@@ -50,10 +50,9 @@ public class FibonaccinKeko {
     }
 
     /**
-     * Metodi poistaa pienimmän Fibonaccin keon alkion ja tekee käyttää apu
-     * metodina consolidate metodia. Consolidate metodi tekee keosta Fibonaccin
-     * keon.
-     *
+     * Metodi poistaa pienimmän Fibonaccin keon alkion ja tekee 
+     * käyttää apumetodina consolidate metodia. 
+     * Consolidate metodi tekee keosta Fibonaccin keon.
      * @return palauttaa poistettavan alkion avaimen arvon.
      */
     public int removeMin() {
@@ -88,8 +87,8 @@ public class FibonaccinKeko {
     }
 
     /**
-     * Consolidate metodi luo fibonaccin keon. Metodia kutsutaan kun keosta
-     * poistetaan node.
+     * Consolidate metodi luo fibonaccin keon. Metodia kutsutaan 
+     * kun keosta poistetaan node.
      */
     public void consolidate() {
         double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
@@ -132,9 +131,9 @@ public class FibonaccinKeko {
     }
 
     /**
-     * Consolidate metodin apumetodi joka linkittää kaksi nodea. Ekana annetusta
-     * tulee child ja toisena parametrina annetusta parent.
-     *
+     * Consolidate metodin apumetodi joka linkittää kaksi nodea. 
+     * Ekana annetusta tulee child ja toisena parametrina annetusta 
+     * parent.
      * @param y
      * @param x
      */
