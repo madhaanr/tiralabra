@@ -88,7 +88,11 @@ public class BinaariKeko {
         minHeapify(binKeko,0);
         return min;
     }
-    
+    /**
+     * Apumetodi pienimmän alkion poistamiseen. Metodi pienentää taulukon
+     * koko jos heapSize on pienempi kuin taulukonKoko/2.
+     * @return palauttaa pienemmän keon tai saman keon.
+     */
     private int[] decreaseHeapSize() {
         heapSize=heapSize-1;
         if(heapSize<taulukonKoko/2&&heapSize>=100) {
@@ -103,9 +107,8 @@ public class BinaariKeko {
     }
     
     /**
-     * Lisää arvon keokoon. Käyttää apumetodina increaseHeapSizea 
-     * joka kasvattaa keon kokoa yhdellä ja kopioi alkiot kekoon
-     * @return poistettava arvo
+     * Lisää arvon kekoon. Käyttää apumetodina increaseHeapSizea 
+     * joka kasvattaa keon kokoa tarpeen vaatiessa ja kopioi alkiot kekoon.
      */
     public void heapInsert(int k) {
         binKeko=increaseHeapSize();
@@ -116,6 +119,12 @@ public class BinaariKeko {
         }
         binKeko[i]=k;
     }
+    /**
+     * Apumetodi heapInsertille joka kasvattaa keon kokoa. Keon tallen-
+     * miseen käytettävän taulukon koko tuplataan jos heapSize on suurempi 
+     * tai yhtäsuuri kuin nykyinen keon koko.
+     * @return palauttaa 2 kertaa suuremman taulukon.
+     */
     private int[] increaseHeapSize() {
         heapSize=heapSize+1;
         if(taulukonKoko<=heapSize) {
@@ -129,7 +138,11 @@ public class BinaariKeko {
         
         return binKeko;
     }
-    
+    /**
+     * Apumetodi jolla valmiista taulukosta saa tehty binaarikeon. 
+     * @param binKeko taulukko josta tehdään keko.
+     * @return palautetaan valmis keko kutsujalle.
+     */
     private int[] buildHeap(int[] binKeko) {
         heapSize=binKeko.length;
         taulukonKoko=heapSize;
@@ -138,7 +151,13 @@ public class BinaariKeko {
         }
         return binKeko;
     }
-    
+    /**
+     * minHeapify korjaa keko ehdon jos se on mennyt rikki, kun alkioita
+     * poistetaan keosta.
+     * @param binKeko
+     * @param i
+     * @return 
+     */
     private int[] minHeapify(int[] binKeko, int i) {
         int left = left(i);
         int right = right(i);
@@ -158,7 +177,12 @@ public class BinaariKeko {
         }
         return binKeko;
     } 
-    
+    /**
+     * Metodi jolla vaihdetaan kahden alkion paikkaa.
+     * @param binKeko keko jolle operaatio suoritettaan.
+     * @param i 
+     * @param smallest keon pienin arvo. 
+     */
     private void swapSmallestwithI(int[] binKeko, int i, int smallest) {
         int apu = binKeko[i];
         binKeko[i] = binKeko[smallest];

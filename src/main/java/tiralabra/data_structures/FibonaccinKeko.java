@@ -1,5 +1,7 @@
 package tiralabra.data_structures;
 
+import java.util.ArrayList;
+
 /* @author mhaanran */
 public class FibonaccinKeko {
 
@@ -51,6 +53,7 @@ public class FibonaccinKeko {
      * Metodi poistaa pienimmän Fibonaccin keon alkion ja tekee käyttää apu
      * metodina consolidate metodia. Consolidate metodi tekee keosta Fibonaccin
      * keon.
+     *
      * @return palauttaa poistettavan alkion avaimen arvon.
      */
     public int removeMin() {
@@ -70,7 +73,7 @@ public class FibonaccinKeko {
                 kasiteltava.setParent(null);
                 kasiteltava = temp;
             }
-            //remove vanhaMin from root list
+            //poistetaan vanhaMin from root list
             vanhaMin.getLeft().setRight(vanhaMin.getRight());
             vanhaMin.getRight().setLeft(vanhaMin.getLeft());
             if (vanhaMin == vanhaMin.getRight()) {
@@ -86,16 +89,20 @@ public class FibonaccinKeko {
     }
 
     /**
-     * Consolidite metodi luo fibonaccin keon. Metodia kutsutaan kun keosta
+     * Consolidate metodi luo fibonaccin keon. Metodia kutsutaan kun keosta
      * poistetaan node.
      */
     public void consolidate() {
-        FibNode[] A = new FibNode[1];
-        for (int i = 0; i < A.length; ++i) {
+        double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
+        int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi));
+        FibNode[] A = new FibNode[size + 1];
+        for (int i = 0; i < size; ++i) {
             A[i] = null;
         }
-        FibNode w = min.getRight();
-        while (w != min) {
+//        FibNode w = min;
+        ArrayList<FibNode> H = rootList();
+        for (FibNode w : H) {
+//        while(w!=min.getRight()) {
             FibNode x = w;
             int d = x.getDegree();
             while (A[d] != null) {
@@ -110,9 +117,10 @@ public class FibonaccinKeko {
                 d = d + 1;
             }
             A[d] = x;
-        }
+
+        } 
         min = null;
-        for (int i = 0; i < A.length; i++) {
+        for (int i = 0; i < size; i++) {
             if (A[i] != null) {
                 if (min == null) {
                     min = A[i];
@@ -124,10 +132,11 @@ public class FibonaccinKeko {
             }
         }
     }
-    
+
     /**
-     * Consolidate metodin apumetodi joka linkittää kaksi nodea. Ekana
-     * annetusta tulee child ja toisena parametrina annetusta parent. 
+     * Consolidate metodin apumetodi joka linkittää kaksi nodea. Ekana annetusta
+     * tulee child ja toisena parametrina annetusta parent.
+     *
      * @param y
      * @param x
      */
@@ -191,6 +200,19 @@ public class FibonaccinKeko {
         keko.min = fibKeko.min;
 
         return keko;
+    }
+    public ArrayList rootList() {
+        FibNode w=min;
+        ArrayList<FibNode> k = new ArrayList();
+        k.add(w);
+        while(min!=w.getRight()) {
+            k.add(w.getRight());
+            w=w.getRight();
+        }
+        k.add(w.getRight());
+        System.out.println(k.size());
+        return k;
+            
     }
 
     @Override

@@ -141,12 +141,12 @@ public class Vertailija {
         FibNode fibNode4 = new FibNode(4);
         FibNode fibNode5 = new FibNode(5);
         FibNode fibNode6 = new FibNode(6);
-        fibonaccinKeko.insert(fibNode6);
+        fibonaccinKeko.insert(fibNode1);
         fibonaccinKeko.insert(fibNode2);
         fibonaccinKeko.insert(fibNode3);
         fibonaccinKeko.insert(fibNode4);
         fibonaccinKeko.insert(fibNode5);
-        fibonaccinKeko.insert(fibNode1);
+        fibonaccinKeko.insert(fibNode6);
             
         fibonaccinKeko.removeMin();
 //        fibonaccinKeko.removeMin();
