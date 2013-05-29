@@ -5,4 +5,5 @@ Pieniä korjauksia ja fibonaccin keon toteuttamista.
 ti 28.5.
 Kekoon voi lisätä alkioita insert metodilla. RemoveMin metodin toteutus on päivän ohjelmassa.
 ke 29.5 
-Removeminin toteutus jatkuu. 
+Removeminin toteutus jatkuu. Consolidate apumetodin toteutus valmis mutta removeMin ei syystä 
+tai toisesta toimi vielä oikein vaan poistaa liian monta nodea.
