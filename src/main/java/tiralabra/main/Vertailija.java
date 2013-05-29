@@ -149,9 +149,9 @@ public class Vertailija {
         fibonaccinKeko.insert(fibNode5);
             
         fibonaccinKeko.removeMin();
-        fibonaccinKeko.removeMin();
-        fibonaccinKeko.removeMin();
-        fibonaccinKeko.removeMin();
+//        fibonaccinKeko.removeMin();
+//        fibonaccinKeko.removeMin();
+//        fibonaccinKeko.removeMin();
         
         
         System.out.println(fibonaccinKeko);

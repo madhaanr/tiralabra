@@ -11,18 +11,14 @@ public class FibNode {
     private int degree;
    
     public FibNode(int key) {
-        this.key=key;
-        this.parent=null;
-        this.child=null;
-        this.left=null;
-        this.right=null;
-        this.degree=0;
-                
+        this.key=key; 
+        parent=null;
+        child=null;
+        left=this;
+        right=this;  
+        degree=0;      
     }
-    public FibNode() {
-        
-    }
-
+  
     public int getKey() {
         return key;
     }

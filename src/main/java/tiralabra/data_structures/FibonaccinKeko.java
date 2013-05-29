@@ -22,6 +22,10 @@ public class FibonaccinKeko {
         return min.getKey();
     }
     
+    public boolean isEmpty() {
+        return min==null;
+    }
+    
     /**
      * Metodilla lisätään fibonaccin kekoon uusia nodeja.
      * @param lisattava kekoon lisätään FibNode.
@@ -33,10 +37,7 @@ public class FibonaccinKeko {
             lisattava.setLeft(min);
             lisattava.setRight(min.getRight());
             min.setRight(lisattava);
-            FibNode node = lisattava.getRight();
-            if(node != null) {
-                node.setLeft(lisattava);
-            }
+            lisattava.getRight().setLeft(lisattava);
             if (lisattava.getKey() < min.getKey()) {            
                 min = lisattava;
             }
@@ -50,52 +51,91 @@ public class FibonaccinKeko {
      * Fibonaccin keon.
      * @return palauttaa poistettavan alkion.
      */
-    public FibNode removeMin() {
-        FibNode vanhaMin = min;
-        if(min!=null) {
-            if(min.getDegree()==0) {
-                FibNode left=min.getLeft();
-                FibNode right=min.getRight();
-                if(left!=null) {
-                    left.setRight(right);
-                    min=left;
-                }
-                if(right!=null) {
-                    right.setLeft(left);
-                    min=right;
-                }
-                while(left!=null&&right!=null) {
-                    if(left.getKey()<right.getKey()) {
-                        min=left;         
-                    }  
-                    left=left.getLeft();
-                }
-                while(right!=null) {
-                    if(right.getKey()<min.getKey()) {
-                        min=right;                 
-                    }
-                    right=right.getRight();
-                }                 
+    public int removeMin() {
+        FibNode z = min;
+       
+        if(z!=null) {
+            FibNode x = z.getChild();
+            FibNode temp;
+            for(int i=z.getDegree();i>0;--i) {
+                temp=x.getRight();
+                
+                x.getLeft().setRight(x.getRight());
+                x.getRight().setLeft(x.getLeft());
+                
+                x.setLeft(z);
+                x.setRight(z.getRight());
+                min.setRight(x);
+                x.getRight().setLeft(x);
+                
+                x.setParent(null);
+                x=temp;
+                
+            }
+            //remove z from root list
+            z.getLeft().setRight(z.getRight());
+            z.getRight().setLeft(z.getLeft());
+            if(z==z.getRight()) {
+                min=null;
             }
             else {
-                FibNode left=min.getLeft();
-                FibNode right=min.getRight();
-                FibNode child=min.getChild();
-                FibNode childLeft = child.getLeft();
-                FibNode childRight = child.getRight();
-                while(childLeft!=null) {
-                    childLeft.setParent(null);
-                    childLeft.setLeft(left);
-                    childLeft.setRight(right);
-                    left.setRight(childLeft);
-                    right.setLeft(childLeft);
-                    
-                }              
-            }         
-            --heapSize;
+                min = z.getRight();
+                consolidate();
+            }
+            heapSize=heapSize-1;
         }
-        return vanhaMin;
+            
+        return z.getKey();
     }
+    public void consolidate() {
+        
+    }
+//    public FibNode removeMin() {
+//        FibNode vanhaMin = min;
+//        if(min!=null) {
+//            if(min.getDegree()==0) {
+//                FibNode left=min.getLeft();
+//                FibNode right=min.getRight();
+//                if(left!=null) {
+//                    left.setRight(right);
+//                    min=left;
+//                }
+//                if(right!=null) {
+//                    right.setLeft(left);
+//                    min=right;
+//                }
+//                while(left!=null&&right!=null) {
+//                    if(left.getKey()<right.getKey()) {
+//                        min=left;         
+//                    }  
+//                    left=left.getLeft();
+//                }
+//                while(right!=null) {
+//                    if(right.getKey()<min.getKey()) {
+//                        min=right;                 
+//                    }
+//                    right=right.getRight();
+//                }                 
+//            }
+//            else {
+//                FibNode left=min.getLeft();
+//                FibNode right=min.getRight();
+//                FibNode child=min.getChild();
+//                FibNode childLeft = child.getLeft();
+//                FibNode childRight = child.getRight();
+//                while(childLeft!=null) {
+//                    childLeft.setParent(null);
+//                    childLeft.setLeft(left);
+//                    childLeft.setRight(right);
+//                    left.setRight(childLeft);
+//                    right.setLeft(childLeft);
+//                    
+//                }              
+//            }         
+//            --heapSize;
+//        }
+//        return vanhaMin;
+//    }
  
     public FibonaccinKeko union(FibonaccinKeko fibKeko) {
         FibonaccinKeko keko = new FibonaccinKeko();
@@ -106,17 +146,7 @@ public class FibonaccinKeko {
     
     @Override
     public String toString() {
-        String keko="";
-        FibNode node = min;
-        while(node!=null) {
-            keko+=node.getKey();
-            node=node.getRight();
-        }
-        FibNode node2 = min.getLeft();
-        while(node2!=null) {
-            keko+=node2.getKey();
-            node2=node2.getLeft();
-        }      
-        return min.getKey()+"--"+keko+"--"+heapSize;
+         
+        return min.getKey()+"--"+heapSize;
     }
 }
