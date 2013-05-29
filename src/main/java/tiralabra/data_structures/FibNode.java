@@ -9,6 +9,7 @@ public class FibNode {
     private FibNode left;
     private FibNode right;
     private int degree;
+    private boolean mark;
    
     public FibNode(int key) {
         this.key=key; 
@@ -16,7 +17,8 @@ public class FibNode {
         child=null;
         left=this;
         right=this;  
-        degree=0;      
+        degree=0;
+        mark=false;
     }
   
     public int getKey() {
@@ -65,6 +67,14 @@ public class FibNode {
 
     public void setRight(FibNode right) {
         this.right = right;
+    }
+
+    public boolean isMark() {
+        return mark;
+    }
+
+    public void setMark(boolean mark) {
+        this.mark = mark;
     }
     
     
