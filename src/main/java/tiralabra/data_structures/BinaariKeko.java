@@ -62,8 +62,7 @@ public class BinaariKeko {
     }
 
     /**
-     * Keon koon kyselemiseen.
-     *
+     * Metodi keon koon kyselemiseen.
      * @return palauttaa keon koon joka on tallessa heapSize muuttujassa.
      */
     public int getHeapSize() {
@@ -71,21 +70,20 @@ public class BinaariKeko {
     }
 
     /**
-     * Metodi palauttaa keon pienimmän alkion.
-     *
-     * @param binKeko
-     * @return Minimi keon pienin alkio on taulukon indeksissä 0. Eli
-     * palautetaan se.
+     * Metodi palauttaa keon pienimmän alkion arvon.
+     * @param binKeko taulukko jossa keko sijaitsee.
+     * @return binKeko[0] Minimi keon pienin alkio on taulukon indeksissä 0. 
+     * Eli palautetaan sen sisältö.
      */
     public int heapMin(int[] binKeko) {
         return binKeko[0];
     }
 
     /**
-     * Poistaa pienimmän arvon keosta. Käyttää apumetodina decreaseHeapSizea
-     * joka pienentää keon kokoa yhdellä ja kopioi muut paitsi viimeisenä keossa
-     * olevan alkion uuteen kekoon
-     *
+     * Poistaa pienimmän arvon keosta. Käyttää apumetodina 
+     * decreaseHeapSizea joka pienentää keon kokoa yhdellä ja kopioi muut 
+     * paitsi viimeisenä keossa olevan alkion uuteen kekoon jolloin tämä alkio
+     * jää keosta pois.
      * @return poistettava, keon pienin arvo.
      */
     public int deleteMin() {
@@ -97,9 +95,8 @@ public class BinaariKeko {
     }
 
     /**
-     * Apumetodi pienimmän alkion poistamiseen. Metodi pienentää taulukon koko
-     * jos heapSize on pienempi kuin taulukonKoko/2.
-     *
+     * Apumetodi pienimmän alkion poistamiseen. Metodi pienentää 
+     * taulukon koko jos heapSize on pienempi kuin taulukonKoko/2.
      * @return palauttaa pienemmän keon tai saman keon.
      */
     private int[] decreaseHeapSize() {
@@ -116,8 +113,8 @@ public class BinaariKeko {
     }
 
     /**
-     * Lisää arvon kekoon. Käyttää apumetodina increaseHeapSizea joka kasvattaa
-     * keon kokoa tarpeen vaatiessa ja kopioi alkiot kekoon.
+     * Lisää arvon kekoon. Käyttää apumetodina increaseHeapSizea joka 
+     * kasvattaa keon kokoa tarpeen vaatiessa.
      */
     public void heapInsert(int k) {
         binKeko = increaseHeapSize();
@@ -130,10 +127,9 @@ public class BinaariKeko {
     }
 
     /**
-     * Apumetodi heapInsertille joka kasvattaa keon kokoa. Keon tallen- miseen
-     * käytettävän taulukon koko tuplataan jos heapSize on suurempi tai
-     * yhtäsuuri kuin nykyinen keon koko.
-     *
+     * Apumetodi heapInsertille joka kasvattaa keon kokoa. Keon 
+     * tallentamiseen  käytettävän taulukon koko tuplataan jos heapSize 
+     * on suurempi tai yhtäsuuri kuin nykyinen keon koko.
      * @return palauttaa 2 kertaa suuremman taulukon.
      */
     private int[] increaseHeapSize() {

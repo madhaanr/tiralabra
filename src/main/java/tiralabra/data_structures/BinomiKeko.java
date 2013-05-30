@@ -10,7 +10,7 @@ public class BinomiKeko {
     private Node head;
 
     /**
-     * Konstructorissa luodaan uusi tyhjä keko. head osoittaa binomikeon 
+     * Konstructorissa luodaan uusi tyhjä keko2. head osoittaa binomikeon 
      * juurilistan ensimmäiseen alkioon ja se asetetaan arvoon null.
      * Make-Binomial-Heap
      */
@@ -19,8 +19,8 @@ public class BinomiKeko {
     }
 
     /**
-     * Metodilla voi tarkistaa onko keko tyhjä.
-     * @return palauttaa true jos keko on tyhjä ja muuten false.
+     * Metodilla voi tarkistaa onko keko2 tyhjä.
+     * @return palauttaa true jos keko2 on tyhjä ja muuten false.
      */
     public boolean isEmpty() {
         return head == null;
@@ -28,9 +28,9 @@ public class BinomiKeko {
 
     /**
      * Metodilla voi lisätä kekoon nodeja.
-     * Aluksi luodaan uusi keko, jonka headiksi laitetaan lisättävä node
-     * Tämän jälkeen mergetään tämä keko jo olemassa olevan keon kanssa ja
-     * yhdistetty keko talletetaan uusikeko nimellä. Lopuksi luokkamuuttuja
+     * Aluksi luodaan uusi keko2, jonka headiksi laitetaan lisättävä node
+     * Tämän jälkeen mergetään tämä keko2 jo olemassa olevan keon kanssa ja
+     * yhdistetty keko2 talletetaan uusikeko nimellä. Lopuksi luokkamuuttuja
      * head pistetään osoittamaan uuden keon headiin.
      * @param lisattava on lisättävä node
      */
@@ -42,24 +42,24 @@ public class BinomiKeko {
     }
 
     /**
-     * Metodi yhdistää kaksi kekoa yhdeksi keoksi. Käyetään muunmuassa 
-     * kunkekoon lisätään alkioita. Käyttää apumetodina mergeJuuriLista 
+     * Metodi yhdistää kaksi kekoa yhdeksi keoksi. Käytetään 
+     * kun kekoon lisätään alkioita. Käyttää apumetodina mergeJuuriLista 
      * ja pair metodeita. 
-     * @param keko2 insertin parametrina annettu keko.
+     * @param keko insertin parametrina annetusta nodesta luotu keko2.
      * @return palauttaa yhdistetyn keon.
      */
-    public BinomiKeko mergeHeap(BinomiKeko keko2) {
-        BinomiKeko keko = new BinomiKeko();
-        keko.head = mergeJuuriLista(this, keko2);
+    public BinomiKeko mergeHeap(BinomiKeko keko) {
+        BinomiKeko keko2 = new BinomiKeko();
+        keko2.head = mergeJuuriLista(this, keko);
         head = null;
-        keko2.head = null;
+        keko.head = null;
 
-        if (keko.head == null) {
-            return keko;
+        if (keko2.head == null) {
+            return keko2;
         }
 
         Node prevNode = null;
-        Node node = keko.head;
+        Node node = keko2.head;
         Node nextNode = node.getSibling();
 
         while (nextNode != null) {
@@ -75,7 +75,7 @@ public class BinomiKeko {
                     pair(nextNode, node);
                 } else {
                     if (prevNode == null) {
-                        keko.head = nextNode;
+                        keko2.head = nextNode;
                     } else {
                         prevNode.setSibling(nextNode);
                     }
@@ -85,9 +85,15 @@ public class BinomiKeko {
             }
             nextNode = node.getSibling();
         }
-        return keko;
+        return keko2;
     }
-
+    /**
+     * mergeHeap metodin apumetodi.
+     * Yhdistää parametrina annettujen kekojen juurilista toisiinsa.
+     * @param keko1 yhdistettävä keko1.
+     * @param keko2 yhdistettävä keko2.
+     * @return palauttaa uuden juurilistan headin eli listan alun..
+     */
     private Node mergeJuuriLista(BinomiKeko keko1, BinomiKeko keko2) {
         if (keko1.head == null) {
             return keko2.head;
@@ -126,7 +132,11 @@ public class BinomiKeko {
             return headL;
         }
     }
-
+    /**
+     * Parittaa kaksi nodea keskenään.
+     * @param eka Tästä nodesta tulee tokan child.
+     * @param toka Tästä nodesta tulee ekan parent.
+     */
     private void pair(Node eka, Node toka) {
         eka.setParent(toka);
         eka.setSibling(toka.getChild());
