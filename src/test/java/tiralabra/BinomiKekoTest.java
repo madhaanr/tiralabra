@@ -20,6 +20,12 @@ public class BinomiKekoTest {
     private BinomiKeko binomiKeko = new BinomiKeko();
     private int[] numeroita = {100, 20, 10, 5, 3, 2, 1, 7, 8, 9, 11, 15, 17, 19, 21, 101, 102, 66, 33, 99, 1000};
     private Node[] nodet = new Node[numeroita.length];
+    private Node node1;
+    private Node node2;
+    private Node node3;
+    private Node node4;
+    private Node node5;
+    private BinomiKeko binomiKeko2;
 
     public BinomiKekoTest() {
         for (int i = 0; i < numeroita.length; i++) {
@@ -30,6 +36,12 @@ public class BinomiKekoTest {
 
     @Before
     public void setUp() {
+        node1=new Node(1);
+        node2=new Node(2);
+        node3=new Node(3);
+        node4=new Node(4);
+        node5=new Node(5);
+        binomiKeko2 = new BinomiKeko();
     }
 
     @After
@@ -127,6 +139,22 @@ public class BinomiKekoTest {
             --vahenna;
         }
         assertEquals(0,binomiKeko5.min());
+    }
+    @Test
+    public void kekoonVoiLisataViisiNodeJaNiidenPerheSuhteetOnOikein() {
+        binomiKeko2.insert(node1);
+        binomiKeko2.insert(node2);
+        binomiKeko2.insert(node3);
+        binomiKeko2.insert(node4);
+        binomiKeko2.insert(node5);
+        assertEquals(node5, binomiKeko2.getHead());
+        assertEquals(node1, node5.getSibling());
+        assertEquals(2, node1.getDegree());
+        assertEquals(node3, node1.getChild());
+        assertEquals(node2, node3.getSibling());
+        assertEquals(node4, node3.getChild());
+        assertEquals(node1, node3.getParent());
+        assertEquals(node1, node2.getParent());
     }
     
 }

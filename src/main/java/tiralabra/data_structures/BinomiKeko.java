@@ -10,7 +10,7 @@ public class BinomiKeko {
     private Node head;
 
     /**
-     * Konstructorissa luodaan uusi tyhjä keko2. head osoittaa binomikeon 
+     * Konstructorissa luodaan uusi tyhjä uusi. head osoittaa binomikeon 
      * juurilistan ensimmäiseen alkioon ja se asetetaan arvoon null.
      * Make-Binomial-Heap
      */
@@ -19,8 +19,8 @@ public class BinomiKeko {
     }
 
     /**
-     * Metodilla voi tarkistaa onko keko2 tyhjä.
-     * @return palauttaa true jos keko2 on tyhjä ja muuten false.
+     * Metodilla voi tarkistaa onko uusi tyhjä.
+     * @return palauttaa true jos uusi on tyhjä ja muuten false.
      */
     public boolean isEmpty() {
         return head == null;
@@ -28,9 +28,9 @@ public class BinomiKeko {
 
     /**
      * Metodilla voi lisätä kekoon nodeja.
-     * Aluksi luodaan uusi keko2, jonka headiksi laitetaan lisättävä node
-     * Tämän jälkeen mergetään tämä keko2 jo olemassa olevan keon kanssa ja
-     * yhdistetty keko2 talletetaan uusikeko nimellä. Lopuksi luokkamuuttuja
+     * Aluksi luodaan uusi uusi, jonka headiksi laitetaan lisättävä node
+     * Tämän jälkeen mergetään tämä uusi jo olemassa olevan keon kanssa ja
+     * yhdistetty uusi talletetaan uusikeko nimellä. Lopuksi luokkamuuttuja
      * head pistetään osoittamaan uuden keon headiin.
      * @param lisattava on lisättävä node
      */
@@ -45,89 +45,98 @@ public class BinomiKeko {
      * Metodi yhdistää kaksi kekoa yhdeksi keoksi. Käytetään 
      * kun kekoon lisätään alkioita. Käyttää apumetodina mergeJuuriLista 
      * ja pair metodeita. 
-     * @param keko insertin parametrina annetusta nodesta luotu keko2.
-     * @return palauttaa yhdistetyn keon.
+     * @param keko insertin parametrina annetusta nodesta luotu uusi.
+     * @return uusi palauttaa yhdistetyn keon.
      */
     public BinomiKeko mergeHeap(BinomiKeko keko) {
-        BinomiKeko keko2 = new BinomiKeko();
-        keko2.head = mergeJuuriLista(this, keko);
+        BinomiKeko uusi = new BinomiKeko();
+        uusi.head = mergeJuuriLista(this, keko);
         head = null;
         keko.head = null;
 
-        if (keko2.head == null) {
-            return keko2;
+        if (uusi.isEmpty()) {
+            return uusi;
         }
+        
+        Node node = uusi.head;
+        Node prev = null;
+        Node next = node.getSibling();
 
-        Node prevNode = null;
-        Node node = keko2.head;
-        Node nextNode = node.getSibling();
-
-        while (nextNode != null) {
-            if (node.getDegree() != nextNode.getDegree()
-            || (nextNode.getSibling() != null 
-            &&  nextNode.getSibling().getDegree() == node.getDegree())
-                ) {
-                prevNode = node;
-                node = nextNode;
-            } else {
-                if (node.getKey() < nextNode.getKey()) {
-                    node.setSibling(nextNode.getSibling());
-                    pair(nextNode, node);
-                } else {
-                    if (prevNode == null) {
-                        keko2.head = nextNode;
-                    } else {
-                        prevNode.setSibling(nextNode);
+        while (next != null) {
+            if (node.getDegree() != next.getDegree()) {
+                prev = node;
+                node = next;
+            } 
+            else if(next.getSibling() != null &&  
+                    next.getSibling().getDegree() == node.getDegree()) {
+                prev = node;
+                node = next;
+            }
+            else {
+                if (node.getKey() < next.getKey()) {
+                    node.setSibling(next.getSibling());
+                    pair(next, node);
+                } 
+                else {
+                    if (prev == null) {
+                        uusi.head = next;
+                    } 
+                    else {
+                        prev.setSibling(next);
                     }
-                    pair(node, nextNode);
-                    node = nextNode;
+                    pair(node, next);
+                    node = next;
                 }
             }
-            nextNode = node.getSibling();
+            next = node.getSibling();
         }
-        return keko2;
+        return uusi;
     }
     /**
      * mergeHeap metodin apumetodi.
      * Yhdistää parametrina annettujen kekojen juurilistat toisiinsa.
      * @param keko1 yhdistettävä keko1.
-     * @param keko2 yhdistettävä keko2.
-     * @return palauttaa uuden juurilistan headin eli listan alun..
+     * @param uusi yhdistettävä uusi.
+     * @return uusiHead palauttaa uuden juurilistan headin eli listan alun.
      */
     private Node mergeJuuriLista(BinomiKeko keko1, BinomiKeko keko2) {
-        if (keko1.head == null) {
+        if (keko1.isEmpty()) {
             return keko2.head;
-        } else if (keko2.head == null) {
+        } 
+        else if (keko2.isEmpty()) {
             return keko1.head;
-        } else {
+        } 
+        else {
             Node uusiHead;
             Node tail;
-            Node keko1Next = keko1.head;
-            Node keko2Next = keko2.head;
+            Node next1 = keko1.head;
+            Node next2 = keko2.head;
 
             if (keko1.head.getDegree() <= keko2.head.getDegree()) {
                 uusiHead = keko1.head;
-                keko1Next = keko1Next.getSibling();
-            } else {
+                next1 = next1.getSibling();
+            } 
+            else {
                 uusiHead = keko2.head;
-                keko2Next = keko2Next.getSibling();
+                next2 = next2.getSibling();
             }
             tail = uusiHead;
-
-            while (keko1Next != null && keko2Next != null) {
-                if (keko1Next.getDegree() <= keko2Next.getDegree()) {
-                    tail.setSibling(keko1Next);
-                    keko1Next = keko1Next.getSibling();
-                } else {
-                    tail.setSibling(keko2Next);
-                    keko2Next = keko2Next.getSibling();
+            while (next1 != null && next2 != null) {
+                if (next1.getDegree() <= next2.getDegree()) {
+                    tail.setSibling(next1);
+                    next1 = next1.getSibling();
+                } 
+                else {
+                    tail.setSibling(next2);
+                    next2 = next2.getSibling();
                 }
                 tail = tail.getSibling();
             }
-            if (keko1Next != null) {
-                tail.setSibling(keko1Next);
-            } else {
-                tail.setSibling(keko2Next);
+            if (next1 != null) {
+                tail.setSibling(next1);
+            } 
+            else {
+                tail.setSibling(next2);
             }
             return uusiHead;
         }
@@ -214,6 +223,15 @@ public class BinomiKeko {
         BinomiKeko uusiKeko = this.mergeHeap(keko);
         head = uusiKeko.head;      
         return min;
+    }
+
+    
+    /**
+     * Metodi jolla saa tietää mikä node on keon head.
+     * @return head palauttaa keon head noden.
+     */
+    public Node getHead() {
+        return head;
     }
 
     @Override

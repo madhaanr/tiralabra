@@ -25,9 +25,9 @@ public class Node {
 //        this.key = key;
 //    }
 //
-//    public Node getParent() {
-//        return parent;
-//    }
+    public Node getParent() {
+        return parent;
+    }
 
     public void setParent(Node parent) {
         this.parent = parent;
