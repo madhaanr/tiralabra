@@ -112,15 +112,16 @@ public class BinomiKekoTest {
         assertFalse(binomiKeko.isEmpty());
     }
     @Test
-    public void kekoonVoiLisataKymmenenMiljoonaaAlkiota() {
-        Node[] kymmenenMiljoonaa = new Node[10000000];
-        int[] numeroita2=new int[10000000];
-        for (int i = 0; i < 10000000; i++) {
+    public void kekoonVoiLisataSataTuhatta() {
+        int maara=100000;
+        int vahenna=maara-1;
+        Node[] kymmenenMiljoonaa = new Node[maara];
+        int[] numeroita2=new int[maara];
+        for (int i = 0; i < maara; i++) {
             numeroita2[i]=i;         
         }
         BinomiKeko binomiKeko5 = new BinomiKeko();
-        int vahenna=9999999;
-        for (int i = 0; i < 10000000; ++i) {
+        for (int i = 0; i < maara; ++i) {
             kymmenenMiljoonaa[i]=new Node(numeroita2[vahenna]);
             binomiKeko5.insert(kymmenenMiljoonaa[i]); 
             --vahenna;

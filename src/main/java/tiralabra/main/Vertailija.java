@@ -10,9 +10,9 @@ import tiralabra.data_structures.Node;
 /* @author mhaanran */
 public class Vertailija {
     public static void main(String[] args) {
-        int ylaraja=5000000;
-        
-        //Alkiot syötetään normaalijärjestyksessä.
+//        int ylaraja=30000000;
+//        
+//        //Alkiot syötetään normaalijärjestyksessä.
 //        PriorityQueue PQ = new PriorityQueue<Integer>();
 //        for (int i = 0; i < ylaraja ; i++) {
 //            PQ.add(i);
@@ -87,7 +87,7 @@ public class Vertailija {
 //        double timeEndBinomiKeko2 = System.currentTimeMillis();
 //        double eroBinomiKeko2 = (timeEndBinomiKeko2-timeStartBinomiKeko2)/1000;
 //        System.out.println((eroBinomiKeko2+"s binomikeko käänteinenjärjestys"));
-//        
+        
 //        //Alkioita syötetään satunnaisessa järjestyksessä.
 //        int satunnainenKoko=100000;   
 //        int[] satunnainen = new int[satunnainenKoko];
@@ -154,7 +154,7 @@ public class Vertailija {
 //        fibonaccinKeko.insert(fibNode8);
 //        fibonaccinKeko.insert(fibNode9);
             
-        fibonaccinKeko.removeMin();
+//        fibonaccinKeko.removeMin();
 //        fibonaccinKeko.removeMin();
 //        fibonaccinKeko.removeMin();
 //        fibonaccinKeko.removeMin();

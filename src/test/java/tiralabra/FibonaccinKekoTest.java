@@ -6,11 +6,9 @@ package tiralabra;
  */
 
 import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 import tiralabra.data_structures.FibNode;
 import tiralabra.data_structures.FibonaccinKeko;
 
@@ -22,6 +20,10 @@ public class FibonaccinKekoTest {
     
     FibonaccinKeko fibKeko;
     FibNode node1;
+    FibNode node2;
+    FibNode node3;
+    FibNode node4;
+    FibNode node5;
     
     public FibonaccinKekoTest() {
         
@@ -31,6 +33,10 @@ public class FibonaccinKekoTest {
     public void setUp() {
         fibKeko = new FibonaccinKeko();
         node1 = new FibNode(1);
+        node2 = new FibNode(2);
+        node3 = new FibNode(3);
+        node4 = new FibNode(4);
+        node5 = new FibNode(5);
     }
     
     @After
@@ -61,4 +67,27 @@ public class FibonaccinKekoTest {
         }
         assertEquals(101,fibKeko.min());
     }
+    @Test
+    public void kekoonVoiLisataViisiNodeaJaNiidenLeftRightOvatOikein() {
+        fibKeko.insert(node1);
+        fibKeko.insert(node2);
+        fibKeko.insert(node3);
+        fibKeko.insert(node4);
+        fibKeko.insert(node5);
+        assertEquals(node2,node1.getLeft());
+        assertEquals(node5,node1.getRight());
+        assertEquals(node1,node2.getRight());
+        assertEquals(node3,node2.getLeft());
+        assertEquals(node2,node3.getRight());
+        assertEquals(node4,node3.getLeft());
+        assertEquals(node3,node4.getRight());
+        assertEquals(node5,node4.getLeft());
+        assertEquals(node4,node5.getRight());
+        assertEquals(node1,node5.getLeft());
+    }
+    @Test
+    public void kekoOnTyhja() {
+        assertEquals(true,fibKeko.isEmpty());
+    }
+    
 }

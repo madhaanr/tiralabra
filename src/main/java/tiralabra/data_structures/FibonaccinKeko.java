@@ -24,14 +24,17 @@ public class FibonaccinKeko {
     public int min() {
         return min.getKey();
     }
-
+    
+    /**
+     * Tarkistus onko keko tyhjä.
+     * @return palauttaa true jos keko on tyhjä
+     */
     public boolean isEmpty() {
         return min == null;
     }
 
     /**
      * Metodilla lisätään fibonaccin kekoon uusia nodeja.
-     *
      * @param lisattava kekoon lisätään FibNode.
      */
     public void insert(FibNode lisattava) {
@@ -50,8 +53,8 @@ public class FibonaccinKeko {
     }
 
     /**
-     * Metodi poistaa pienimmän Fibonaccin keon alkion ja tekee 
-     * käyttää apumetodina consolidate metodia. 
+     * Metodi poistaa pienimmän Fibonaccin keon alkion. 
+     * Käyttää apumetodina consolidate metodia. 
      * Consolidate metodi tekee keosta Fibonaccin keon.
      * @return palauttaa poistettavan alkion avaimen arvon.
      */
@@ -72,7 +75,6 @@ public class FibonaccinKeko {
                 kasiteltava.setParent(null);
                 kasiteltava = temp;
             }
-            //poistetaan vanhaMin from root list
             vanhaMin.getLeft().setRight(vanhaMin.getRight());
             vanhaMin.getRight().setLeft(vanhaMin.getLeft());
             if (vanhaMin == vanhaMin.getRight()) {
@@ -90,7 +92,7 @@ public class FibonaccinKeko {
      * Consolidate metodi luo fibonaccin keon. Metodia kutsutaan 
      * kun keosta poistetaan node.
      */
-    public void consolidate() {
+    private void consolidate() {
         double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
         int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi));
         FibNode[] A = new FibNode[size+1];
@@ -134,8 +136,8 @@ public class FibonaccinKeko {
      * Consolidate metodin apumetodi joka linkittää kaksi nodea. 
      * Ekana annetusta tulee child ja toisena parametrina annetusta 
      * parent.
-     * @param y
-     * @param x
+     * @param y node josta tulee child.
+     * @param x node josta tulee parent.
      */
     public void link(FibNode y, FibNode x) {
         y.getLeft().setRight(y.getRight());
@@ -165,6 +167,10 @@ public class FibonaccinKeko {
         return k;           
     }
 
+    /**
+     * Palauttaa fibonaccin keon koon. Käytetään testeissä.
+     * @return heapSize eli keon koko
+     */
     public int getHeapSize() {
         return heapSize;
     }
