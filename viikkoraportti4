@@ -4,6 +4,12 @@ ma 27.5.
 Pieniä korjauksia ja fibonaccin keon toteuttamista.
 ti 28.5.
 Kekoon voi lisätä alkioita insert metodilla. RemoveMin metodin toteutus on päivän ohjelmassa.
-ke 29.5 
+ke 29.5. 
 Removeminin toteutus jatkuu. Consolidate apumetodin toteutus valmis mutta removeMin ei syystä 
-tai toisesta toimi vielä oikein vaan poistaa liian monta nodea.
+tai toisesta toimi vielä oikein vaan poistaa liian monta nodea. Osallistuin ekaan code review dojoon.
+Aika erilaisia olivat kaikki käsitellyt projektit ja en paljon pystynyt kommentoimaan kun en muiden
+aiheita riittävän hyvin tuntenut. Sain muutamia kommentteja esim. jotkin binomikeon metodit ovat liian
+hankalia ymmärtää.
+to 30.5.
+Ensimmäinen varsinainen code review ohjelmassa. Lisäksi metodien kommentointia. Testien kirjoittelua fibonaccin 
+keolle ja fibonaccin keon removeMin/consolidate metodien muokkausta jotta keosta voisi poistaa nodeja.
