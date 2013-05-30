@@ -89,7 +89,7 @@ public class BinomiKeko {
     }
     /**
      * mergeHeap metodin apumetodi.
-     * Yhdistää parametrina annettujen kekojen juurilista toisiinsa.
+     * Yhdistää parametrina annettujen kekojen juurilistat toisiinsa.
      * @param keko1 yhdistettävä keko1.
      * @param keko2 yhdistettävä keko2.
      * @return palauttaa uuden juurilistan headin eli listan alun..
@@ -100,19 +100,19 @@ public class BinomiKeko {
         } else if (keko2.head == null) {
             return keko1.head;
         } else {
-            Node headL;
+            Node uusiHead;
             Node tail;
             Node keko1Next = keko1.head;
             Node keko2Next = keko2.head;
 
             if (keko1.head.getDegree() <= keko2.head.getDegree()) {
-                headL = keko1.head;
+                uusiHead = keko1.head;
                 keko1Next = keko1Next.getSibling();
             } else {
-                headL = keko2.head;
+                uusiHead = keko2.head;
                 keko2Next = keko2Next.getSibling();
             }
-            tail = headL;
+            tail = uusiHead;
 
             while (keko1Next != null && keko2Next != null) {
                 if (keko1Next.getDegree() <= keko2Next.getDegree()) {
@@ -129,7 +129,7 @@ public class BinomiKeko {
             } else {
                 tail.setSibling(keko2Next);
             }
-            return headL;
+            return uusiHead;
         }
     }
     /**

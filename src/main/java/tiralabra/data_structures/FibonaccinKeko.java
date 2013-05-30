@@ -165,6 +165,10 @@ public class FibonaccinKeko {
         return k;           
     }
 
+    public int getHeapSize() {
+        return heapSize;
+    }
+    
     @Override
     public String toString() {
         String keko = "";
