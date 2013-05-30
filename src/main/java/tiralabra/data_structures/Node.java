@@ -14,24 +14,20 @@ public class Node {
         this.parent=null;
         this.child=null;
         this.sibling=null;
-        this.degree=0;
-                
-    }
-    public Node() {
-        
+        this.degree=0;               
     }
 
     public int getKey() {
         return key;
     }
 
-    public void setKey(int key) {
-        this.key = key;
-    }
-
-    public Node getParent() {
-        return parent;
-    }
+//    public void setKey(int key) {
+//        this.key = key;
+//    }
+//
+//    public Node getParent() {
+//        return parent;
+//    }
 
     public void setParent(Node parent) {
         this.parent = parent;
