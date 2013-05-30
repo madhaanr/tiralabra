@@ -19,11 +19,11 @@ public class BinaariKekoTest {
     int[] binKeko ={20,5,3,9,6,7,8,10,11};
       
     public BinaariKekoTest() {    
-        this.binaariKeko = new BinaariKeko(binKeko);
+        
     }
     @Before
     public void setUp() {
-        
+        binaariKeko = new BinaariKeko(binKeko);
     }
     
     @Test
@@ -112,13 +112,28 @@ public class BinaariKekoTest {
         for (int i = 1; i< maara; ++i) {
             numeroita2[i]=i;         
         }
-        int[] nolla = {0};
-        BinaariKeko binaariKeko5 = new BinaariKeko(nolla);
+        BinaariKeko binaariKeko5 = new BinaariKeko();
         for (int i = 1; i < maara; ++i) {
             binaariKeko5.heapInsert(numeroita2[i]); 
       
         }
         assertEquals(0,binaariKeko5.heapMin(numeroita2));
     }
-    
+    @Test
+    public void keostaVoiPoistaaSataTuhattaAlkiota() {
+        int maara=100000;
+        int[] numeroita2=new int[maara];
+        for (int i = 1; i< maara; ++i) {
+            numeroita2[i]=i;         
+        }
+        BinaariKeko binaariKeko5 = new BinaariKeko();
+        for (int i = 1; i < maara; ++i) {
+            binaariKeko5.heapInsert(numeroita2[i]); 
+      
+        }
+        for (int i = 1; i < maara; i++) {
+            binaariKeko5.deleteMin();
+        }
+        assertEquals(0,binaariKeko5.getHeapSize());
+    }  
 }
