@@ -13,15 +13,16 @@ public class BinaariKeko {
        
     /**
      * Luodaan syötteenä saadusta taulukosta minimi binäärikeko.
-     * @param binKeko
+     * @param binKeko Binäärikeko tallennetaan tähän muuttujaan.
      */
     public BinaariKeko(int[] binKeko) {
         this.binKeko=buildHeap(binKeko);
     }
     
     /**
-     * Konstruktori jolla luodaan parametrin taulukon koko suuruinen binääri
-     * taulukko binäärikeon tallentamista varten.
+     * Konstruktori jolla luodaan parametrin taulukonKoko suuruinen 
+     * int tyyppinen taulukko binäärikeon tallentamista varten.
+     * default arvo taulukonKoolle on 100.
      */
     public BinaariKeko() {
         this.binKeko = new int[taulukonKoko];
@@ -30,8 +31,8 @@ public class BinaariKeko {
     /**
      * Metodi palauttaa syötteenä annetun indeksin parentin eli keossa 
      * ylemmällä tasolla olevan arvon indeksin.
-     * @param i alkion indeksi.
-     * @return indeksi jaettuna kahdella.
+     * @param i alkion indeksi taulukossa binKeko.
+     * @return i/2 palauttaa parentin indeksin.
      */
     public int parent(int i) {
         return i / 2;
@@ -39,9 +40,9 @@ public class BinaariKeko {
 
     /**
      * Metodi palauttaa ylemmän tason indeksiä alemmalla tasolla olevan 
-     * lapsen indeksin. Tässä tapauksessa vasemman lapsen indeksin.
-     * @param i alkion indeksi.
-     * @return indeksi i*2.
+     * lapsen indeksin. 
+     * @param i alkion indeksi taulukossa binKeko.
+     * @return i*2 palauttaa vasemman lapsen indeksin.
      */
     public int left(int i) {
         return 2 * i;
@@ -49,9 +50,9 @@ public class BinaariKeko {
 
     /**
      * Metodi palauttaa ylemmän tason indeksiä alemmalla tasolla olevan 
-     * lapsen indeksin. Tässä tapauksessa oikean lapsen indeksin.
-     * @param i alkion indeksi.
-     * @return indeksi*2+1
+     * lapsen indeksin.
+     * @param i alkion indeksi taulukossa binKeko.
+     * @return i*2+1 palauttaa oikean lapsen indeksin
      */
     public int right(int i) {
         return 2 * i + 1;
@@ -85,7 +86,7 @@ public class BinaariKeko {
         int min = binKeko[0];
         binKeko[0]=binKeko[heapSize-1];
         binKeko=decreaseHeapSize();
-        minHeapify(binKeko,0);
+        heapify(binKeko,0);
         return min;
     }
     /**
@@ -147,18 +148,18 @@ public class BinaariKeko {
         heapSize=binKeko.length;
         taulukonKoko=heapSize;
         for(int i=binKeko.length/2; i>=0;--i ) {
-            minHeapify(binKeko,i);
+            heapify(binKeko,i);
         }
         return binKeko;
     }
     /**
-     * minHeapify korjaa keko ehdon jos se on mennyt rikki, kun alkioita
+     * heapify korjaa keko ehdon jos se on mennyt rikki, kun alkioita
      * poistetaan keosta.
-     * @param binKeko
-     * @param i
-     * @return 
+     * @param binKeko taulukko jossa keko sijaitsee.
+     * @param i taulukon indeksi, josta on poistettu alkio.
+     * @return binKeko palauttaa korjatun keon. 
      */
-    private int[] minHeapify(int[] binKeko, int i) {
+    private int[] heapify(int[] binKeko, int i) {
         int left = left(i);
         int right = right(i);
         int smallest;
@@ -170,7 +171,7 @@ public class BinaariKeko {
             }
             if (binKeko[i] > binKeko[smallest]) {
                 swapSmallestwithI(binKeko, i, smallest);      
-                minHeapify(binKeko, smallest);
+                heapify(binKeko, smallest);
             }
         } else if (left == heapSize-1 && binKeko[i] > binKeko[left]) {
             swapSmallestwithI(binKeko, i, left);         
@@ -178,9 +179,9 @@ public class BinaariKeko {
         return binKeko;
     } 
     /**
-     * Metodi jolla vaihdetaan kahden alkion paikkaa.
+     * Apumetodi heapifylle jolla vaihdetaan kahden alkion paikkaa.
      * @param binKeko keko jolle operaatio suoritettaan.
-     * @param i 
+     * @param i taulukon indeksi.
      * @param smallest keon pienin arvo. 
      */
     private void swapSmallestwithI(int[] binKeko, int i, int smallest) {
