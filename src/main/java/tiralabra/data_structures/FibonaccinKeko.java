@@ -60,7 +60,6 @@ public class FibonaccinKeko {
      */
     public int removeMin() {
         FibNode vanhaMin = min;
-
         if (vanhaMin != null) {
             FibNode kasiteltava = vanhaMin.getChild();
             FibNode temp;
@@ -94,8 +93,8 @@ public class FibonaccinKeko {
      */
     private void consolidate() {
         double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
-        int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi));
-        FibNode[] A = new FibNode[size+1];
+        int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi))+1;
+        FibNode[] A = new FibNode[size];    
         for (int i = 0; i < size; ++i) {
             A[i] = null;
         }
@@ -108,24 +107,34 @@ public class FibonaccinKeko {
             while (A[d] != null) {
                 FibNode y = A[d];
                 if (x.getKey() > y.getKey()) {
-                    FibNode apu = x;
-                    x = y;
-                    y = apu;
+                    FibNode apu = y;
+                    y = x;
+                    x = apu;
                 }
                 link(y, x);
                 A[d] = null;
                 d = d + 1;
             }
-            A[d] = x; 
+            A[d] = x;     
         } 
         min = null;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; ++i) {
             if (A[i] != null) {
                 if (min == null) {
                     min = A[i];
-                } else {
+                    System.out.println(min.getKey()+"täällä");
+                } 
+                else {
+                    A[i].getLeft().setRight(A[i].getRight());
+                    A[i].getRight().setLeft(A[i].getLeft());
+                    A[i].setLeft(min);
+                    A[i].setRight(min.getRight());
+                    min.setRight(A[i]);
+                    A[i].getRight().setLeft(A[i]);
+                    System.out.println(min.getKey()+"täälläfgd");
                     if (A[i].getKey() < min.getKey()) {
-                        min = A[i];
+                        System.out.println(min.getKey()+"täällägdfgggggg");
+                        min = A[i];        
                     }
                 }
             }
@@ -144,16 +153,35 @@ public class FibonaccinKeko {
         y.getRight().setLeft(y.getLeft());
         y.setParent(x);
         x.setChild(y);
-        x.setDegree(+1);
+        x.setDegree(x.getDegree()+1);
         y.setMark(false);
     }
 
-    public FibonaccinKeko union(FibonaccinKeko fibKeko) {
-        FibonaccinKeko keko = new FibonaccinKeko();
-        keko.min = fibKeko.min;
-
-        return keko;
+    /**
+     * Yhdistää kaksi fibonaccin kekoa toisiinsa. 
+     * @param H1 Ensimmäinen yhdistettävä keko.
+     * @param H2 Toinen yhdistettävä keko.
+     * @return H palauttaa yhdistetyn keon
+     */
+    public FibonaccinKeko union(FibonaccinKeko H1, FibonaccinKeko H2) {
+        FibonaccinKeko H = new FibonaccinKeko();
+        H.min = H1.min;
+        //concatenate the root list of H2 with root list of H
+        if(H1==null) {
+            H.min=H2.min;
+        }
+        else if(H2.min!=null&&H2.min.getKey()<H1.min.getKey()) {
+            H.min=H2.min;
+        }
+        H.heapSize=H1.heapSize+H2.heapSize;
+        return H;
     }
+    
+    /**
+     * Kaikki juurilistan nodet pistetään arraylistiin josta 
+     * niitä sitten kivasti saa haettua.
+     * @return k palauttaa arraylistin jossa kaikki juurilistan nodet
+     */
     public ArrayList rootList() {
         FibNode w=min;
         ArrayList<FibNode> k = new ArrayList();
@@ -163,13 +191,13 @@ public class FibonaccinKeko {
             w=w.getRight();
         }
         k.add(w.getRight());
-        System.out.println(k.size());
+//        System.out.println(k.size());
         return k;           
     }
 
     /**
      * Palauttaa fibonaccin keon koon. Käytetään testeissä.
-     * @return heapSize eli keon koko
+     * @return heapSize eli keon koko.
      */
     public int getHeapSize() {
         return heapSize;
@@ -179,15 +207,17 @@ public class FibonaccinKeko {
     public String toString() {
         String keko = "";
         String parent="";
-        FibNode node = min.getRight();
-        while (node != min) {
-            if(node.getParent()!=null) {
-                parent+=node.getParent().getKey();
-            }
-            keko += node.getKey();
-            node = node.getRight();
-        }
-        keko += min.getKey();
-        return min.getKey() + "--" + keko+"--" +parent+ "--" + heapSize;
+//        FibNode node = min.getRight();
+//        while (node != min) {
+//            if(node.getParent()!=null) {
+//                parent+=node.getParent().getKey();
+//            }
+//            keko += node.getKey();
+//            node = node.getRight();
+//        }
+       
+//        keko += min.getKey();
+//        return "min key: "+min.getKey() + "\nkeko: " + keko+"\nheapSize: " + heapSize;'
+        return "heapSize: "+heapSize;
     }
 }
