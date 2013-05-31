@@ -32,6 +32,9 @@ public class FibNode {
     public FibNode getParent() {
         return parent;
     }
+    public int getParentKey() {
+        return parent.key;
+    }
 
     public void setParent(FibNode parent) {
         this.parent = parent;
@@ -39,6 +42,9 @@ public class FibNode {
 
     public FibNode getChild() {
         return child;
+    }
+    public int getChildKey() {
+        return child.key;
     }
 
     public void setChild(FibNode child) {

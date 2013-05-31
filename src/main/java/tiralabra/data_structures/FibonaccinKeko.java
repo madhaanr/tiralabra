@@ -50,6 +50,7 @@ public class FibonaccinKeko {
             }
         }
         heapSize = heapSize + 1;
+        System.out.println("");
     }
 
     /**
@@ -122,7 +123,7 @@ public class FibonaccinKeko {
             if (A[i] != null) {
                 if (min == null) {
                     min = A[i];
-                    System.out.println(min.getKey()+"täällä");
+//                    System.out.println(min.getKey()+"täällä");
                 } 
                 else {
                     A[i].getLeft().setRight(A[i].getRight());
@@ -131,9 +132,9 @@ public class FibonaccinKeko {
                     A[i].setRight(min.getRight());
                     min.setRight(A[i]);
                     A[i].getRight().setLeft(A[i]);
-                    System.out.println(min.getKey()+"täälläfgd");
+//                    System.out.println(min.getKey()+"täälläfgd");
                     if (A[i].getKey() < min.getKey()) {
-                        System.out.println(min.getKey()+"täällägdfgggggg");
+//                        System.out.println(min.getKey()+"täällägdfgggggg");
                         min = A[i];        
                     }
                 }
@@ -149,13 +150,31 @@ public class FibonaccinKeko {
      * @param x node josta tulee parent.
      */
     public void link(FibNode y, FibNode x) {
-        y.getLeft().setRight(y.getRight());
-        y.getRight().setLeft(y.getLeft());
+        FibNode yLeft = y.getLeft();
+        FibNode yRight = y.getRight();     
+        yLeft.setRight(yRight);
+        yRight.setLeft(yLeft);
+        if(x.getChild()!=null) {
+            y.setLeft(x.getChild());
+            y.setRight(x.getChild().getRight());         
+            x.getChild().setRight(y);
+            y.getRight().setLeft(y);
+        }
+        else {
+            y.setLeft(y);
+            y.setRight(y);
+        }
         y.setParent(x);
         x.setChild(y);
         x.setDegree(x.getDegree()+1);
         y.setMark(false);
+        
+        System.out.println("y:"+y.getKey()+" yLeft:"+y.getLeft().getKey()+" yParent:"+y.getParent().getKey()+" xChild:"+x.getChild().getKey());
     }
+//    lisattava.setLeft(min);
+//    lisattava.setRight(min.getRight());
+//    min.setRight(lisattava);
+//    lisattava.getRight().setLeft(lisattava);
 
     /**
      * Yhdistää kaksi fibonaccin kekoa toisiinsa. 

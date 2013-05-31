@@ -154,10 +154,13 @@ public class Vertailija {
         fibonaccinKeko.insert(fibNode8);
         fibonaccinKeko.insert(fibNode9);
         String poisto="";
-        poisto+=fibonaccinKeko.removeMin();
+        poisto+=    fibonaccinKeko.removeMin();
         poisto+=" "+fibonaccinKeko.removeMin();
         poisto+=" "+fibonaccinKeko.removeMin();
-//        poisto+=fibonaccinKeko.removeMin();
+        poisto+=" "+fibonaccinKeko.removeMin();
+        poisto+=" "+fibonaccinKeko.removeMin();
+        poisto+=" "+fibonaccinKeko.removeMin();
+ 
         
         
         System.out.println(fibonaccinKeko+"\npoistettu: "+poisto);
