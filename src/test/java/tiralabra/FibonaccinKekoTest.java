@@ -127,7 +127,7 @@ public class FibonaccinKekoTest {
     }   
     @Test
     public void removeMinKuusiNodea() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 10; i > 0; i--) {
             fibKeko.insert(new FibNode(i));
         }
 //        for (int i = 0; i < 10; i++) {
@@ -138,7 +138,7 @@ public class FibonaccinKekoTest {
         fibKeko.removeMin();
 //        fibKeko.removeMin();
 //        fibKeko.removeMin();
-        assertEquals(4,fibKeko.removeMin());
+        assertEquals(7,fibKeko.removeMin());
     }
     @Test
     public void removeMinSataNodea() {

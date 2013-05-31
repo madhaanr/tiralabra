@@ -94,8 +94,8 @@ public class FibonaccinKeko {
      */
     private void consolidate() {
         double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
-        int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi))+1;
-        FibNode[] A = new FibNode[size];    
+        int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi));
+        FibNode[] A = new FibNode[size+1];    
         for (int i = 0; i < size; ++i) {
             A[i] = null;
         }
@@ -169,7 +169,7 @@ public class FibonaccinKeko {
         x.setDegree(x.getDegree()+1);
         y.setMark(false);
         
-        System.out.println("y:"+y.getKey()+" yLeft:"+y.getLeft().getKey()+" yParent:"+y.getParent().getKey()+" xChild:"+x.getChild().getKey());
+        System.out.println("y:"+y.getKey()+" yLeft:"+y.getLeft().getKey()+" yRight:"+y.getRight().getKey()+" yParent:"+y.getParent().getKey()+" xChild:"+x.getChild().getKey());
     }
 //    lisattava.setLeft(min);
 //    lisattava.setRight(min.getRight());
