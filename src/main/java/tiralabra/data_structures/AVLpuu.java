@@ -55,16 +55,48 @@ public class AVLpuu {
         k1.setLeft(leftRotate(k2));
         return rightRotate(k1);
     }
-    public void avlInsert(AvlNode k1, int x) {
-        AvlNode uusi = insert(k1,x);
-        AvlNode p= uusi.getParent();
+    public void avlInsert(AvlNode k1, int k) {
+        AvlNode uusi = insert(k1,k);
+        AvlNode p=uusi.getParent();
         while(p!=null) {
-            
+            if(height(p.getLeft())==height(p.getRight())+2) {
+                AvlNode vanhempi = p.getParent();
+                AvlNode alipuu;
+                if(epaTasaPainoVasenVaiOikeaAlipuu(p)) {
+                    alipuu=rightRotate(p);
+                }
+                else {
+                    alipuu=leftRightRotate(p);
+                }
+                if(vanhempi==null) {
+                    k1=alipuu;
+                }
+                else if(vanhempi.getLeft()==p) {
+                    vanhempi.setLeft(alipuu);
+                }
+                else {
+                    vanhempi.setRight(alipuu);
+                }
+                if(vanhempi!=null) {
+                    vanhempi.setHeight(Math.max(height(vanhempi.getLeft()), height(vanhempi.getRight()))+1);
+                }
+                return;
+            }
+            if(height(p.getRight())==height(p.getLeft())+2) {
+//                vanhempi.
+            }
         }
+        p.setHeight(Math.max(height(p.getLeft()),height(p.getRight()))+1);
+        p=p.getParent();
     }
     private AvlNode insert(AvlNode k1,int k) {
        AvlNode uusi=new AvlNode(k); 
        
+       uusi.setHeight(0);
        return uusi;
+    }
+
+    private boolean epaTasaPainoVasenVaiOikeaAlipuu(AvlNode p) {
+        return height(p.getLeft().getLeft())>height(p.getLeft().getRight());
     }
 }
