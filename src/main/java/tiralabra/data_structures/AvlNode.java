@@ -9,6 +9,10 @@ public class AvlNode {
     private int key;
     private int height;
 
+    public AvlNode(int key) {
+        this.key=key;
+    }
+    
     public AvlNode getLeft() {
         return left;
     }
@@ -25,6 +29,14 @@ public class AvlNode {
         this.right = right;
     }
 
+    public AvlNode getParent() {
+        return parent;
+    }
+
+    public void setParent(AvlNode parent) {
+        this.parent = parent;
+    }
+    
     public int getKey() {
         return key;
     }
