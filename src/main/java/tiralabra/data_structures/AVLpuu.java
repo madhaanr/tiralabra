@@ -1,14 +1,30 @@
 package tiralabra.data_structures;
 
-/* @author mhaanran */
+
+/**
+ * Luokka toteuttaa AVL-puun.
+ * @author mhaanran
+ */
 public class AVLpuu {
 
     private AvlNode k1;
+    private int puunKoko;
 
+   
+    /**
+     * Konstruktori jossa luodaan uusi puun juuri ja asetetaan sen 
+     * arvoksi null.
+     */
     public AVLpuu() {
         k1=null;
+        puunKoko=0;
     }
     
+    /**
+     * Metodi tietyn solmun korkeuden kyselemiseen.
+     * @param x solmu jonka korkeus halutaan selvittää
+     * @return palautetaan solmun korkeus.
+     */
     public int height(AvlNode x) {
         if (x == null) {
             return -1;
@@ -16,6 +32,11 @@ public class AVLpuu {
         return x.getHeight();
     }
 
+    /**
+     *
+     * @param k1
+     * @return
+     */
     public AvlNode rightRotate(AvlNode k1) {
         AvlNode k2 = k1.getLeft();
         k2.setParent(k1.getParent());
@@ -56,10 +77,10 @@ public class AVLpuu {
         return rightRotate(k1);
     }
     public void avlInsert(int k) {
-        if(k1==null) {
-            k1=new AvlNode(k);
-        }
-        AvlNode uusi = insert(k1,k);
+//        if(k1==null) {
+//            k1=new AvlNode(k);
+//        }
+        AvlNode uusi = insert(k);
         AvlNode p=uusi.getParent();
         AvlNode vanhempi;
         AvlNode alipuu;
@@ -110,14 +131,13 @@ public class AVLpuu {
             }
             p.setHeight(Math.max(height(p.getLeft()),height(p.getRight()))+1);
             p=p.getParent();
-        }
-        
+           
+        }     
     }
-    private AvlNode insert(AvlNode k1,int k) {
+    private AvlNode insert(int k) {
+       puunKoko++; 
        AvlNode uusi=new AvlNode(k); 
-       AvlNode p=null;
-       uusi.setKey(k);
-       
+       AvlNode p=null;     
        if(k1==null) {
            k1=uusi;
            return k1;
@@ -139,16 +159,35 @@ public class AVLpuu {
        else {
            p.setRight(uusi);
        }
-       uusi.setHeight(0);
        return uusi;
     }
-
     private boolean epaTasaPainoVasenVaiOikeaAlipuu(AvlNode p) {
         return height(p.getLeft().getLeft())>height(p.getLeft().getRight());
     }
     
+    public void avlDelete(int x) {
+        AvlNode pois = delete(x);
+        
+    }
+    private AvlNode delete(int x) {
+        puunKoko--;
+        AvlNode pois = new AvlNode(x);
+        
+        return pois;
+    }
+     
+    public int getJuurenAvain() {
+        return k1.getKey();
+    }
+    public int getPuunKoko() {
+        return puunKoko;
+    }
+    public AvlNode getJuuri() {
+        return k1;
+    }
+    
     @Override
     public String toString() {
-        return ""+k1.getKey()+k1.getRight().getKey();
+        return ""+k1.getKey()+k1.getHeight();
     }
 }
