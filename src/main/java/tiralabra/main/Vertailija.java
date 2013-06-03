@@ -1,6 +1,8 @@
 package tiralabra.main;
 
 import java.util.PriorityQueue;
+import tiralabra.data_structures.AVLpuu;
+import tiralabra.data_structures.AvlNode;
 import tiralabra.data_structures.BinaariKeko;
 import tiralabra.data_structures.BinomiKeko;
 import tiralabra.data_structures.FibNode;
@@ -133,36 +135,41 @@ public class Vertailija {
 //        double timeEndBinomiKeko3 = System.currentTimeMillis();
 //        double eroBinomiKeko3 = (timeEndBinomiKeko3-timeStartBinomiKeko3)/1000;
 //        System.out.println((eroBinomiKeko3+"s binomikeko satunnaisjärjestys"));
+//        
+//        FibonaccinKeko fibonaccinKeko = new FibonaccinKeko();
+//        FibNode fibNode1 = new FibNode(1);
+//        FibNode fibNode2 = new FibNode(2);
+//        FibNode fibNode3 = new FibNode(3);
+//        FibNode fibNode4 = new FibNode(4);
+//        FibNode fibNode5 = new FibNode(5);
+//        FibNode fibNode6 = new FibNode(6);
+//        FibNode fibNode7 = new FibNode(7);
+//        FibNode fibNode8 = new FibNode(8);
+//        FibNode fibNode9 = new FibNode(9);
+//        fibonaccinKeko.insert(fibNode1);
+//        fibonaccinKeko.insert(fibNode2);
+//        fibonaccinKeko.insert(fibNode3);
+//        fibonaccinKeko.insert(fibNode4);
+//        fibonaccinKeko.insert(fibNode5);
+//        fibonaccinKeko.insert(fibNode6);
+//        fibonaccinKeko.insert(fibNode7);
+//        fibonaccinKeko.insert(fibNode8);
+//        fibonaccinKeko.insert(fibNode9);
+//        String poisto="";
+//        poisto+=    fibonaccinKeko.removeMin();
+//        poisto+=" "+fibonaccinKeko.removeMin();
+//        poisto+=" "+fibonaccinKeko.removeMin();
+//        poisto+=" "+fibonaccinKeko.removeMin();
+//        poisto+=" "+fibonaccinKeko.removeMin();
+//        poisto+=" "+fibonaccinKeko.removeMin();
+// 
+//        
+//        
+//        System.out.println(fibonaccinKeko+"\npoistettu: "+poisto);
+        AVLpuu avl=new AVLpuu();
+        avl.avlInsert(5);
         
-        FibonaccinKeko fibonaccinKeko = new FibonaccinKeko();
-        FibNode fibNode1 = new FibNode(1);
-        FibNode fibNode2 = new FibNode(2);
-        FibNode fibNode3 = new FibNode(3);
-        FibNode fibNode4 = new FibNode(4);
-        FibNode fibNode5 = new FibNode(5);
-        FibNode fibNode6 = new FibNode(6);
-        FibNode fibNode7 = new FibNode(7);
-        FibNode fibNode8 = new FibNode(8);
-        FibNode fibNode9 = new FibNode(9);
-        fibonaccinKeko.insert(fibNode1);
-        fibonaccinKeko.insert(fibNode2);
-        fibonaccinKeko.insert(fibNode3);
-        fibonaccinKeko.insert(fibNode4);
-        fibonaccinKeko.insert(fibNode5);
-        fibonaccinKeko.insert(fibNode6);
-        fibonaccinKeko.insert(fibNode7);
-        fibonaccinKeko.insert(fibNode8);
-        fibonaccinKeko.insert(fibNode9);
-        String poisto="";
-        poisto+=    fibonaccinKeko.removeMin();
-        poisto+=" "+fibonaccinKeko.removeMin();
-        poisto+=" "+fibonaccinKeko.removeMin();
-        poisto+=" "+fibonaccinKeko.removeMin();
-        poisto+=" "+fibonaccinKeko.removeMin();
-        poisto+=" "+fibonaccinKeko.removeMin();
- 
         
-        
-        System.out.println(fibonaccinKeko+"\npoistettu: "+poisto);
+        System.out.println(avl);
     }
 }

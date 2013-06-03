@@ -11,6 +11,11 @@ public class AvlNode {
 
     public AvlNode(int key) {
         this.key=key;
+        this.left=null;
+        this.right=null;
+        this.parent=null;
+        this.height=0;
+        
     }
     
     public AvlNode getLeft() {
