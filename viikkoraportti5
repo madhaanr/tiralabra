@@ -2,4 +2,7 @@ pe 31.5.
 Fibonaccin keon consolidate metodin debuggausta. Testien tekemistä consolidate metodille. 
 Union metodin suunnittelua.
 ma 3.6.
-AVL-puun toteuttaminen aloitettu.
+AVL-puun toteuttaminen aloitettu. Insert ja eri käännöt toteutettu.  
+Deleten toteuttaminen aloitettu. Myös testejä olen tehnyt jo sen verran, että voin sanoa puun rakenteen olevan
+oikea kun puuhun lisätään 7 avainta. Eli ainakin insert ja jotkin kierto operaatiot toimivat oikein. Perusteellisempiä
+testejä teen, kun saan deleten toteutettua huomenna.
