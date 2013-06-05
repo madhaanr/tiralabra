@@ -9,8 +9,7 @@ public class AVLpuu {
 
     private AvlNode k1;
     private int puunKoko;
-
-   
+  
     /**
      * Konstruktori jossa luodaan uusi puun juuri ja asetetaan sen 
      * arvoksi null.
@@ -33,9 +32,10 @@ public class AVLpuu {
     }
 
     /**
-     *
-     * @param k1
-     * @return
+     * Metodi joka kiertää AVL-puun solmuja oikealle 
+     * epätasapainon korjaamiseksi.
+     * @param k1 solmu, joka epätasapainossa.
+     * @return k2 palautetaan solmu joka oli aiemmin k1 solmun vasen lapsi.
      */
     public AvlNode rightRotate(AvlNode k1) {
         AvlNode k2 = k1.getLeft();
@@ -51,6 +51,12 @@ public class AVLpuu {
         return k2;
     }
 
+    /**
+     * Metodi joka kiertää AVL-puun solmuja vasemmalle
+     * epätasapainon korjaamiseksi.
+     * @param k1 solmu, joka epätasapainossa.
+     * @return k2 palautetaan solmu joka oli aiemmin k1 solmun oikea lapsi.
+     */
     public AvlNode leftRotate(AvlNode k1) {
         AvlNode k2 = k1.getRight();
         k2.setParent(k1.getParent());
@@ -64,18 +70,37 @@ public class AVLpuu {
         k2.setHeight(Math.max(height(k2.getLeft()), height(k2.getRight())) + 1);
         return k2;
     }
-
+    
+    /**
+     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään k1
+     * solmun oikea lapsi oikealle ja sen jälkeen k1 solmu vasemmalle.
+     * @param k1 solmu, joka epätasapainossa.
+     * @return palautetaan leftRotate(k1).
+     */
     public AvlNode rightLeftRotate(AvlNode k1) {
         AvlNode k2 = k1.getRight();
         k1.setRight(rightRotate(k2));
         return leftRotate(k1);
     }
 
+    /**
+     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään k1
+     * solmun vasen solmu vasemmalle ja sen jälkeen k1 solmu oikealle
+     * @param k1
+     * @return
+     */
     public AvlNode leftRightRotate(AvlNode k1) {
         AvlNode k2 = k1.getLeft();
         k1.setLeft(leftRotate(k2));
         return rightRotate(k1);
     }
+    
+    /**
+     * Metodi solmun lisäämiseen avl-puuhun. Varsinainen solmun lisäys 
+     * tehdään apumetodissa ja sen jälkeen puulle tehdään tarvittavat kierrot.
+     * @param k lisättävän solmun avain.
+     * @return palautetaan lisättävä solmu.
+     */
     public AvlNode avlInsert(int k) {
 //        if(k1==null) {
 //            k1=new AvlNode(k);
@@ -135,6 +160,12 @@ public class AVLpuu {
         }     
         return uusi;
     }
+    /**
+     * Apumetodi solmun lisäämiseen avl-puuhun. Hoitaa varsinaisen 
+     * solmun lisäämisen puuhun.
+     * @param k solmun avain.
+     * @return palautetaan lisätty solmu.
+     */
     private AvlNode insert(int k) {
        puunKoko++; 
        AvlNode uusi=new AvlNode(k); 
@@ -162,10 +193,19 @@ public class AVLpuu {
        }
        return uusi;
     }
+    /**
+     * 
+     * @param p
+     * @return 
+     */
     private boolean epaTasaPainoVasenVaiOikeaAlipuu(AvlNode p) {
         return height(p.getLeft().getLeft())>height(p.getLeft().getRight());
     }
     
+    /**
+     *
+     * @param x
+     */
     public void avlDelete(AvlNode x) {
         AvlNode pois = delete(x);
         AvlNode p=pois.getParent();
@@ -207,6 +247,12 @@ public class AVLpuu {
            
         }
     }
+    
+    /**
+  
+  * @param x
+  * @return    * 
+     */
     private AvlNode delete(AvlNode x) {
         puunKoko--;
         AvlNode pois = x;
@@ -262,6 +308,9 @@ public class AVLpuu {
         }
         return seur;
     }
+    /**
+     * 
+     */
     private AvlNode min(AvlNode x) {
         while(x.getLeft()!=null) {
             x=x.getLeft();
@@ -269,12 +318,26 @@ public class AVLpuu {
         return x;
     }
      
+    /**
+     *
+     * @return
+     */
     public int getJuurenAvain() {
         return k1.getKey();
     }
+    
+    /**
+     *
+     * @return
+     */
     public int getPuunKoko() {
         return puunKoko;
     }
+    
+    /**
+     *
+     * @return
+     */
     public AvlNode getJuuri() {
         return k1;
     }
