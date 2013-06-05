@@ -169,9 +169,9 @@ public class Vertailija {
         AVLpuu avl=new AVLpuu();
         avl.avlInsert(5);
         avl.avlInsert(3);
-//        avl.avlInsert(7);
-//        avl.avlInsert(2);
-//        avl.avlInsert(1);
+        avl.avlInsert(7);
+        avl.avlInsert(2);
+        avl.avlInsert(1);
 //        avl.avlInsert(4);
 //        avl.avlInsert(8);
 //        avl.avlInsert(9);
@@ -179,7 +179,7 @@ public class Vertailija {
 //        avl.avlInsert(30);
 //        avl.avlInsert(15);
 //        avl.avlInsert(3000);
-        avl.avlDelete(5);
+//        avl.avlDelete(5);
             
         System.out.println(avl);
     }

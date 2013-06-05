@@ -76,7 +76,7 @@ public class AVLpuu {
         k1.setLeft(leftRotate(k2));
         return rightRotate(k1);
     }
-    public void avlInsert(int k) {
+    public AvlNode avlInsert(int k) {
 //        if(k1==null) {
 //            k1=new AvlNode(k);
 //        }
@@ -105,7 +105,7 @@ public class AVLpuu {
                 if(vanhempi!=null) {
                     vanhempi.setHeight(Math.max(height(vanhempi.getLeft()), height(vanhempi.getRight()))+1);
                 }
-                return;
+                return uusi;
             }
             if(height(p.getRight())==height(p.getLeft())+2) {
                 vanhempi=p.getParent();
@@ -127,12 +127,13 @@ public class AVLpuu {
                 if(vanhempi!=null) {
                     vanhempi.setHeight(Math.max(height(vanhempi.getLeft()), height(vanhempi.getRight()))+1);
                 }
-                return;
+                return uusi;
             }
             p.setHeight(Math.max(height(p.getLeft()),height(p.getRight()))+1);
             p=p.getParent();
-           
+            
         }     
+        return uusi;
     }
     private AvlNode insert(int k) {
        puunKoko++; 
@@ -165,39 +166,39 @@ public class AVLpuu {
         return height(p.getLeft().getLeft())>height(p.getLeft().getRight());
     }
     
-    public void avlDelete(int x) {
+    public void avlDelete(AvlNode x) {
         AvlNode pois = delete(x);
         AvlNode p=pois.getParent();
         AvlNode vanhempi;
         AvlNode alipuu;
         while(p!=null) {
-            if(p.getLeft().getHeight()==p.getRight().getHeight()+2||
-               p.getLeft().getHeight()+2==p.getRight().getHeight()) {
+            if(height(p.getLeft())==height(p.getRight())+2||
+               height(p.getLeft())+2==height(p.getRight())) {
                 vanhempi=p.getParent();
-                 if(height(p.getLeft().getLeft())>height(p.getLeft().getRight())) {
-                     alipuu=rightRotate(p);
-                 }
-                 else if(height(p.getRight().getLeft())>height(p.getRight().getRight())) {
-                     alipuu=leftRotate(p);
-                 }
-                 else if(height(p.getLeft().getRight())>height(p.getLeft().getLeft())) {
-                     alipuu=leftRightRotate(p);
-                 }
-                 else {
-                     alipuu=rightLeftRotate(p);
-                 }
-                 if(p==k1) {
-                     k1=alipuu;
-                     return;
-                 }
-                 if(alipuu.getKey()>vanhempi.getKey()) {
-                     vanhempi.setRight(alipuu);     
-                 }
-                 else {
-                     vanhempi.setLeft(alipuu);
-                 }
-                 alipuu.setParent(vanhempi);
-                 p=vanhempi;
+                if(height(p.getLeft().getLeft())>height(p.getLeft().getRight())) {
+                    alipuu=rightRotate(p);
+                }
+                else if(height(p.getRight().getLeft())>height(p.getRight().getRight())) {
+                    alipuu=leftRotate(p);
+                }
+                else if(height(p.getLeft().getRight())>height(p.getLeft().getLeft())) {
+                    alipuu=leftRightRotate(p);
+                }
+                else {
+                    alipuu=rightLeftRotate(p);
+                }
+                if(p.equals(k1)) {
+                    k1=alipuu;
+                    return;
+                }
+                if(alipuu.getKey()>vanhempi.getKey()) {
+                    vanhempi.setRight(alipuu);     
+                }
+                else {
+                    vanhempi.setLeft(alipuu);
+                }
+                alipuu.setParent(vanhempi);
+                p=vanhempi;
             }
             else {
                 p.setHeight(Math.max(height(p.getLeft()), height(p.getRight()))+1);
@@ -206,9 +207,9 @@ public class AVLpuu {
            
         }
     }
-    private AvlNode delete(int x) {
+    private AvlNode delete(AvlNode x) {
         puunKoko--;
-        AvlNode pois = new AvlNode(x);
+        AvlNode pois = x;
         AvlNode vanh;
         AvlNode lapsi;
         if(pois.getLeft()==null && pois.getRight()==null) {
@@ -280,6 +281,6 @@ public class AVLpuu {
     
     @Override
     public String toString() {
-        return ""+k1.getKey()+k1.getHeight();
+        return ""+k1.getKey();
     }
 }

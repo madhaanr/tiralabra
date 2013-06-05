@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import tiralabra.data_structures.AVLpuu;
+import tiralabra.data_structures.AvlNode;
 
 /**
  *
@@ -54,5 +55,26 @@ public class AVLpuuTest {
         assertEquals(3,avlPuu.getJuuri().getLeft().getRight().getKey());
         assertEquals(5,avlPuu.getJuuri().getRight().getLeft().getKey());
         assertEquals(7,avlPuu.getJuuri().getRight().getRight().getKey());
+    }
+    @Test
+    public void deleteKey() {
+        AvlNode node5 = avlPuu.avlInsert(5);
+        avlPuu.avlDelete(node5);
+        assertEquals(null,avlPuu.getJuuri());
+    }
+    @Test
+    public void deleteKeyPoistaaVasemmanLapsen() {
+        AvlNode node5 = avlPuu.avlInsert(5);
+        AvlNode node4 = avlPuu.avlInsert(4);
+        avlPuu.avlDelete(node4);
+        assertEquals(null,avlPuu.getJuuri().getLeft());
+    }
+    @Test
+    public void deleteKeyPoistaOikeanLapsen() {
+        avlPuu.avlInsert(5);
+        AvlNode node6=avlPuu.avlInsert(6);
+        avlPuu.avlDelete(node6);
+        assertEquals(null,avlPuu.getJuuri().getRight());
+        assertEquals(1,avlPuu.getPuunKoko());
     }
 }
