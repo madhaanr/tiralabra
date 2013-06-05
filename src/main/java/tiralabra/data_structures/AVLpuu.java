@@ -203,8 +203,11 @@ public class AVLpuu {
     }
     
     /**
-     *
-     * @param x
+     * Metodi jolla poistetaan nodeja AVL-puusta. Varsinainen poistaminen
+     * tapahtuu apumetodissa delete. Kun node on poistettu niin sitten
+     * avlDelete suorittaa tarvittavan määrän kiertoja jotta puuhun ei jää
+     * epätasapainoa.
+     * @param x avlnode
      */
     public void avlDelete(AvlNode x) {
         AvlNode pois = delete(x);
@@ -249,10 +252,10 @@ public class AVLpuu {
     }
     
     /**
-  
-  * @param x
-  * @return    * 
-     */
+    *  
+    * @param x poistettava node.
+    * @return palautetaan
+    */
     private AvlNode delete(AvlNode x) {
         puunKoko--;
         AvlNode pois = x;

@@ -100,4 +100,46 @@ public class AVLpuuTest {
         avlPuu.avlDelete(node4);
         assertEquals(5,avlPuu.getJuuri().getKey());
     }
+    @Test
+    public void insertLisaaPuuhunTuhatNodea() {
+        for (int i = 0; i < 1000; i++) {
+            avlPuu.avlInsert(i);
+        }
+        assertEquals(1000,avlPuu.getPuunKoko());
+    }
+    @Test
+    public void insertLisaaPuuhunKymmenenTuhattaNodeKaanteisessaJarjestyksessa() {
+        for (int i = 10000; i>0 ; i--) {
+            avlPuu.avlInsert(i);
+        }
+        assertEquals(10000,avlPuu.getPuunKoko());
+    }
+    @Test
+    public void puunKorkeusOikeinKunPuussaKymmenenMiljoonaaNodea() {
+        for (int i = 0; i < 10000000; i++) {
+            avlPuu.avlInsert(i);
+        }
+        assertEquals(23,avlPuu.getJuuri().getHeight());
+    }
+    @Test
+    public void deleteJuuriKunPuussaKymmenenTuhattaNodea() {
+        AvlNode[] nodet = new AvlNode[10001];
+        for (int i = 10000; i>0 ; i--) {
+            nodet[i]=avlPuu.avlInsert(i);
+        }
+        avlPuu.avlDelete(nodet[5905]);
+        assertEquals(5906,avlPuu.getJuurenAvain());
+    }
+    @Test
+    public void deleteKymmenenMiljoonaaNodea() {
+        AvlNode[] nodet = new AvlNode[1000];
+        for (int i = 0; i < 100; i++) {
+            nodet[i]=avlPuu.avlInsert(i);
+        }
+        for (int i = 99; i > 95; i--) {
+            avlPuu.avlDelete(nodet[i]);
+        }
+        assertEquals(5,avlPuu.getJuurenAvain());
+        
+    }
 }
