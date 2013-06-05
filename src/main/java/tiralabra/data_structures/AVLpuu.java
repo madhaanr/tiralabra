@@ -172,8 +172,63 @@ public class AVLpuu {
     private AvlNode delete(int x) {
         puunKoko--;
         AvlNode pois = new AvlNode(x);
-        
-        return pois;
+        AvlNode vanh;
+        AvlNode lapsi;
+        if(pois.getLeft()==null && pois.getRight()==null) {
+            vanh=pois.getParent();
+            if(vanh==null) {
+                k1=null;
+                return pois;
+            }
+            if(pois==vanh.getLeft()) {
+                vanh.setLeft(null);
+            }
+            else {
+                vanh.setRight(null);
+            }
+            return pois;
+        }
+        if(pois.getLeft()==null||pois.getRight()==null) {
+            if(pois.getLeft()!=null) {
+                lapsi=pois.getLeft();
+            }
+            else {
+                lapsi=pois.getRight();
+            }
+            vanh=pois.getParent();
+            lapsi.setParent(vanh);
+            if(vanh==null) {
+                k1=lapsi;
+                return pois;
+            }
+            if(pois==vanh.getLeft()) {
+                vanh.setLeft(lapsi);
+            }
+            else {
+                vanh.setRight(lapsi);
+            }
+            return pois;
+        }
+        AvlNode seur=min(pois.getRight());
+        pois.setKey(seur.getKey());
+        lapsi=seur.getRight();
+        vanh=seur.getParent();
+        if(vanh.getLeft()==seur) {
+            vanh.setLeft(lapsi);
+        }
+        else {
+            vanh.setRight(lapsi);
+        }
+        if(lapsi!=null) {
+            lapsi.setParent(vanh);
+        }
+        return seur;
+    }
+    private AvlNode min(AvlNode x) {
+        while(x.getLeft()!=null) {
+            x=x.getLeft();
+        }
+        return x;
     }
      
     public int getJuurenAvain() {
