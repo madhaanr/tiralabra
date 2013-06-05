@@ -6,3 +6,6 @@ AVL-puun toteuttaminen aloitettu. Insert ja eri käännöt toteutettu.
 Deleten toteuttaminen aloitettu. Myös testejä olen tehnyt jo sen verran, että voin sanoa puun rakenteen olevan
 oikea kun puuhun lisätään 7 avainta. Eli ainakin insert ja jotkin kierto operaatiot toimivat oikein. Perusteellisempiä
 testejä teen, kun saan deleten toteutettua huomenna.
+ke 5.6.
+AVL-puun delete operaation toteutus. Koodin refactorointia selkeämmäksi. Testien kirjoittelua erityisesti
+AVL-puulle.
