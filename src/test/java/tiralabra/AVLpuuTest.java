@@ -20,7 +20,7 @@ import tiralabra.data_structures.AvlNode;
 public class AVLpuuTest {
     
     private AVLpuu avlPuu;
-    private int k;
+   
     
     public AVLpuuTest() {
     }
@@ -28,12 +28,12 @@ public class AVLpuuTest {
     @Before
     public void setUp() {
         avlPuu=new AVLpuu();
-        k=1;
+     
     }
     
     @Test
     public void puuhunVoiLisataYhdenAvaimen() {
-        avlPuu.avlInsert(k);
+        avlPuu.avlInsert(1);
         assertEquals(1,avlPuu.getJuurenAvain());
     }
     @Test
@@ -75,6 +75,29 @@ public class AVLpuuTest {
         AvlNode node6=avlPuu.avlInsert(6);
         avlPuu.avlDelete(node6);
         assertEquals(null,avlPuu.getJuuri().getRight());
-        assertEquals(1,avlPuu.getPuunKoko());
+    }
+    @Test
+    public void deleteKeyKunPuussaSeitsemanNodea() {
+        AvlNode node1 = avlPuu.avlInsert(1);
+        AvlNode node2 = avlPuu.avlInsert(2);
+        AvlNode node3 = avlPuu.avlInsert(3);
+        AvlNode node4 = avlPuu.avlInsert(4);
+        AvlNode node5 = avlPuu.avlInsert(5);
+        AvlNode node6 = avlPuu.avlInsert(6);
+        AvlNode node7 = avlPuu.avlInsert(7);       
+        avlPuu.avlDelete(node7);
+        assertEquals(node6.getKey(),node4.getRight().getKey());
+    }
+    @Test
+    public void deleteJuuriKunPuussaSeitsemanNodea() {
+        AvlNode node1 = avlPuu.avlInsert(1);
+        AvlNode node2 = avlPuu.avlInsert(2);
+        AvlNode node3 = avlPuu.avlInsert(3);
+        AvlNode node4 = avlPuu.avlInsert(4);
+        AvlNode node5 = avlPuu.avlInsert(5);
+        AvlNode node6 = avlPuu.avlInsert(6);
+        AvlNode node7 = avlPuu.avlInsert(7);       
+        avlPuu.avlDelete(node4);
+        assertEquals(5,avlPuu.getJuuri().getKey());
     }
 }
