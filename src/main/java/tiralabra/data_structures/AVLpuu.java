@@ -167,7 +167,44 @@ public class AVLpuu {
     
     public void avlDelete(int x) {
         AvlNode pois = delete(x);
-        
+        AvlNode p=pois.getParent();
+        AvlNode vanhempi;
+        AvlNode alipuu;
+        while(p!=null) {
+            if(p.getLeft().getHeight()==p.getRight().getHeight()+2||
+               p.getLeft().getHeight()+2==p.getRight().getHeight()) {
+                vanhempi=p.getParent();
+                 if(height(p.getLeft().getLeft())>height(p.getLeft().getRight())) {
+                     alipuu=rightRotate(p);
+                 }
+                 else if(height(p.getRight().getLeft())>height(p.getRight().getRight())) {
+                     alipuu=leftRotate(p);
+                 }
+                 else if(height(p.getLeft().getRight())>height(p.getLeft().getLeft())) {
+                     alipuu=leftRightRotate(p);
+                 }
+                 else {
+                     alipuu=rightLeftRotate(p);
+                 }
+                 if(p==k1) {
+                     k1=alipuu;
+                     return;
+                 }
+                 if(alipuu.getKey()>vanhempi.getKey()) {
+                     vanhempi.setRight(alipuu);     
+                 }
+                 else {
+                     vanhempi.setLeft(alipuu);
+                 }
+                 alipuu.setParent(vanhempi);
+                 p=vanhempi;
+            }
+            else {
+                p.setHeight(Math.max(height(p.getLeft()), height(p.getRight()))+1);
+                p=p.getParent();
+            }
+           
+        }
     }
     private AvlNode delete(int x) {
         puunKoko--;
