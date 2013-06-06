@@ -7,121 +7,122 @@ package tiralabra.data_structures;
  */
 public class AVLpuu {
 
-    private AvlNode k1;
+    private AvlNode juuriNode;
     private int puunKoko;
   
     /**
      * Konstruktori jossa luodaan uusi puun juuri ja asetetaan sen 
-     * arvoksi null.
+     * arvoksi null ja puunKooksi 0;
      */
     public AVLpuu() {
-        k1=null;
+        juuriNode=null;
         puunKoko=0;
     }
     
     /**
      * Metodi tietyn solmun korkeuden kyselemiseen.
-     * @param x solmu jonka korkeus halutaan selvittää
+     * @param node solmu jonka korkeus halutaan selvittää
      * @return palautetaan solmun korkeus.
      */
-    public int height(AvlNode x) {
-        if (x == null) {
+    public int height(AvlNode node) {
+        if (node == null) {
             return -1;
         }
-        return x.getHeight();
+        return node.getHeight();
     }
 
     /**
      * Metodi joka kiertää AVL-puun solmuja oikealle 
      * epätasapainon korjaamiseksi.
-     * @param k1 solmu, joka epätasapainossa.
-     * @return k2 palautetaan solmu joka oli aiemmin k1 solmun vasen lapsi.
+     * @param kaannettava solmu, joka epätasapainossa.
+     * @return vasenLapsi palautetaan solmu joka oli kaannettavan vasen lapsi.
      */
-    public AvlNode rightRotate(AvlNode k1) {
-        AvlNode k2 = k1.getLeft();
-        k2.setParent(k1.getParent());
-        k1.setParent(k2);
-        k1.setLeft(k2.getRight());
-        k2.setRight(k1);
-        if (k1.getLeft() != null) {
-            k1.getLeft().setParent(k1);
+    public AvlNode rightRotate(AvlNode kaannettava) {
+        AvlNode vasenLapsi = kaannettava.getLeft();
+        vasenLapsi.setParent(kaannettava.getParent());
+        kaannettava.setParent(vasenLapsi);
+        kaannettava.setLeft(vasenLapsi.getRight());
+        vasenLapsi.setRight(kaannettava);
+        if (kaannettava.getLeft() != null) {
+            kaannettava.getLeft().setParent(kaannettava);
         }
-        k1.setHeight(Math.max(height(k1.getLeft()), height(k1.getRight())) + 1);
-        k2.setHeight(Math.max(height(k2.getLeft()), height(k2.getRight())) + 1);
-        return k2;
+        kaannettava.setHeight(Math.max(height(kaannettava.getLeft()), height(kaannettava.getRight())) + 1);
+        vasenLapsi.setHeight(Math.max(height(vasenLapsi.getLeft()), height(vasenLapsi.getRight())) + 1);
+        return vasenLapsi;
     }
 
     /**
      * Metodi joka kiertää AVL-puun solmuja vasemmalle
      * epätasapainon korjaamiseksi.
-     * @param k1 solmu, joka epätasapainossa.
-     * @return k2 palautetaan solmu joka oli aiemmin k1 solmun oikea lapsi.
+     * @param kaannettava solmu, joka epätasapainossa.
+     * @return oikeaLapsi palautetaan solmu joka oli aiemmin kaannettavan 
+     * solmun oikea lapsi.
      */
-    public AvlNode leftRotate(AvlNode k1) {
-        AvlNode k2 = k1.getRight();
-        k2.setParent(k1.getParent());
-        k1.setParent(k2);
-        k1.setRight(k2.getLeft());
-        k2.setLeft(k1);
-        if (k1.getRight() != null) {
-            k1.getRight().setParent(k1);
+    public AvlNode leftRotate(AvlNode kaannettava) {
+        AvlNode oikeaLapsi = kaannettava.getRight();
+        oikeaLapsi.setParent(kaannettava.getParent());
+        kaannettava.setParent(oikeaLapsi);
+        kaannettava.setRight(oikeaLapsi.getLeft());
+        oikeaLapsi.setLeft(kaannettava);
+        if (kaannettava.getRight() != null) {
+            kaannettava.getRight().setParent(kaannettava);
         }
-        k1.setHeight(Math.max(height(k1.getLeft()), height(k1.getRight())) + 1);
-        k2.setHeight(Math.max(height(k2.getLeft()), height(k2.getRight())) + 1);
-        return k2;
+        kaannettava.setHeight(Math.max(height(kaannettava.getLeft()), height(kaannettava.getRight())) + 1);
+        oikeaLapsi.setHeight(Math.max(height(oikeaLapsi.getLeft()), height(oikeaLapsi.getRight())) + 1);
+        return oikeaLapsi;
     }
     
     /**
-     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään k1
-     * solmun oikea lapsi oikealle ja sen jälkeen k1 solmu vasemmalle.
-     * @param k1 solmu, joka epätasapainossa.
-     * @return palautetaan leftRotate(k1).
+     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään juuriNode
+     * solmun oikea lapsi oikealle ja sen jälkeen juuriNode solmu vasemmalle.
+     * @param kaannettava solmu, joka epätasapainossa.
+     * @return palautetaan leftRotate(kaannettava).
      */
-    public AvlNode rightLeftRotate(AvlNode k1) {
-        AvlNode k2 = k1.getRight();
-        k1.setRight(rightRotate(k2));
-        return leftRotate(k1);
+    public AvlNode rightLeftRotate(AvlNode kaannettava) {
+        AvlNode oikeaLapsi = kaannettava.getRight();
+        kaannettava.setRight(rightRotate(oikeaLapsi));
+        return leftRotate(kaannettava);
     }
 
     /**
-     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään k1
-     * solmun vasen solmu vasemmalle ja sen jälkeen k1 solmu oikealle
-     * @param k1
-     * @return
+     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään juuriNode
+     * solmun vasen solmu vasemmalle ja sen jälkeen juuriNode solmu oikealle
+     * @param kaannettava node jota kaannetaan
+     * @return palautetaan rightRotate(kaannettava).
      */
-    public AvlNode leftRightRotate(AvlNode k1) {
-        AvlNode k2 = k1.getLeft();
-        k1.setLeft(leftRotate(k2));
-        return rightRotate(k1);
+    public AvlNode leftRightRotate(AvlNode kaannettava) {
+        AvlNode vasenLapsi = kaannettava.getLeft();
+        kaannettava.setLeft(leftRotate(vasenLapsi));
+        return rightRotate(kaannettava);
     }
     
     /**
      * Metodi solmun lisäämiseen avl-puuhun. Varsinainen solmun lisäys 
      * tehdään apumetodissa ja sen jälkeen puulle tehdään tarvittavat kierrot.
-     * @param k lisättävän solmun avain.
+     * @param lisattava lisättävän solmun avain.
      * @return palautetaan lisättävä solmu.
      */
-    public AvlNode avlInsert(int k) {
-//        if(k1==null) {
-//            k1=new AvlNode(k);
+    public AvlNode avlInsert(int lisattava) {
+//        if(juuriNode==null) {
+//            juuriNode=new AvlNode(lisattava);
 //        }
-        AvlNode uusi = insert(k);
-        AvlNode p=uusi.getParent();
+        AvlNode uusi = insert(lisattava);
+        AvlNode parent=uusi.getParent();
         AvlNode vanhempi;
         AvlNode alipuu;
-        while(p!=null) { 
-            if(height(p.getLeft())==height(p.getRight())+2) {
-                vanhempi = p.getParent();
-                if(epaTasaPainoVasenVaiOikeaAlipuu(p)) {
-                    alipuu=rightRotate(p);
+        while(parent!=null) { 
+            if(height(parent.getLeft())==height(parent.getRight())+2) {
+                vanhempi = parent.getParent();
+                if(epaTasaPainoVasenVaiOikeaAlipuu(parent)) {
+                    alipuu=rightRotate(parent);
                 }
                 else {
-                    alipuu=leftRightRotate(p);
+                    alipuu=leftRightRotate(parent);
                 }
                 if(vanhempi==null) {
-                    k1=alipuu;
+                    juuriNode=alipuu;
                 }
-                else if(vanhempi.getLeft()==p) {
+                else if(vanhempi.getLeft()==parent) {
                     vanhempi.setLeft(alipuu);
                 }
                 else {
@@ -132,18 +133,18 @@ public class AVLpuu {
                 }
                 return uusi;
             }
-            if(height(p.getRight())==height(p.getLeft())+2) {
-                vanhempi=p.getParent();
-                if(height(p.getRight().getRight())>height(p.getRight().getLeft())) {
-                    alipuu=leftRotate(p);
+            if(height(parent.getRight())==height(parent.getLeft())+2) {
+                vanhempi=parent.getParent();
+                if(height(parent.getRight().getRight())>height(parent.getRight().getLeft())) {
+                    alipuu=leftRotate(parent);
                 }
                 else {
-                    alipuu=rightLeftRotate(p);
+                    alipuu=rightLeftRotate(parent);
                 }
                 if(vanhempi==null) {
-                    k1=alipuu;
+                    juuriNode=alipuu;
                 }
-                else if(vanhempi.getLeft()==p) {
+                else if(vanhempi.getLeft()==parent) {
                     vanhempi.setLeft(alipuu);
                 }
                 else {
@@ -154,8 +155,8 @@ public class AVLpuu {
                 }
                 return uusi;
             }
-            p.setHeight(Math.max(height(p.getLeft()),height(p.getRight()))+1);
-            p=p.getParent();
+            parent.setHeight(Math.max(height(parent.getLeft()),height(parent.getRight()))+1);
+            parent=parent.getParent();
             
         }     
         return uusi;
@@ -163,20 +164,20 @@ public class AVLpuu {
     /**
      * Apumetodi solmun lisäämiseen avl-puuhun. Hoitaa varsinaisen 
      * solmun lisäämisen puuhun.
-     * @param k solmun avain.
+     * @param lisattava solmun avain.
      * @return palautetaan lisätty solmu.
      */
-    private AvlNode insert(int k) {
+    private AvlNode insert(int lisattava) {
        puunKoko++; 
-       AvlNode uusi=new AvlNode(k); 
-       AvlNode p=null;     
-       if(k1==null) {
-           k1=uusi;
-           return k1;
+       AvlNode uusi=new AvlNode(lisattava); 
+       AvlNode parent=null;     
+       if(juuriNode==null) {
+           juuriNode=uusi;
+           return juuriNode;
        }    
-       AvlNode x=k1;
+       AvlNode x=juuriNode;
        while(x!=null) {
-           p=x;
+           parent=x;
            if(uusi.getKey()<x.getKey()) {
                x=x.getLeft();
            }
@@ -184,12 +185,12 @@ public class AVLpuu {
                x=x.getRight();
            }
        }
-       uusi.setParent(p);
-       if(uusi.getKey()<p.getKey()) {
-           p.setLeft(uusi);
+       uusi.setParent(parent);
+       if(uusi.getKey()<parent.getKey()) {
+           parent.setLeft(uusi);
        }
        else {
-           p.setRight(uusi);
+           parent.setRight(uusi);
        }
        return uusi;
     }
@@ -197,7 +198,7 @@ public class AVLpuu {
      * Apumetodi jonka tarkoitus on selkeyttää koodia. Vertailu tehdään
      * apumetodissa jolloin oikeassa koodissa ei ole hankalasti avattavaa
      * vertailua.
-     * @param p Node jonka lapsen lapsia vertaillaan.
+     * @param parent Node jonka lapsen lapsia vertaillaan.
      * @return palautetaan true jos ehto on tosi. Muuten false.
      */
     private boolean epaTasaPainoVasenVaiOikeaAlipuu(AvlNode p) {
@@ -209,31 +210,31 @@ public class AVLpuu {
      * tapahtuu apumetodissa delete. Kun node on poistettu niin sitten
      * avlDelete suorittaa tarvittavan määrän kiertoja jotta puuhun ei jää
      * epätasapainoa.
-     * @param x avlnode joka poistetaan
+     * @param poistettava avlnode joka poistetaan
      */
-    public void avlDelete(AvlNode x) {
-        AvlNode pois = delete(x);
-        AvlNode p=pois.getParent();
+    public void avlDelete(AvlNode poistettava) {
+        AvlNode pois = delete(poistettava);
+        AvlNode parent=pois.getParent();
         AvlNode vanhempi;
         AvlNode alipuu;
-        while(p!=null) {
-            if(height(p.getLeft())==height(p.getRight())+2||
-               height(p.getLeft())+2==height(p.getRight())) {
-                vanhempi=p.getParent();
-                if(height(p.getLeft().getLeft())>height(p.getLeft().getRight())) {
-                    alipuu=rightRotate(p);
+        while(parent!=null) {
+            if(height(parent.getLeft())==height(parent.getRight())+2||
+               height(parent.getLeft())+2==height(parent.getRight())) {
+                vanhempi=parent.getParent();
+                if(height(parent.getLeft().getLeft())>height(parent.getLeft().getRight())) {
+                    alipuu=rightRotate(parent);
                 }
-                else if(height(p.getRight().getLeft())>height(p.getRight().getRight())) {
-                    alipuu=leftRotate(p);
+                else if(height(parent.getRight().getLeft())>height(parent.getRight().getRight())) {
+                    alipuu=leftRotate(parent);
                 }
-                else if(height(p.getLeft().getRight())>height(p.getLeft().getLeft())) {
-                    alipuu=leftRightRotate(p);
+                else if(height(parent.getLeft().getRight())>height(parent.getLeft().getLeft())) {
+                    alipuu=leftRightRotate(parent);
                 }
                 else {
-                    alipuu=rightLeftRotate(p);
+                    alipuu=rightLeftRotate(parent);
                 }
-                if(p.equals(k1)) {
-                    k1=alipuu;
+                if(parent.equals(juuriNode)) {
+                    juuriNode=alipuu;
                     return;
                 }
                 if(alipuu.getKey()>vanhempi.getKey()) {
@@ -243,30 +244,31 @@ public class AVLpuu {
                     vanhempi.setLeft(alipuu);
                 }
                 alipuu.setParent(vanhempi);
-                p=vanhempi;
+                parent=vanhempi;
             }
             else {
-                p.setHeight(Math.max(height(p.getLeft()), height(p.getRight()))+1);
-                p=p.getParent();
+                parent.setHeight(Math.max(height(parent.getLeft()), height(parent.getRight()))+1);
+                parent=parent.getParent();
             }
            
         }
     }
     
     /**
-    *  
-    * @param x poistettava node.
+    * delete metodi on avlDelete metodin apu metodi joka huolehtii 
+    * varsinaisesta noden poistamisesta.
+    * @param poistettava poistettava node.
     * @return palautetaan
     */
-    private AvlNode delete(AvlNode x) {
+    private AvlNode delete(AvlNode poistettava) {
         puunKoko--;
-        AvlNode pois = x;
+        AvlNode pois = poistettava;
         AvlNode vanh;
         AvlNode lapsi;
         if(pois.getLeft()==null && pois.getRight()==null) {
             vanh=pois.getParent();
             if(vanh==null) {
-                k1=null;
+                juuriNode=null;
                 return pois;
             }
             if(pois==vanh.getLeft()) {
@@ -287,7 +289,7 @@ public class AVLpuu {
             vanh=pois.getParent();
             lapsi.setParent(vanh);
             if(vanh==null) {
-                k1=lapsi;
+                juuriNode=lapsi;
                 return pois;
             }
             if(pois==vanh.getLeft()) {
@@ -314,41 +316,47 @@ public class AVLpuu {
         return seur;
     }
     /**
-     * 
+     * Palauttaa pinon pienimmän noden. Aloittaa juuresta ja käy
+     * silmukassa läpi vasemmat lapset kunnes tullaan arvoon null eli ei
+     * ole enää vasenta lasta. Tällöin on tultu pienimpään nodeen.
+     * @return pinon pienin node.
      */
-    private AvlNode min(AvlNode x) {
-        while(x.getLeft()!=null) {
-            x=x.getLeft();
+    private AvlNode min(AvlNode node) {
+        while(node.getLeft()!=null) {
+            node=node.getLeft();
         }
-        return x;
+        return node;
     }
      
     /**
-     *
-     * @return
+     * Palauttaa juuren avaimen. Käytetään testeissä. Ei kuulu AVL-puun
+     * varsinaiseen toteutukseen.
+     * @return juuri noden avain.
      */
     public int getJuurenAvain() {
-        return k1.getKey();
+        return juuriNode.getKey();
     }
     
     /**
-     *
-     * @return
+     * Palauttaa tiedon montako nodea on puussa. Käytetään testeissä. 
+     * Ei kuulu AVL-puun varsinaiseen toteutukseen.
+     * @return puunKoko eli monta node puussa on.
      */
     public int getPuunKoko() {
         return puunKoko;
     }
     
     /**
-     *
-     * @return
+     * Palauttaa puun juuren. Käytetään testeissä. Ei kuulu AVL-puun
+     * varsinaiseen toteutukseen.
+     * @return juuriNode
      */
     public AvlNode getJuuri() {
-        return k1;
+        return juuriNode;
     }
     
     @Override
     public String toString() {
-        return ""+k1.getKey();
+        return ""+juuriNode.getKey();
     }
 }
