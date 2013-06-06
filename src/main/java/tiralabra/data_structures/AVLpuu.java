@@ -194,9 +194,11 @@ public class AVLpuu {
        return uusi;
     }
     /**
-     * 
-     * @param p
-     * @return 
+     * Apumetodi jonka tarkoitus on selkeyttää koodia. Vertailu tehdään
+     * apumetodissa jolloin oikeassa koodissa ei ole hankalasti avattavaa
+     * vertailua.
+     * @param p Node jonka lapsen lapsia vertaillaan.
+     * @return palautetaan true jos ehto on tosi. Muuten false.
      */
     private boolean epaTasaPainoVasenVaiOikeaAlipuu(AvlNode p) {
         return height(p.getLeft().getLeft())>height(p.getLeft().getRight());
@@ -207,7 +209,7 @@ public class AVLpuu {
      * tapahtuu apumetodissa delete. Kun node on poistettu niin sitten
      * avlDelete suorittaa tarvittavan määrän kiertoja jotta puuhun ei jää
      * epätasapainoa.
-     * @param x avlnode
+     * @param x avlnode joka poistetaan
      */
     public void avlDelete(AvlNode x) {
         AvlNode pois = delete(x);

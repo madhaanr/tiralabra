@@ -129,17 +129,18 @@ public class AVLpuuTest {
         }
         avlPuu.avlDelete(nodet[5905]);
         assertEquals(5906,avlPuu.getJuurenAvain());
+        assertEquals(9999,avlPuu.getPuunKoko());
     }
-    @Test
-    public void deleteKymmenenMiljoonaaNodea() {
-        AvlNode[] nodet = new AvlNode[1000];
-        for (int i = 0; i < 100; i++) {
-            nodet[i]=avlPuu.avlInsert(i);
-        }
-        for (int i = 99; i > 95; i--) {
-            avlPuu.avlDelete(nodet[i]);
-        }
-        assertEquals(5,avlPuu.getJuurenAvain());
-        
-    }
+//    @Test
+//    public void deleteKymmenenMiljoonaaNodea() {
+//        AvlNode[] nodet = new AvlNode[1000];
+//        for (int i = 0; i < 100; i++) {
+//            nodet[i]=avlPuu.avlInsert(i);
+//        }
+//        for (int i = 99; i > 95; i--) {
+//            avlPuu.avlDelete(nodet[i]);
+//        }
+//        assertEquals(5,avlPuu.getJuurenAvain());
+//        
+//    }
 }
