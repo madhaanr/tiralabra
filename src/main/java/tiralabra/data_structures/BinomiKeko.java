@@ -63,12 +63,11 @@ public class BinomiKeko {
         Node next = node.getSibling();
 
         while (next != null) {
-            if (node.getDegree() != next.getDegree()) {
+            if (degreesOfNodeNextNotSame(node, next)) {
                 prev = node;
                 node = next;
             } 
-            else if(next.getSibling() != null &&  
-                    next.getSibling().getDegree() == node.getDegree()) {
+            else if(nextSiblingNotNullAndNodeNextDegreesSame(next, node)) {
                 prev = node;
                 node = next;
             }
@@ -103,43 +102,41 @@ public class BinomiKeko {
         if (keko1.isEmpty()) {
             return keko2.head;
         } 
-        else if (keko2.isEmpty()) {
+        if (keko2.isEmpty()) {
             return keko1.head;
         } 
+        
+        Node uusiHead;
+        Node tail;
+        Node k1Head = keko1.head;
+        Node k2Head = keko2.head;
+        if (k1HeadDegreeSmallerThanK2Heads(k1Head, k2Head)) {
+            uusiHead = keko1.head;
+            k1Head = k1Head.getSibling();
+        } 
         else {
-            Node uusiHead;
-            Node tail;
-            Node k1Head = keko1.head;
-            Node k2Head = keko2.head;
-
-            if (k1Head.getDegree() <= k2Head.getDegree()) {
-                uusiHead = keko1.head;
+            uusiHead = keko2.head;
+            k2Head = k2Head.getSibling();
+        }
+        tail = uusiHead;
+        while (k1HeadAndk2HeadNotNull(k1Head, k2Head)) {
+            if (k1HeadDegreeSmallerThanK2Heads(k1Head, k2Head)) {
+                tail.setSibling(k1Head);
                 k1Head = k1Head.getSibling();
             } 
             else {
-                uusiHead = keko2.head;
+                tail.setSibling(k2Head);
                 k2Head = k2Head.getSibling();
             }
-            tail = uusiHead;
-            while (k1Head != null && k2Head != null) {
-                if (k1Head.getDegree() <= k2Head.getDegree()) {
-                    tail.setSibling(k1Head);
-                    k1Head = k1Head.getSibling();
-                } 
-                else {
-                    tail.setSibling(k2Head);
-                    k2Head = k2Head.getSibling();
-                }
-                tail = tail.getSibling();
-            }
-            if (k1Head != null) {
-                tail.setSibling(k1Head);
-            } 
-            else {
-                tail.setSibling(k2Head);
-            }
-            return uusiHead;
+            tail = tail.getSibling();
         }
+        if (k1Head != null) {
+            tail.setSibling(k1Head);
+        } 
+        else {
+            tail.setSibling(k2Head);
+        }
+        return uusiHead;
     }
     /**
      * Parittaa kaksi nodea keskenään.
@@ -233,6 +230,51 @@ public class BinomiKeko {
         return head;
     }
 
+    /**
+     * Apumetodi mergeHeapille. Tarkistus onko nextin sibling not null 
+     * ja ovatko node ja next saman asteisia.
+     * @param node käsiteltävä node.
+     * @param next noden sibling.
+     * @return palautetaan true jos nextillä on sisarus ja noden sekä nextin 
+     * degreet ovat samat
+     */
+    private boolean nextSiblingNotNullAndNodeNextDegreesSame(Node next, Node node) {
+        return next.getSibling() != null &&  
+               next.getSibling().getDegree() == node.getDegree();
+    }
+    /**
+     * Apumetodi mergeHeapille. Tarkistetaan ettei noden ja nextin 
+     * degree ole sama. 
+     * @param node käsiteltävä node.
+     * @param next noden sibling.
+     * @return palautetaan vertailun tulos. True jos degree eivät ole samat.
+     */
+    private boolean degreesOfNodeNextNotSame(Node node, Node next) {
+        return node.getDegree() != next.getDegree();
+    }
+    
+    /**
+     * Metodin mergeJuuriLista apumetodi joka tarkistaa ovatko k1Head ja k2Head null
+     * @param k1Head keon 1 head.
+     * @param k2Head keon 2 head.
+     * @return palautetaan true jos molemmat eivät ole null.
+     */
+    private boolean k1HeadAndk2HeadNotNull(Node k1Head, Node k2Head) {
+        return k1Head != null && k2Head != null;
+    }
+    
+    /**
+     * Metodin mergeJuuriLista apumetodi jolla tarkistetaan onko k1Head 
+     * degree pienempi tai sama kuin k2Head degree.
+     * @param k1Head keon 1 head node.
+     * @param k2Head keon 2 head node
+     * @return palautetaan true jos k1Head degree on pienempi tai yhtäsuuri
+     * kuin k2Head degree. 
+     */
+    private boolean k1HeadDegreeSmallerThanK2Heads(Node k1Head, Node k2Head) {
+        return k1Head.getDegree() <= k2Head.getDegree();
+    }
+    
     @Override
     public String toString() {
         String keko = "";
