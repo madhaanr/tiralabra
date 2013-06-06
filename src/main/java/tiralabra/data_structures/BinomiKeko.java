@@ -109,34 +109,34 @@ public class BinomiKeko {
         else {
             Node uusiHead;
             Node tail;
-            Node next1 = keko1.head;
-            Node next2 = keko2.head;
+            Node k1Head = keko1.head;
+            Node k2Head = keko2.head;
 
-            if (keko1.head.getDegree() <= keko2.head.getDegree()) {
+            if (k1Head.getDegree() <= k2Head.getDegree()) {
                 uusiHead = keko1.head;
-                next1 = next1.getSibling();
+                k1Head = k1Head.getSibling();
             } 
             else {
                 uusiHead = keko2.head;
-                next2 = next2.getSibling();
+                k2Head = k2Head.getSibling();
             }
             tail = uusiHead;
-            while (next1 != null && next2 != null) {
-                if (next1.getDegree() <= next2.getDegree()) {
-                    tail.setSibling(next1);
-                    next1 = next1.getSibling();
+            while (k1Head != null && k2Head != null) {
+                if (k1Head.getDegree() <= k2Head.getDegree()) {
+                    tail.setSibling(k1Head);
+                    k1Head = k1Head.getSibling();
                 } 
                 else {
-                    tail.setSibling(next2);
-                    next2 = next2.getSibling();
+                    tail.setSibling(k2Head);
+                    k2Head = k2Head.getSibling();
                 }
                 tail = tail.getSibling();
             }
-            if (next1 != null) {
-                tail.setSibling(next1);
+            if (k1Head != null) {
+                tail.setSibling(k1Head);
             } 
             else {
-                tail.setSibling(next2);
+                tail.setSibling(k2Head);
             }
             return uusiHead;
         }
@@ -192,9 +192,9 @@ public class BinomiKeko {
 
         Node node1 = head;
         Node node2 = node1.getSibling();
-        Node node2Prev = node1;
         Node node1Prev = null;
-
+        Node node2Prev = node1;
+        
         while (node2 != null) {
             if (node2.getKey() < node1.getKey()) {
                 node1 = node2;
@@ -212,13 +212,12 @@ public class BinomiKeko {
         }
 
         BinomiKeko keko = new BinomiKeko();
-
-        Node node3 = node1.getChild();
-        while (node3 != null) {
-            Node next = node3.getSibling();
-            node3.setSibling(keko.head);
-            keko.head = node3;
-            node3 = next;
+        node1 = node1.getChild();
+        while (node1 != null) {
+            Node next = node1.getSibling();
+            node1.setSibling(keko.head);
+            keko.head = node1;
+            node1 = next;
         }
         BinomiKeko uusiKeko = this.mergeHeap(keko);
         head = uusiKeko.head;      

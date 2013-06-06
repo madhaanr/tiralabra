@@ -18,8 +18,7 @@ public class FibonaccinKeko {
 
     /**
      * Metodi palauttaa keon pienimmän alkion key kentän arvon.
-     *
-     * @return pienin alkio on tallennettu min muuttujan arvoksi.
+     * @return pienin alkio on tallennettu min muuttujan avaimen arvoksi.
      */
     public int min() {
         return min.getKey();
@@ -90,52 +89,51 @@ public class FibonaccinKeko {
 
     /**
      * Consolidate metodi luo fibonaccin keon. Metodia kutsutaan 
-     * kun keosta poistetaan node.
+     * kun keosta poistetaan node. Alussa matemaattinen kaava jolla lasketaan
+     * keon koko.
      */
     private void consolidate() {
         double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
         int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi));
-        FibNode[] A = new FibNode[size+1];    
+        
+        FibNode[] taulu = new FibNode[size+1];    
         for (int i = 0; i < size; ++i) {
-            A[i] = null;
+            taulu[i] = null;
         }
-//        FibNode w = min;
-        ArrayList<FibNode> H = rootList();
-        for (FibNode w : H) {
-//        while(w!=min.getRight()) {
-            FibNode x = w;
-            int d = x.getDegree();
-            while (A[d] != null) {
-                FibNode y = A[d];
-                if (x.getKey() > y.getKey()) {
-                    FibNode apu = y;
-                    y = x;
-                    x = apu;
+//       juuriNL=juuriNodeLista
+        ArrayList<FibNode> juuriNL = rootList();
+        for (FibNode juuriNode : juuriNL) {
+//        juuriNodeLista alkio x jota käsitellään
+            FibNode juuriNLnodeX = juuriNode;
+            int xDegree = juuriNLnodeX.getDegree();
+            while (taulu[xDegree] != null) {
+                FibNode tauluY = taulu[xDegree];
+                if (juuriNLnodeX.getKey() > tauluY.getKey()) {
+                    FibNode apu = tauluY;
+                    tauluY = juuriNLnodeX;
+                    juuriNLnodeX = apu;
                 }
-                link(y, x);
-                A[d] = null;
-                d = d + 1;
+                link(tauluY, juuriNLnodeX);
+                taulu[xDegree] = null;
+                xDegree = xDegree + 1;
             }
-            A[d] = x;     
+            taulu[xDegree] = juuriNLnodeX;     
         } 
         min = null;
         for (int i = 0; i < size; ++i) {
-            if (A[i] != null) {
+            if (taulu[i] != null) {
                 if (min == null) {
-                    min = A[i];
-//                    System.out.println(min.getKey()+"täällä");
+                    min = taulu[i];
                 } 
                 else {
-                    A[i].getLeft().setRight(A[i].getRight());
-                    A[i].getRight().setLeft(A[i].getLeft());
-                    A[i].setLeft(min);
-                    A[i].setRight(min.getRight());
-                    min.setRight(A[i]);
-                    A[i].getRight().setLeft(A[i]);
-//                    System.out.println(min.getKey()+"täälläfgd");
-                    if (A[i].getKey() < min.getKey()) {
-//                        System.out.println(min.getKey()+"täällägdfgggggg");
-                        min = A[i];        
+                    taulu[i].getLeft().setRight(taulu[i].getRight());
+                    taulu[i].getRight().setLeft(taulu[i].getLeft());
+                    taulu[i].setLeft(min);
+                    taulu[i].setRight(min.getRight());
+                    min.setRight(taulu[i]);
+                    taulu[i].getRight().setLeft(taulu[i]);
+                    if (taulu[i].getKey() < min.getKey()) {
+                        min = taulu[i];        
                     }
                 }
             }
@@ -169,49 +167,45 @@ public class FibonaccinKeko {
         x.setDegree(x.getDegree()+1);
         y.setMark(false);
         
-        System.out.println("y:"+y.getKey()+" yLeft:"+y.getLeft().getKey()+" yRight:"+y.getRight().getKey()+" yParent:"+y.getParent().getKey()+" xChild:"+x.getChild().getKey());
+//        System.out.println("y:"+y.getKey()+" yLeft:"+y.getLeft().getKey()+" yRight:"+y.getRight().getKey()+" yParent:"+y.getParent().getKey()+" xChild:"+x.getChild().getKey());
     }
-//    lisattava.setLeft(min);
-//    lisattava.setRight(min.getRight());
-//    min.setRight(lisattava);
-//    lisattava.getRight().setLeft(lisattava);
 
     /**
      * Yhdistää kaksi fibonaccin kekoa toisiinsa. 
-     * @param H1 Ensimmäinen yhdistettävä keko.
-     * @param H2 Toinen yhdistettävä keko.
-     * @return H palauttaa yhdistetyn keon
+     * @param keko1 Ensimmäinen yhdistettävä keko.
+     * @param keko2 Toinen yhdistettävä keko.
+     * @return yhdistettyKeko palauttaa yhdistetyn keon
      */
-    public FibonaccinKeko union(FibonaccinKeko H1, FibonaccinKeko H2) {
-        FibonaccinKeko H = new FibonaccinKeko();
-        H.min = H1.min;
-        //concatenate the root list of H2 with root list of H
-        if(H1==null) {
-            H.min=H2.min;
+    public FibonaccinKeko union(FibonaccinKeko keko1, FibonaccinKeko keko2) {
+        FibonaccinKeko yhdistettyKeko = new FibonaccinKeko();
+        yhdistettyKeko.min = keko1.min;
+        if(keko1==null) {
+            yhdistettyKeko.min=keko2.min;
         }
-        else if(H2.min!=null&&H2.min.getKey()<H1.min.getKey()) {
-            H.min=H2.min;
+        else if(keko2.min!=null&&keko2.min.getKey()<keko1.min.getKey()) {
+            yhdistettyKeko.min=keko2.min;
         }
-        H.heapSize=H1.heapSize+H2.heapSize;
-        return H;
+        yhdistettyKeko.heapSize=keko1.heapSize+keko2.heapSize;
+        return yhdistettyKeko;
     }
     
     /**
      * Kaikki juurilistan nodet pistetään arraylistiin josta 
      * niitä sitten kivasti saa haettua.
-     * @return k palauttaa arraylistin jossa kaikki juurilistan nodet
+     * @return juuriNodeLista palauttaa arraylistin jossa kaikki juurilistan 
+     * nodet
      */
     public ArrayList rootList() {
-        FibNode w=min;
-        ArrayList<FibNode> k = new ArrayList();
-        k.add(w);
-        while(min!=w.getRight()) {
-            k.add(w.getRight());
-            w=w.getRight();
+        FibNode lisattava=min;
+        ArrayList<FibNode> juuriNodeLista = new ArrayList();
+        juuriNodeLista.add(lisattava);
+        while(min!=lisattava.getRight()) {
+            juuriNodeLista.add(lisattava.getRight());
+            lisattava=lisattava.getRight();
         }
-        k.add(w.getRight());
-//        System.out.println(k.size());
-        return k;           
+        juuriNodeLista.add(lisattava.getRight());
+//        System.out.println(juuriNodeLista.size());
+        return juuriNodeLista;           
     }
 
     /**
