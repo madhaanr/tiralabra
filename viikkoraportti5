@@ -10,3 +10,7 @@ ke 5.6.
 AVL-puun delete operaation toteutus ja javadocin kirjoitus avl-puulle. Testien kirjoittelua 
 AVL-puulle. Delete operaatio on melkein valmis ja näyttää toimivan kun poistetaan pieniä määriä nodeja.
 Testaaminen vielä kesken voiko myös luokkaa tuhansia tai enemmän nodea poistaa.
+to 6.6.
+Koodin refactorointi. Javadocin kirjoittelua avl-puulle ja testien tekemistä. Tietorakenne vertailut jäävät ensi 
+viikolle ja avl-puun deleten debuggaus jää myös ensi viikkoon. Pienistä puista voi poistaa nodeja, mutta kun puuhun
+vaikkapa 100 nodea niin sen jälkeen ei toimi oikein. Raportin kirjoittelua.
