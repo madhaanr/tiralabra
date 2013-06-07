@@ -225,16 +225,35 @@ public class AVLpuuTest {
         avlPuu.avlDelete(avlPuu.getJuuri());
         assertEquals(5906,avlPuu.getJuurenAvain());     
     }
+    @Test
+    public void deleteSeitsemanNodea() {
+        AvlNode node1 = avlPuu.avlInsert(1);
+        AvlNode node2 = avlPuu.avlInsert(2);
+        AvlNode node3 = avlPuu.avlInsert(3);
+        AvlNode node4 = avlPuu.avlInsert(4);
+        AvlNode node5 = avlPuu.avlInsert(5);
+        AvlNode node6 = avlPuu.avlInsert(6);
+        AvlNode node7 = avlPuu.avlInsert(7);  
+        avlPuu.avlDelete(node1);
+        avlPuu.avlDelete(node5);
+        
+        avlPuu.avlDelete(node2);
+//        avlPuu.avlDelete(node3);
+        avlPuu.avlDelete(node7);
+       
+        assertEquals(4,avlPuu.getJuurenAvain());
+        
+    }
 //    @Test
 //    public void deleteKymmenenMiljoonaaNodea() {
 //        AvlNode[] nodet = new AvlNode[1000];
 //        for (int i = 0; i < 100; i++) {
 //            nodet[i]=avlPuu.avlInsert(i);
 //        }
-//        for (int i = 99; i > 95; i--) {
+//        for (int i = 99; i > 96; i--) {
 //            avlPuu.avlDelete(nodet[i]);
 //        }
-//        assertEquals(5,avlPuu.getJuurenAvain());
+//        assertEquals(64,avlPuu.getJuurenAvain());
 //        
 //    }
 }

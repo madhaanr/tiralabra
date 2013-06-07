@@ -109,6 +109,7 @@ public class AVLpuu {
      * @return palautetaan lisättävä solmu.
      */
     public AvlNode avlInsert(int lisattava) {
+
         AvlNode uusi = insert(lisattava);
         AvlNode parent = uusi.getParent();
         AvlNode vanhempi;
@@ -217,8 +218,7 @@ public class AVLpuu {
         AvlNode vanhempi;
         AvlNode alipuu;
         while (parent != null) {
-            if (height(parent.getLeft()) == height(parent.getRight()) + 2
-                    || height(parent.getLeft()) + 2 == height(parent.getRight())) {
+            if (height(parent.getLeft()) == height(parent.getRight()) + 2) {
                 vanhempi = parent.getParent();
                 if (height(parent.getLeft().getLeft()) > height(parent.getLeft().getRight())) {
                     alipuu = rightRotate(parent);
@@ -228,6 +228,29 @@ public class AVLpuu {
                     alipuu = leftRightRotate(parent);
                 } else {
                     alipuu = rightLeftRotate(parent);
+                }
+                if (parent==juuriNode) {
+                    juuriNode = alipuu;
+                    return;
+                }
+                if (alipuu.getKey() > vanhempi.getKey()) {
+                    vanhempi.setRight(alipuu);
+                } else {
+                    vanhempi.setLeft(alipuu);
+                }
+                alipuu.setParent(vanhempi);
+                parent = vanhempi;
+            }
+            if(height(parent.getRight()) == height(parent.getLeft()) + 2) {
+                vanhempi = parent.getParent();
+                if (height(parent.getLeft().getLeft()) > height(parent.getLeft().getRight())) {
+                    alipuu = leftRotate(parent);
+                } else if (height(parent.getRight().getLeft()) > height(parent.getRight().getRight())) {
+                    alipuu = rightRotate(parent);
+                } else if (height(parent.getLeft().getRight()) > height(parent.getLeft().getLeft())) {
+                    alipuu = rightLeftRotate(parent);
+                } else {
+                    alipuu = leftRightRotate(parent);
                 }
                 if (parent.equals(juuriNode)) {
                     juuriNode = alipuu;
@@ -240,7 +263,8 @@ public class AVLpuu {
                 }
                 alipuu.setParent(vanhempi);
                 parent = vanhempi;
-            } else {
+            }
+            else {
                 parent.setHeight(Math.max(height(parent.getLeft()), height(parent.getRight())) + 1);
                 parent = parent.getParent();
             }
