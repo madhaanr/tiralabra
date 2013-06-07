@@ -1,6 +1,5 @@
 package tiralabra.data_structures;
 
-
 /**
  * Luokka toteuttaa AVL-puun.
  * @author mhaanran
