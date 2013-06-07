@@ -20,15 +20,21 @@ import tiralabra.data_structures.AvlNode;
 public class AVLpuuTest {
     
     private AVLpuu avlPuu;
-   
+    private AVLpuu avlPuu2;
     
     public AVLpuuTest() {
+        
     }
     
     @Before
     public void setUp() {
-        avlPuu=new AVLpuu();
+        avlPuu = new AVLpuu();
      
+    }
+    @Test
+    public void konstruktoriTesti() {
+        avlPuu2 = new AVLpuu();
+        assertEquals(0,avlPuu2.getPuunKoko());
     }
     @Test
     public void heightNull() {
@@ -100,7 +106,8 @@ public class AVLpuuTest {
         assertEquals(8,avlPuu.getJuuri().getLeft().getRight().getKey());
         assertEquals(12,avlPuu.getJuuri().getRight().getLeft().getKey());
         assertEquals(20,avlPuu.getJuuri().getRight().getRight().getKey());
-        
+        assertEquals(3,avlPuu.getJuuri().getLeft().getLeft().getLeft().getKey());
+        assertEquals(5,avlPuu.getJuuri().getLeft().getLeft().getRight().getKey());      
     }
     @Test
     public void deleteKey() {
