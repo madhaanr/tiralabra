@@ -109,9 +109,6 @@ public class AVLpuu {
      * @return palautetaan lisättävä solmu.
      */
     public AvlNode avlInsert(int lisattava) {
-//        if(juuriNode==null) {
-//            juuriNode=new AvlNode(lisattava);
-//        }
         AvlNode uusi = insert(lisattava);
         AvlNode parent = uusi.getParent();
         AvlNode vanhempi;
