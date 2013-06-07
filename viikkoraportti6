@@ -1,0 +1,4 @@
+pe 7.6.
+AVL-puun testailua. Käännöt on nyt testattu melko hyvin ja näyttävät toimivan odotetusti kun puussa
+on pieni määrä nodeja. Todella suurella node määrällä testailu ei ole mahdollista.
+Deleten debuggaus jatkuu.
