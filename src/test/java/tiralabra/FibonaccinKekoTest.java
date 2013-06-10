@@ -150,16 +150,16 @@ public class FibonaccinKekoTest {
         assertEquals(5,fibKeko.removeMin());
         assertEquals(6,fibKeko.removeMin());
     }
-//    @Test
-//    public void removeMinSataNodea() {
-//        for (int i = 200; i < 1000; i++) {
-//            fibKeko.insert(new FibNode(i));
-//        }
-//        for (int i = 0; i < 4; i++) {
-//            fibKeko.removeMin();
-//        }
-//        assertEquals(203,fibKeko.min());
-//    }
+    @Test
+    public void removeMinSataNodea() {
+        for (int i = 200; i < 1000; i++) {
+            fibKeko.insert(new FibNode(i));
+        }
+        for (int i = 0; i < 100; i++) {
+            fibKeko.removeMin();
+        }
+        assertEquals(310,fibKeko.min());
+    }
 //    @Test
 //    public void removeNolla() {
 //        fibKeko.insert(node0);

@@ -48,8 +48,7 @@ public class FibonaccinKeko {
                 min = lisattava;
             }
         }
-        heapSize = heapSize + 1;
-        System.out.println("");
+        heapSize++;
     }
 
     /**
@@ -62,10 +61,10 @@ public class FibonaccinKeko {
         if(min==null) {
             return Integer.MIN_VALUE;
         }
-        FibNode vanhaMin = min;
-        
+        FibNode vanhaMin = min;      
         FibNode kasiteltava = vanhaMin.getChild();
         FibNode temp;
+        
         for (int i = vanhaMin.getDegree(); i > 0; i--) {
             temp = kasiteltava.getRight();
             kasiteltava.getLeft().setRight(kasiteltava.getRight());
@@ -76,16 +75,16 @@ public class FibonaccinKeko {
             kasiteltava.getRight().setLeft(kasiteltava);
             kasiteltava.setParent(null);
             kasiteltava = temp;
-            heapSize--;
         }
-        min.getLeft().setRight(min.getRight());
-        min.getRight().setLeft(min.getLeft());
+        vanhaMin.getLeft().setRight(vanhaMin.getRight());
+        vanhaMin.getRight().setLeft(vanhaMin.getLeft());
         if (vanhaMin == vanhaMin.getRight()) {
             min = null;
         } else {
             min = vanhaMin.getRight();
             consolidate();
         }  
+        heapSize--;
         return vanhaMin.getKey();
     }
 
@@ -98,33 +97,44 @@ public class FibonaccinKeko {
         if(min==null) {
             return;
         }
+        
         double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
-        int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi));
+        int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi))+1;
         
         FibNode[] taulu = new FibNode[size];    
         for (int i = 0; i < taulu.length; ++i) {
             taulu[i] = null;
         }
-//       juuriNL=juuriNodeLista
-        ArrayList<FibNode> juuriNL = rootList();
-        for (FibNode juuriNode : juuriNL) {
-//        juuriNodeListan alkio x jota käsitellään
-            FibNode juuriNLnodeX = juuriNode.getRight();
-//            System.out.println(juuriNode.getKey());
-            int xDegree = juuriNLnodeX.getDegree();
-//            System.out.println(xDegree+"jjj");
+        
+        int juuriNodeja=0;
+        FibNode kasiteltava=min;
+        if(kasiteltava!=null) {
+            juuriNodeja++;
+            kasiteltava=kasiteltava.getRight();
+            while(kasiteltava!=min) {
+                juuriNodeja++;
+                kasiteltava=kasiteltava.getRight();
+            }
+        }
+        
+        while(juuriNodeja>0) {
+//        juuriNodeListan alkio kasiteltava jota käsitellään
+            FibNode seuraava = kasiteltava.getRight();
+            int xDegree = seuraava.getDegree();
             while (taulu[xDegree] != null) {
                 FibNode tauluY = taulu[xDegree];
-                if (juuriNLnodeX.getKey() > tauluY.getKey()) {
+                if (kasiteltava.getKey() > tauluY.getKey()) {
                     FibNode apu = tauluY;
-                    tauluY = juuriNLnodeX;
-                    juuriNLnodeX = apu;
+                    tauluY = kasiteltava;
+                    kasiteltava = apu;
                 }
-                link(tauluY, juuriNLnodeX);
+                link(tauluY, kasiteltava);
                 taulu[xDegree] = null;
                 xDegree++;
             }
-            taulu[xDegree] = juuriNLnodeX;   
+            taulu[xDegree] = kasiteltava;
+            kasiteltava=seuraava;
+            juuriNodeja--;
             
         } 
         min = null;
@@ -138,12 +148,10 @@ public class FibonaccinKeko {
 //                    System.out.println(min.getKey()+"+++"+i);
                 } 
                 else {
-                    taulu[i].getLeft().setRight(taulu[i].getRight());
-                    taulu[i].getRight().setLeft(taulu[i].getLeft());
-                    taulu[i].setLeft(min);
-                    taulu[i].setRight(min.getRight());
-                    min.setRight(taulu[i]);
-                    taulu[i].getRight().setLeft(taulu[i]);
+                    taulu[i].setRight(min);
+                    taulu[i].setLeft(min.getLeft());
+                    min.getLeft().setRight(taulu[i]);
+                    min.setLeft(taulu[i]);
                     if (taulu[i].getKey() < min.getKey()) {
                         min = taulu[i];   
 //                        System.out.println(min.getKey()+":-:"+taulu[i].getKey()+"--"+i);
@@ -154,11 +162,11 @@ public class FibonaccinKeko {
     }
 
     /**
-     * Consolidate metodin apumetodi joka linkittää kaksi nodea. 
+     * Consolidate metodin apumetodi, joka linkittää kaksi nodea. 
      * Ekana annetusta tulee child ja toisena parametrina annetusta 
      * parent.
-     * @param y node josta tulee child.
-     * @param x node josta tulee parent.
+     * @param tauluY node josta tulee child.
+     * @param kasiteltava node josta tulee parent.
      */
     public void link(FibNode y, FibNode x) {
         FibNode yLeft = y.getLeft();
@@ -180,8 +188,6 @@ public class FibonaccinKeko {
         }
         x.setDegree(x.getDegree()+1);
         y.setMark(false);
-        
-//        System.out.println("y:"+y.getKey()+" yLeft:"+y.getLeft().getKey()+" yRight:"+y.getRight().getKey()+" yParent:"+y.getParent().getKey()+" xChild:"+x.getChild().getKey());
     }
 
     /**
@@ -203,37 +209,6 @@ public class FibonaccinKeko {
         return yhdistettyKeko;
     }
     
-    /**
-     * Kaikki juurilistan nodet pistetään arraylistiin josta 
-     * niitä sitten kivasti saa haettua.
-     * @return juuriNodeLista palauttaa arraylistin jossa kaikki juurilistan 
-     * nodet
-     */
-    public ArrayList rootList() {
-        FibNode lisattava=min;
-        ArrayList<FibNode> juuriNodeLista = new ArrayList();
-        juuriNodeLista.add(lisattava);
-        while(min!=lisattava.getRight()) {
-            juuriNodeLista.add(lisattava.getRight());
-            lisattava=lisattava.getRight();
-        }
-        String tulostus = "";
-        for (int i = 0; i < juuriNodeLista.size(); i++) {
-            tulostus+="  "+juuriNodeLista.get(i).getKey();
-            if(juuriNodeLista.get(i).getChild()!=null) {
-                tulostus+=":"+juuriNodeLista.get(i).getChild().getKey()+" ";
-                if(juuriNodeLista.get(i).getChild().getLeft()!=null) {
-                    tulostus+="+"+juuriNodeLista.get(i).getChild().getLeft().getKey()+" ";
-                }
-                if(juuriNodeLista.get(i).getChild().getRight()!=null&&juuriNodeLista.get(i).getChild().getLeft()!=juuriNodeLista.get(i).getChild().getRight()) {
-                    tulostus+="-"+juuriNodeLista.get(i).getChild().getRight().getKey()+" ";
-                }
-            }
-        }
-        System.out.println(tulostus);
-        return juuriNodeLista;           
-    }
-
     /**
      * Palauttaa fibonaccin keon koon. Käytetään testeissä.
      * @return heapSize eli keon koko.
