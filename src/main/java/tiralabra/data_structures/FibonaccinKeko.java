@@ -94,8 +94,7 @@ public class FibonaccinKeko {
      * keon koko.
      */
     private void consolidate() {
-        
-        
+              
         double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
         int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi))+1;
         
@@ -104,15 +103,12 @@ public class FibonaccinKeko {
             taulu[i] = null;
         }
         
-        int juuriNodeja=0;
+        int juuriNodeja=1;
         FibNode kasiteltava=min;
-        if(kasiteltava!=null) {
+        kasiteltava=kasiteltava.getRight();
+        while(kasiteltava!=min) {
             juuriNodeja++;
             kasiteltava=kasiteltava.getRight();
-            while(kasiteltava!=min) {
-                juuriNodeja++;
-                kasiteltava=kasiteltava.getRight();
-            }
         }
         
         while(juuriNodeja>0) {

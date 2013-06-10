@@ -1,6 +1,11 @@
 package tiralabra.data_structures;
 
-/* @author mhaanran */
+/**
+ * FibNode luokkaa käytetään fibonaccin keon kanssa. Jokainen 
+ * fibonaccin keon solmu on
+ * fibnodeluokan ilmentymä ja sillä on luokan määrittelemät muuttujat.
+ * @author mhaanran
+ */
 public class FibNode {
 
     private int key;
@@ -25,15 +30,8 @@ public class FibNode {
         return key;
     }
 
-    public void setKey(int key) {
-        this.key = key;
-    }
-
     public FibNode getParent() {
         return parent;
-    }
-    public int getParentKey() {
-        return parent.key;
     }
 
     public void setParent(FibNode parent) {

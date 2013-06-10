@@ -172,7 +172,7 @@ public class FibonaccinKekoTest {
         fibKeko.insert(node3);
         assertEquals(0,fibKeko.removeMin());
         assertEquals(3,node2.getChildKey());
-        assertEquals(2,node3.getParentKey());
+        assertEquals(2,node3.getParent().getKey());
         assertEquals(1,node2.getDegree());
     }
     @Test
