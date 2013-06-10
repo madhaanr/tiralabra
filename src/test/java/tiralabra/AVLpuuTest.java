@@ -244,16 +244,16 @@ public class AVLpuuTest {
         assertEquals(4,avlPuu.getJuurenAvain());
         
     }
-//    @Test
-//    public void deleteKymmenenMiljoonaaNodea() {
-//        AvlNode[] nodet = new AvlNode[1000];
-//        for (int i = 0; i < 100; i++) {
-//            nodet[i]=avlPuu.avlInsert(i);
-//        }
-//        for (int i = 99; i > 96; i--) {
-//            avlPuu.avlDelete(nodet[i]);
-//        }
-//        assertEquals(64,avlPuu.getJuurenAvain());
-//        
-//    }
+    @Test
+    public void deleteKymmenenMiljoonaaNodea() {
+        AvlNode[] nodet = new AvlNode[1000];
+        for (int i = 0; i < 100; i++) {
+            nodet[i]=avlPuu.avlInsert(i);
+        }
+        for (int i = 99; i > 96; i--) {
+            avlPuu.avlDelete(nodet[i]);
+        }
+        assertEquals(64,avlPuu.getJuurenAvain());
+        
+    }
 }

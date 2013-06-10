@@ -122,34 +122,34 @@ public class FibonaccinKekoTest {
         assertEquals(1,fibKeko.removeMin());
         assertEquals(2,fibKeko.removeMin());
     }
-//    @Test
-//    public void removeMinKolmeNodea() {
-//        fibKeko.insert(node1);
-//        fibKeko.insert(node2);
-//        fibKeko.insert(node3);
-//        fibKeko.insert(node4);
-//        fibKeko.insert(node5);
-//        fibKeko.insert(node89);
-//        fibKeko.insert(node100);
-//        fibKeko.removeMin();
-//        fibKeko.removeMin();
-//        assertEquals(3,fibKeko.removeMin());
-//    }   
-//    @Test
-//    public void removeMinKuusiNodea() {
-//        for (int i = 10; i > 0; i--) {
-//            fibKeko.insert(new FibNode(i));
+    @Test
+    public void removeMinKolmeNodea() {
+        fibKeko.insert(node1);
+        fibKeko.insert(node2);
+        fibKeko.insert(node3);
+        fibKeko.insert(node4);
+        fibKeko.insert(node5);
+        fibKeko.insert(node89);
+        fibKeko.insert(node100);
+        assertEquals(1,fibKeko.removeMin());
+        assertEquals(2,fibKeko.removeMin());
+        assertEquals(3,fibKeko.removeMin());
+    }   
+    @Test
+    public void removeMinKuusiNodea() {
+        for (int i = 10; i > 0; i--) {
+            fibKeko.insert(new FibNode(i));
+        }
+//        for (int i = 0; i < 10; i++) {
+//            fibKeko.removeMin();
 //        }
-////        for (int i = 0; i < 10; i++) {
-////            fibKeko.removeMin();
-////        }
-//        fibKeko.removeMin();
-//        fibKeko.removeMin();
-//        fibKeko.removeMin();
-////        fibKeko.removeMin();
-////        fibKeko.removeMin();
-//        assertEquals(7,fibKeko.removeMin());
-//    }
+        assertEquals(1,fibKeko.removeMin());
+        assertEquals(2,fibKeko.removeMin());
+        assertEquals(3,fibKeko.removeMin());
+        assertEquals(4,fibKeko.removeMin());
+        assertEquals(5,fibKeko.removeMin());
+        assertEquals(6,fibKeko.removeMin());
+    }
 //    @Test
 //    public void removeMinSataNodea() {
 //        for (int i = 200; i < 1000; i++) {

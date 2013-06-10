@@ -239,7 +239,7 @@ public class AVLpuu {
                     vanhempi.setLeft(alipuu);
                 }
                 alipuu.setParent(vanhempi);
-                parent = vanhempi;
+                parent = parent.getParent();
             }
             if(height(parent.getRight()) == height(parent.getLeft()) + 2) {
                 vanhempi = parent.getParent();
@@ -262,7 +262,7 @@ public class AVLpuu {
                     vanhempi.setLeft(alipuu);
                 }
                 alipuu.setParent(vanhempi);
-                parent = vanhempi;
+                parent = parent.getParent();
             }
             else {
                 parent.setHeight(Math.max(height(parent.getLeft()), height(parent.getRight())) + 1);

@@ -59,31 +59,33 @@ public class FibonaccinKeko {
      * @return palauttaa poistettavan alkion avaimen arvon.
      */
     public int removeMin() {
-        FibNode vanhaMin = min;
-        if (vanhaMin != null) {
-            FibNode kasiteltava = vanhaMin.getChild();
-            FibNode temp;
-            for (int i = vanhaMin.getDegree(); i > 0; --i) {
-                temp = kasiteltava.getRight();
-                kasiteltava.getLeft().setRight(kasiteltava.getRight());
-                kasiteltava.getRight().setLeft(kasiteltava.getLeft());
-                kasiteltava.setLeft(vanhaMin);
-                kasiteltava.setRight(vanhaMin.getRight());
-                min.setRight(kasiteltava);
-                kasiteltava.getRight().setLeft(kasiteltava);
-                kasiteltava.setParent(null);
-                kasiteltava = temp;
-            }
-            vanhaMin.getLeft().setRight(vanhaMin.getRight());
-            vanhaMin.getRight().setLeft(vanhaMin.getLeft());
-            if (vanhaMin == vanhaMin.getRight()) {
-                min = null;
-            } else {
-                min = vanhaMin.getRight();
-                consolidate();
-            }
-            heapSize = heapSize - 1;
+        if(min==null) {
+            return Integer.MIN_VALUE;
         }
+        FibNode vanhaMin = min;
+        
+        FibNode kasiteltava = vanhaMin.getChild();
+        FibNode temp;
+        for (int i = vanhaMin.getDegree(); i > 0; i--) {
+            temp = kasiteltava.getRight();
+            kasiteltava.getLeft().setRight(kasiteltava.getRight());
+            kasiteltava.getRight().setLeft(kasiteltava.getLeft());
+            kasiteltava.setLeft(min);
+            kasiteltava.setRight(min.getRight());
+            min.setRight(kasiteltava);
+            kasiteltava.getRight().setLeft(kasiteltava);
+            kasiteltava.setParent(null);
+            kasiteltava = temp;
+            heapSize--;
+        }
+        min.getLeft().setRight(min.getRight());
+        min.getRight().setLeft(min.getLeft());
+        if (vanhaMin == vanhaMin.getRight()) {
+            min = null;
+        } else {
+            min = vanhaMin.getRight();
+            consolidate();
+        }  
         return vanhaMin.getKey();
     }
 
@@ -93,19 +95,24 @@ public class FibonaccinKeko {
      * keon koko.
      */
     private void consolidate() {
+        if(min==null) {
+            return;
+        }
         double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
         int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi));
         
-        FibNode[] taulu = new FibNode[size+1];    
-        for (int i = 0; i < size; ++i) {
+        FibNode[] taulu = new FibNode[size];    
+        for (int i = 0; i < taulu.length; ++i) {
             taulu[i] = null;
         }
 //       juuriNL=juuriNodeLista
         ArrayList<FibNode> juuriNL = rootList();
         for (FibNode juuriNode : juuriNL) {
-//        juuriNodeLista alkio x jota käsitellään
-            FibNode juuriNLnodeX = juuriNode;
+//        juuriNodeListan alkio x jota käsitellään
+            FibNode juuriNLnodeX = juuriNode.getRight();
+//            System.out.println(juuriNode.getKey());
             int xDegree = juuriNLnodeX.getDegree();
+//            System.out.println(xDegree+"jjj");
             while (taulu[xDegree] != null) {
                 FibNode tauluY = taulu[xDegree];
                 if (juuriNLnodeX.getKey() > tauluY.getKey()) {
@@ -115,15 +122,20 @@ public class FibonaccinKeko {
                 }
                 link(tauluY, juuriNLnodeX);
                 taulu[xDegree] = null;
-                xDegree = xDegree + 1;
+                xDegree++;
             }
-            taulu[xDegree] = juuriNLnodeX;     
+            taulu[xDegree] = juuriNLnodeX;   
+            
         } 
         min = null;
-        for (int i = 0; i < size; ++i) {
+        
+        for (int i = 0; i < size; i++) {
             if (taulu[i] != null) {
                 if (min == null) {
                     min = taulu[i];
+                    min.setLeft(min);
+                    min.setRight(min);
+//                    System.out.println(min.getKey()+"+++"+i);
                 } 
                 else {
                     taulu[i].getLeft().setRight(taulu[i].getRight());
@@ -133,7 +145,8 @@ public class FibonaccinKeko {
                     min.setRight(taulu[i]);
                     taulu[i].getRight().setLeft(taulu[i]);
                     if (taulu[i].getKey() < min.getKey()) {
-                        min = taulu[i];        
+                        min = taulu[i];   
+//                        System.out.println(min.getKey()+":-:"+taulu[i].getKey()+"--"+i);
                     }
                 }
             }
@@ -152,6 +165,8 @@ public class FibonaccinKeko {
         FibNode yRight = y.getRight();     
         yLeft.setRight(yRight);
         yRight.setLeft(yLeft);
+        y.setParent(x);
+        
         if(x.getChild()!=null) {
             y.setLeft(x.getChild());
             y.setRight(x.getChild().getRight());         
@@ -159,11 +174,10 @@ public class FibonaccinKeko {
             y.getRight().setLeft(y);
         }
         else {
+            x.setChild(y);
             y.setLeft(y);
             y.setRight(y);
         }
-        y.setParent(x);
-        x.setChild(y);
         x.setDegree(x.getDegree()+1);
         y.setMark(false);
         
@@ -203,8 +217,20 @@ public class FibonaccinKeko {
             juuriNodeLista.add(lisattava.getRight());
             lisattava=lisattava.getRight();
         }
-        juuriNodeLista.add(lisattava.getRight());
-//        System.out.println(juuriNodeLista.size());
+        String tulostus = "";
+        for (int i = 0; i < juuriNodeLista.size(); i++) {
+            tulostus+="  "+juuriNodeLista.get(i).getKey();
+            if(juuriNodeLista.get(i).getChild()!=null) {
+                tulostus+=":"+juuriNodeLista.get(i).getChild().getKey()+" ";
+                if(juuriNodeLista.get(i).getChild().getLeft()!=null) {
+                    tulostus+="+"+juuriNodeLista.get(i).getChild().getLeft().getKey()+" ";
+                }
+                if(juuriNodeLista.get(i).getChild().getRight()!=null&&juuriNodeLista.get(i).getChild().getLeft()!=juuriNodeLista.get(i).getChild().getRight()) {
+                    tulostus+="-"+juuriNodeLista.get(i).getChild().getRight().getKey()+" ";
+                }
+            }
+        }
+        System.out.println(tulostus);
         return juuriNodeLista;           
     }
 
