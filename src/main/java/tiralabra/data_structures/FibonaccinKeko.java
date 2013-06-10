@@ -94,9 +94,7 @@ public class FibonaccinKeko {
      * keon koko.
      */
     private void consolidate() {
-        if(min==null) {
-            return;
-        }
+        
         
         double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
         int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi))+1;
@@ -217,21 +215,4 @@ public class FibonaccinKeko {
         return heapSize;
     }
     
-    @Override
-    public String toString() {
-        String keko = "";
-        String parent="";
-//        FibNode node = min.getRight();
-//        while (node != min) {
-//            if(node.getParent()!=null) {
-//                parent+=node.getParent().getKey();
-//            }
-//            keko += node.getKey();
-//            node = node.getRight();
-//        }
-       
-//        keko += min.getKey();
-//        return "min key: "+min.getKey() + "\nkeko: " + keko+"\nheapSize: " + heapSize;'
-        return "heapSize: "+heapSize;
-    }
 }

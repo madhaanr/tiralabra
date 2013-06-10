@@ -1,6 +1,10 @@
 package tiralabra.data_structures;
 
-/* @author mhaanran */
+/**
+ * AvlNode luokkaa käytetään Avl-puun kanssa. Jokainen avl-puun solmu on
+ * avlnode-luokan ilmentymä ja sillä on luokan määrittelemät muuttujat.
+ * @author mhaanran
+ */
 public class AvlNode {
     
     private AvlNode left;

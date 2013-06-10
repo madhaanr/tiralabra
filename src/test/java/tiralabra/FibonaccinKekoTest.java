@@ -50,6 +50,10 @@ public class FibonaccinKekoTest {
     }
    
     @Test
+    public void tyhjastaKeostaPoistoPalauttaaMinInteger() {
+        assertEquals(Integer.MIN_VALUE,fibKeko.removeMin());
+    }
+    @Test
     public void isEmptyTrue() {
         assertTrue(fibKeko.isEmpty());
     }
@@ -158,17 +162,38 @@ public class FibonaccinKekoTest {
         for (int i = 0; i < 100; i++) {
             fibKeko.removeMin();
         }
-        assertEquals(310,fibKeko.min());
+        assertEquals(300,fibKeko.min());
     }
-//    @Test
-//    public void removeNolla() {
-//        fibKeko.insert(node0);
-//        fibKeko.insert(node1);
-//        fibKeko.insert(node2);
-//        fibKeko.insert(node3);
-//        assertEquals(0,fibKeko.removeMin());
-////        assertEquals(3,node2.getChildKey());
-//        assertEquals(1,node3.getParentKey());
-////        assertEquals(1,node2.getDegree());
-//    }
+    @Test
+    public void removeNolla() {
+        fibKeko.insert(node0);
+        fibKeko.insert(node1);
+        fibKeko.insert(node2);
+        fibKeko.insert(node3);
+        assertEquals(0,fibKeko.removeMin());
+        assertEquals(3,node2.getChildKey());
+        assertEquals(2,node3.getParentKey());
+        assertEquals(1,node2.getDegree());
+    }
+    @Test
+    public void removeMiljoonaNodea() {
+        for (int i = 0; i < 1000000; i++) {
+            fibKeko.insert(new FibNode(i));
+        }
+        fibKeko.removeMin();
+        for (int i = 0; i < 999999; i++) {
+            fibKeko.removeMin();
+        }
+        assertTrue(fibKeko.isEmpty());
+    }
+    @Test
+    public void removeSataNodeaKaanteinenJarjestys() {
+        for (int i = 1000; i > 200; i--) {
+            fibKeko.insert(new FibNode(i));
+        }
+        for (int i = 0; i < 100; i++) {
+            fibKeko.removeMin();
+        }
+        assertEquals(301,fibKeko.min());
+    }
 }
