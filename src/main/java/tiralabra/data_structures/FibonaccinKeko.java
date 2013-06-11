@@ -103,15 +103,15 @@ public class FibonaccinKeko {
             taulu[i] = null;
         }
         
-        int juuriNodeja=1;
+        int juuriNodejenLKM=1;
         FibNode kasiteltava=min;
         kasiteltava=kasiteltava.getRight();
         while(kasiteltava!=min) {
-            juuriNodeja++;
+            juuriNodejenLKM++;
             kasiteltava=kasiteltava.getRight();
         }
         
-        while(juuriNodeja>0) {
+        while(juuriNodejenLKM>0) {
 //        juuriNodeListan alkio kasiteltava jota käsitellään
             FibNode seuraava = kasiteltava.getRight();
             int xDegree = seuraava.getDegree();
@@ -128,7 +128,7 @@ public class FibonaccinKeko {
             }
             taulu[xDegree] = kasiteltava;
             kasiteltava=seuraava;
-            juuriNodeja--;
+            juuriNodejenLKM--;
             
         } 
         min = null;

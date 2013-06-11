@@ -374,7 +374,19 @@ public class AVLpuu {
     public AvlNode getJuuri() {
         return juuriNode;
     }
-
+    /**
+     * Puun alkioiden tulostaminen pienimmästä suurimpaan. Eli sisä-
+     * järjestyksessä.
+     * @param x mistä aloitetaan
+     */
+    public void tulostaAlkiot(AvlNode x) {
+        if(x!=null) {
+            tulostaAlkiot(x.getLeft());
+            System.out.print(x.getKey()+" ");
+            tulostaAlkiot(x.getRight());         
+        }
+    }
+    
     @Override
     public String toString() {
         return "" + juuriNode.getKey();

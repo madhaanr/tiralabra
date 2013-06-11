@@ -256,4 +256,15 @@ public class AVLpuuTest {
         assertEquals(64,avlPuu.getJuurenAvain());
         
     }
+    @Test
+    public void puunAlkioidenTulostaminen() {
+        AvlNode node1 = avlPuu.avlInsert(1);
+        AvlNode node2 = avlPuu.avlInsert(2);
+        AvlNode node3 = avlPuu.avlInsert(3);
+        AvlNode node4 = avlPuu.avlInsert(4);
+        AvlNode node5 = avlPuu.avlInsert(5);
+        AvlNode node6 = avlPuu.avlInsert(6);
+        AvlNode node7 = avlPuu.avlInsert(7);  
+        avlPuu.tulostaAlkiot(node4);
+    }
 }

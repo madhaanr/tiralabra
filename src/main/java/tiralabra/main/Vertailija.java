@@ -166,12 +166,21 @@ public class Vertailija {
 //        
 //        
 //        System.out.println(fibonaccinKeko+"\npoistettu: "+poisto);
-        AVLpuu avl=new AVLpuu();
-        avl.avlInsert(5);
-        avl.avlInsert(3);
-        avl.avlInsert(7);
-        avl.avlInsert(2);
-        avl.avlInsert(1);
+        AVLpuu avlPuu=new AVLpuu();
+        for (int i = 0; i < 5; i++) {
+            avlPuu.avlInsert(i);
+        }
+        for (int i = 500; i < 505; i++) {
+            avlPuu.avlInsert(i);
+        }
+        for (int i = 30; i < 36; i++) {
+            avlPuu.avlInsert(i);
+        }
+        for (int i = 1000; i < 1005; i++) {
+            avlPuu.avlInsert(i);
+        }
+        avlPuu.tulostaAlkiot(avlPuu.getJuuri());
+       
 //        avl.avlInsert(4);
 //        avl.avlInsert(8);
 //        avl.avlInsert(9);
@@ -181,6 +190,5 @@ public class Vertailija {
 //        avl.avlInsert(3000);
 //        avl.avlDelete(5);
             
-        System.out.println(avl);
     }
 }

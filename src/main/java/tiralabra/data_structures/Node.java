@@ -1,6 +1,10 @@
 package tiralabra.data_structures;
 
-/* @author mhaanran */
+/**
+ * Luokka Node toteuttaa binomikeon solmut. Solmuja linkittämällä
+ * luodaan binomikeko.
+ * @author mhaanran
+ */
 public class Node {
 
     private int key;
