@@ -6,3 +6,5 @@ ma 10.6.
 Fibonaccin keon consolidate ja removemin toimivat lopultakin oikein. Seuraavaksi korjaan avl-keon deleten ja
 sitten kaikkien operaatioiden pitäisi olla toteutettu. Keskiviikon ja perjantain ohjauksissa voi tietysti tulla vielä
 uusia juttuja.
+ke 12.6.
+Koodi katselmointiin valmistautumista. AVL-puun deleten korjailua. Yleistä refactorointia.
