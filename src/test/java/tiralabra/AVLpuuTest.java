@@ -247,13 +247,14 @@ public class AVLpuuTest {
     @Test
     public void deleteKymmenenMiljoonaaNodea() {
         AvlNode[] nodet = new AvlNode[1000];
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             nodet[i]=avlPuu.avlInsert(i);
         }
-        for (int i = 99; i > 96; i--) {
+        
+        for (int i=999; i >= 0; i--) {
             avlPuu.avlDelete(nodet[i]);
         }
-        assertEquals(63,avlPuu.getJuurenAvain());
+        assertTrue(avlPuu.isEmpty());
         
     }
     @Test

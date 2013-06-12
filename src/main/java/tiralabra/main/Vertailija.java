@@ -12,7 +12,7 @@ import tiralabra.data_structures.Node;
 /* @author mhaanran */
 public class Vertailija {
     public static void main(String[] args) {
-        int ylaraja=30000000;
+        int ylaraja=10000000;
         
         //Alkiot syötetään normaalijärjestyksessä.
         PriorityQueue PQ = new PriorityQueue<Integer>();
@@ -95,7 +95,7 @@ public class Vertailija {
 //        double timeEndAVLpuu = System.currentTimeMillis();
 //        double eroAVLpuu = (timeEndAVLpuu-timeStartAVLpuu)/1000;
         System.out.println(inserteroAvlpuu+"s AVL-puu lisäys");
-        
+        System.out.println("----------------------------------------------------------------");
         System.gc();
 
         //Alkiot syötetään käänteisessä järjestyksessä.

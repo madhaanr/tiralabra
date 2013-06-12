@@ -19,6 +19,9 @@ public class AVLpuu {
         treeSize = 0;
     }
 
+    public boolean isEmpty() {
+        return head==null;
+    }
     /**
      * Metodi tietyn solmun korkeuden kyselemiseen.
      *
@@ -40,7 +43,11 @@ public class AVLpuu {
      * @return vasenLapsi palautetaan solmu joka oli kaannettavan vasen lapsi.
      */
     private AvlNode rightRotate(AvlNode kaannettava) {
+
         AvlNode vasenLapsi = kaannettava.getLeft();
+        if (vasenLapsi == null) {
+            System.out.println("moro");
+        }
         vasenLapsi.setParent(kaannettava.getParent());
         kaannettava.setParent(vasenLapsi);
         kaannettava.setLeft(vasenLapsi.getRight());
@@ -84,6 +91,7 @@ public class AVLpuu {
      */
     private AvlNode rightLeftRotate(AvlNode kaannettava) {
         AvlNode oikeaLapsi = kaannettava.getRight();
+
         kaannettava.setRight(rightRotate(oikeaLapsi));
         return leftRotate(kaannettava);
     }
@@ -102,9 +110,8 @@ public class AVLpuu {
     }
 
     /**
-     * Metodi solmun lisäämiseen avl-puuhun. Varsinainen solmun lisäys 
-     * tehdään apumetodissa insert ja sen jälkeen puulle tehdään tarvittavat 
-     * kierrot.
+     * Metodi solmun lisäämiseen avl-puuhun. Varsinainen solmun lisäys tehdään
+     * apumetodissa insert ja sen jälkeen puulle tehdään tarvittavat kierrot.
      *
      * @param lisattava lisättävän solmun avain.
      * @return palautetaan lisättävä solmu.
@@ -159,6 +166,7 @@ public class AVLpuu {
         }
         return uusi;
     }
+
     /**
      * Apumetodi jonka tarkoitus on selkeyttää koodia. Vertailu tehdään
      * apumetodissa jolloin oikeassa koodissa ei ole hankalasti avattavaa
@@ -170,7 +178,6 @@ public class AVLpuu {
     private boolean epaTasaPainoVasenVaiOikeaAlipuu(AvlNode p) {
         return height(p.getLeft().getLeft()) > height(p.getLeft().getRight());
     }
-
 
     /**
      * Apumetodi solmun lisäämiseen avl-puuhun. Hoitaa varsinaisen solmun
@@ -206,11 +213,11 @@ public class AVLpuu {
         return uusi;
     }
 
-    
     /**
      * Metodi jolla poistetaan nodeja AVL-puusta. Varsinainen poistaminen
      * tapahtuu apumetodissa delete. Kun node on poistettu niin sitten avlDelete
-     * suorittaa tarvittavan määrän kiertoja jotta puuhun ei jää epätasapainoa.
+     * suorittaa tarvittavan määrän kiertoja jotta mahdollinen epätasapaino 
+     * saadaan korjattua.
      *
      * @param poistettava avlnode joka poistetaan
      */
@@ -218,20 +225,25 @@ public class AVLpuu {
         AvlNode pois = delete(poistettava);
         AvlNode parent = pois.getParent();
         AvlNode vanhempi;
-        AvlNode alipuu;
+        AvlNode alipuu = null;
         while (parent != null) {
             if (height(parent.getLeft()) == height(parent.getRight()) + 2) {
                 vanhempi = parent.getParent();
-                if (epaTasaPainoVasenVaiOikeaAlipuu(parent)) {
+ 
+                if (height(parent.getLeft().getLeft()) > height(parent.getLeft().getRight())) {
                     alipuu = rightRotate(parent);
-                } else if (height(parent.getRight().getRight()) > height(parent.getRight().getLeft())) {
+                } else if (parent.getRight() != null && height(parent.getRight().getRight()) > height(parent.getRight().getLeft())) {
                     alipuu = leftRotate(parent);
                 } else if (height(parent.getLeft().getRight()) > height(parent.getLeft().getLeft())) {
                     alipuu = leftRightRotate(parent);
-                } else {
+                } else  if(parent.getRight() != null &&height(parent.getRight().getLeft()) > height(parent.getRight().getRight())){
                     alipuu = rightLeftRotate(parent);
+                } else if (height(parent.getRight()) > height(parent.getLeft())){
+                    alipuu = leftRotate(parent);
+                } else {
+                    alipuu = rightRotate(parent);
                 }
-                if (parent==head) {
+                if (parent == head) {
                     head = alipuu;
                     return;
                 }
@@ -239,7 +251,7 @@ public class AVLpuu {
                 alipuu.setParent(vanhempi);
                 parent = vanhempi;
             }
-            if(height(parent.getRight()) == height(parent.getLeft()) + 2) {
+            if (height(parent.getRight()) == height(parent.getLeft()) + 2) {
                 vanhempi = parent.getParent();
                 if (height(parent.getRight().getRight()) > height(parent.getRight().getLeft())) {
                     alipuu = leftRotate(parent);
@@ -250,15 +262,14 @@ public class AVLpuu {
                 } else {
                     alipuu = leftRightRotate(parent);
                 }
-                if (parent==head) {
+                if (parent == head) {
                     head = alipuu;
                     return;
                 }
                 vanhempi.setLeft(alipuu);
                 alipuu.setParent(vanhempi);
                 parent = vanhempi;
-            }
-            else {
+            } else {
                 parent.setHeight(Math.max(height(parent.getLeft()), height(parent.getRight())) + 1);
                 parent = parent.getParent();
             }
@@ -272,7 +283,7 @@ public class AVLpuu {
      * @param poistettava poistettava node.
      * @return palautetaan
      */
-    private AvlNode delete(AvlNode poistettava) {  
+    private AvlNode delete(AvlNode poistettava) {
         AvlNode pois = poistettava;
         AvlNode vanhempi;
         AvlNode lapsi;
@@ -369,34 +380,52 @@ public class AVLpuu {
     public AvlNode getJuuri() {
         return head;
     }
+
     /**
      * Puun alkioiden tulostaminen pienimmästä suurimpaan. Eli sisä-
-     * järjestyksessä. 
-     * Hupimetodi testailuun.
+     * järjestyksessä. Hupimetodi testailuun.
+     *
      * @param x mistä aloitetaan
      */
     public void tulostaAlkiot(AvlNode x) {
-        if(x!=null) {
+        if (x != null) {
             tulostaAlkiot(x.getLeft());
-            System.out.print(x.getKey()+" ");
-            tulostaAlkiot(x.getRight());         
+            System.out.print(x.getKey() + " ");
+            tulostaAlkiot(x.getRight());
         }
     }
-    
+
     /**
      * AvlPuun pienimmän avaimen palautus.
+     *
      * @return node jossa on AVL-puun pienin arvo.
      */
     public AvlNode min() {
         AvlNode node = head;
-        while(node.getLeft()!=null) {
-            node=node.getLeft();
+        while (node.getLeft() != null) {
+            node = node.getLeft();
         }
         return node;
     }
-    
+
     @Override
     public String toString() {
         return "" + head.getKey();
+    }
+
+    public static void main(String[] args) {
+        AVLpuu avlPuu = new AVLpuu();
+
+        AvlNode[] nodet = new AvlNode[1000];
+      for (int i = 0; i < 1000; i++) {
+            nodet[i]=avlPuu.avlInsert(i);
+        }
+        
+        for (int i=999; i > 0; i--) {
+            avlPuu.avlDelete(nodet[i]);
+        }
+        avlPuu.avlDelete(nodet[0]);
+        System.out.println("");
+
     }
 }
