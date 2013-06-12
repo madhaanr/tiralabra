@@ -34,7 +34,7 @@ public class AVLpuuTest {
     @Test
     public void konstruktoriTesti() {
         avlPuu2 = new AVLpuu();
-        assertEquals(0,avlPuu2.getPuunKoko());
+        assertEquals(0,avlPuu2.getTreeSize());
     }
     @Test
     public void heightNull() {
@@ -52,7 +52,7 @@ public class AVLpuuTest {
         for (int i = 0; i < 10; i++) {
             avlPuu.avlInsert(i);
         }
-        assertEquals(10,avlPuu.getPuunKoko());
+        assertEquals(10,avlPuu.getTreeSize());
     }
     @Test
     public void puuhunLisatytAvaimetOvatOikeillaPaikoilla() {
@@ -200,14 +200,14 @@ public class AVLpuuTest {
         for (int i = 0; i < 1000; i++) {
             avlPuu.avlInsert(i);
         }
-        assertEquals(1000,avlPuu.getPuunKoko());
+        assertEquals(1000,avlPuu.getTreeSize());
     }
     @Test
     public void insertLisaaPuuhunKymmenenTuhattaNodeKaanteisessaJarjestyksessa() {
         for (int i = 10000; i>0 ; i--) {
             avlPuu.avlInsert(i);
         }
-        assertEquals(10000,avlPuu.getPuunKoko());
+        assertEquals(10000,avlPuu.getTreeSize());
     }
     @Test
     public void puunKorkeusOikeinKunPuussaMiljoonaNodea() {
@@ -253,18 +253,26 @@ public class AVLpuuTest {
         for (int i = 99; i > 96; i--) {
             avlPuu.avlDelete(nodet[i]);
         }
-        assertEquals(64,avlPuu.getJuurenAvain());
+        assertEquals(63,avlPuu.getJuurenAvain());
         
     }
     @Test
-    public void puunAlkioidenTulostaminen() {
-        AvlNode node1 = avlPuu.avlInsert(1);
-        AvlNode node2 = avlPuu.avlInsert(2);
-        AvlNode node3 = avlPuu.avlInsert(3);
-        AvlNode node4 = avlPuu.avlInsert(4);
-        AvlNode node5 = avlPuu.avlInsert(5);
-        AvlNode node6 = avlPuu.avlInsert(6);
-        AvlNode node7 = avlPuu.avlInsert(7);  
-        avlPuu.tulostaAlkiot(node4);
+    public void palautaPienin() {
+        AvlNode[] nodet = new AvlNode[100000];
+        for (int i = 0; i < 10000; i++) {
+            nodet[i]=avlPuu.avlInsert(i);
+        }
+        assertEquals(0,avlPuu.min().getKey());
     }
+//    @Test
+//    public void puunAlkioidenTulostaminen() {
+//        AvlNode node1 = avlPuu.avlInsert(1);
+//        AvlNode node2 = avlPuu.avlInsert(2);
+//        AvlNode node3 = avlPuu.avlInsert(3);
+//        AvlNode node4 = avlPuu.avlInsert(4);
+//        AvlNode node5 = avlPuu.avlInsert(5);
+//        AvlNode node6 = avlPuu.avlInsert(6);
+//        AvlNode node7 = avlPuu.avlInsert(7);  
+//        avlPuu.tulostaAlkiot(node4);
+//    }
 }
