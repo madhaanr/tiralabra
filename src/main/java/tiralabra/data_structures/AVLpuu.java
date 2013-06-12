@@ -7,7 +7,7 @@ package tiralabra.data_structures;
  */
 public class AVLpuu {
 
-    private AvlNode juuriNode;
+    private AvlNode head;
     private int puunKoko;
 
     /**
@@ -15,7 +15,7 @@ public class AVLpuu {
      * ja puunKooksi 0;
      */
     public AVLpuu() {
-        juuriNode = null;
+        head = null;
         puunKoko = 0;
     }
 
@@ -76,8 +76,8 @@ public class AVLpuu {
     }
 
     /**
-     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään juuriNode
-     * solmun oikea lapsi oikealle ja sen jälkeen juuriNode solmu vasemmalle.
+     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään head
+     * solmun oikea lapsi oikealle ja sen jälkeen head solmu vasemmalle.
      *
      * @param kaannettava solmu, joka epätasapainossa.
      * @return palautetaan leftRotate(kaannettava).
@@ -89,8 +89,8 @@ public class AVLpuu {
     }
 
     /**
-     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään juuriNode
-     * solmun vasen solmu vasemmalle ja sen jälkeen juuriNode solmu oikealle
+     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään head
+     * solmun vasen solmu vasemmalle ja sen jälkeen head solmu oikealle
      *
      * @param kaannettava node jota kaannetaan
      * @return palautetaan rightRotate(kaannettava).
@@ -123,7 +123,7 @@ public class AVLpuu {
                     alipuu = leftRightRotate(parent);
                 }
                 if (vanhempi == null) {
-                    juuriNode = alipuu;
+                    head = alipuu;
                 } else if (vanhempi.getLeft() == parent) {
                     vanhempi.setLeft(alipuu);
                 } else {
@@ -142,7 +142,7 @@ public class AVLpuu {
                     alipuu = rightLeftRotate(parent);
                 }
                 if (vanhempi == null) {
-                    juuriNode = alipuu;
+                    head = alipuu;
                 } else if (vanhempi.getLeft() == parent) {
                     vanhempi.setLeft(alipuu);
                 } else {
@@ -171,11 +171,11 @@ public class AVLpuu {
         puunKoko++;
         AvlNode uusi = new AvlNode(lisattava);
         AvlNode parent = null;
-        if (juuriNode == null) {
-            juuriNode = uusi;
-            return juuriNode;
+        if (head == null) {
+            head = uusi;
+            return head;
         }
-        AvlNode x = juuriNode;
+        AvlNode x = head;
         while (x != null) {
             parent = x;
             if (uusi.getKey() < x.getKey()) {
@@ -229,8 +229,8 @@ public class AVLpuu {
                 } else {
                     alipuu = rightLeftRotate(parent);
                 }
-                if (parent==juuriNode) {
-                    juuriNode = alipuu;
+                if (parent==head) {
+                    head = alipuu;
                     return;
                 }
                 if (alipuu.getKey() > vanhempi.getKey()) {
@@ -252,8 +252,8 @@ public class AVLpuu {
                 } else {
                     alipuu = leftRightRotate(parent);
                 }
-                if (parent.equals(juuriNode)) {
-                    juuriNode = alipuu;
+                if (parent.equals(head)) {
+                    head = alipuu;
                     return;
                 }
                 if (alipuu.getKey() > vanhempi.getKey()) {
@@ -287,7 +287,7 @@ public class AVLpuu {
         if (pois.getLeft() == null && pois.getRight() == null) {
             vanh = pois.getParent();
             if (vanh == null) {
-                juuriNode = null;
+                head = null;
                 return pois;
             }
             if (pois == vanh.getLeft()) {
@@ -306,7 +306,7 @@ public class AVLpuu {
             vanh = pois.getParent();
             lapsi.setParent(vanh);
             if (vanh == null) {
-                juuriNode = lapsi;
+                head = lapsi;
                 return pois;
             }
             if (pois == vanh.getLeft()) {
@@ -352,7 +352,7 @@ public class AVLpuu {
      * @return juuri noden avain.
      */
     public int getJuurenAvain() {
-        return juuriNode.getKey();
+        return head.getKey();
     }
 
     /**
@@ -369,10 +369,10 @@ public class AVLpuu {
      * Palauttaa puun juuren. Käytetään testeissä. Ei kuulu AVL-puun
      * varsinaiseen toteutukseen.
      *
-     * @return juuriNode
+     * @return head
      */
     public AvlNode getJuuri() {
-        return juuriNode;
+        return head;
     }
     /**
      * Puun alkioiden tulostaminen pienimmästä suurimpaan. Eli sisä-
@@ -389,6 +389,6 @@ public class AVLpuu {
     
     @Override
     public String toString() {
-        return "" + juuriNode.getKey();
+        return "" + head.getKey();
     }
 }
