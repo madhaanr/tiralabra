@@ -7,4 +7,8 @@ Fibonaccin keon consolidate ja removemin toimivat lopultakin oikein. Seuraavaksi
 sitten kaikkien operaatioiden pitäisi olla toteutettu. Keskiviikon ja perjantain ohjauksissa voi tietysti tulla vielä
 uusia juttuja.
 ke 12.6.
-Koodi katselmointiin valmistautumista. AVL-puun deleten korjailua. Yleistä refactorointia.
+Koodi katselmointiin valmistautumista. AVL-puun deleten korjailua. Debuggasimme deleteä noin kaksi tuntia
+ohjaajien kanssa ja nyt se toimii. Tietorakenteet kurssin materiaalin pseudokoodi ei ottanut huomioon paria
+erikoistapausta joten koodista puuttui muutama tarvittava kääntö. Yleistä refactorointia ja testailua.
+to 13.6.
+Demoon valmistautumista. Koodin refactorointia ja testailua. Dokumenttien kirjoittelua.
