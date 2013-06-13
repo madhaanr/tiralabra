@@ -84,17 +84,17 @@ public class Vertailija {
         AVLpuu avlPuu = new AVLpuu();
         double inserttimeStartAvlpuu = System.nanoTime();
         for (int i = 0; i < ylaraja; i++) {
-            avlPuu.avlInsert(i);
+            avlPuu.insert(i);
         }
         double inserttimeEndAvlpuu = System.nanoTime();
         double inserteroAvlpuu = (inserttimeEndAvlpuu-inserttimeStartAvlpuu)/1000000000;
-//        double timeStartAVLpuu = System.currentTimeMillis();
-//        for (int i = 0; i < ylaraja; i++) {
-//            avlPuu.avlDelete(avlPuu.getJuuri());
-//        }
-//        double timeEndAVLpuu = System.currentTimeMillis();
-//        double eroAVLpuu = (timeEndAVLpuu-timeStartAVLpuu)/1000;
-        System.out.println(inserteroAvlpuu+"s AVL-puu lisäys");
+        double timeStartAVLpuu = System.currentTimeMillis();
+        for (int i = 0; i < ylaraja; i++) {
+            avlPuu.delete(avlPuu.getJuuri());
+        }
+        double timeEndAVLpuu = System.currentTimeMillis();
+        double eroAVLpuu = (timeEndAVLpuu-timeStartAVLpuu)/1000;
+        System.out.println(inserteroAvlpuu+"s AVL-puu lisäys\t\t"+eroAVLpuu+"s AVL-puu poisto");
         System.out.println("----------------------------------------------------------------");
         System.gc();
 
@@ -149,19 +149,21 @@ public class Vertailija {
         double eroFibonaccinKeko2 = (timeEndFibonaccinKeko2-timeStartFibonaccinKeko2)/1000000000;
         System.out.println((eroFibonaccinKeko2+"s Fibonaccinkeko käänteinenjärjestys"));
         
-//        AVLpuu avlPuu = new AVLpuu();
-//         for (int i = 0; i < ylaraja; i++) {
-//            avlPuu.avlInsert(i);
-//        }
-//        double timeStartAVLpuu = System.currentTimeMillis();
-//        for (int i = 0; i < ylaraja; i++) {
-//            avlPuu.avlDelete(avlPuu.getJuuri());
-//        }
-//        double timeEndAVLpuu = System.currentTimeMillis();
-//        double eroAVLpuu = (timeEndAVLpuu-timeStartAVLpuu)/1000;
-//        System.out.println((eroAVLpuu+"s AVL-puu"));
+        AvlNode[] nodet = new AvlNode[ylaraja];
+        AVLpuu avlPuu2 = new AVLpuu();
+         for (int i = 0; i < ylaraja; i++) {
+            nodet[i]=avlPuu2.insert(vahenna-i);
+        }
+        double timeStartAVLpuu2 = System.nanoTime();
+        for (int i = 0; i < ylaraja; i++) {
+            avlPuu2.delete(nodet[i]);
+        }
+        double timeEndAVLpuu2 = System.nanoTime();
+        double eroAVLpuu2 = (timeEndAVLpuu2-timeStartAVLpuu2)/1000000000;
+        System.out.println((eroAVLpuu2+"s AVL-puu poisto"));
         
-        
+        System.out.println("----------------------------------------------------------------");
+        System.gc();
         //Alkioita syötetään satunnaisessa järjestyksessä.
         int satunnainenKoko=500000;   
         int[] satunnainen = new int[satunnainenKoko];
@@ -223,11 +225,11 @@ public class Vertailija {
         
 //        AVLpuu avlPuu = new AVLpuu();
 //         for (int i = 0; i < ylaraja; i++) {
-//            avlPuu.avlInsert(i);
+//            avlPuu.insert(i);
 //        }
 //        double timeStartAVLpuu = System.currentTimeMillis();
 //        for (int i = 0; i < ylaraja; i++) {
-//            avlPuu.avlDelete(avlPuu.getJuuri());
+//            avlPuu.delete(avlPuu.getJuuri());
 //        }
 //        double timeEndAVLpuu = System.currentTimeMillis();
 //        double eroAVLpuu = (timeEndAVLpuu-timeStartAVLpuu)/1000;
@@ -264,27 +266,27 @@ public class Vertailija {
 //        System.out.println(fibonaccinKeko+"\npoistettu: "+poisto);
 //        AVLpuu avlPuu=new AVLpuu();
 //        for (int i = 0; i < 5; i++) {
-//            avlPuu.avlInsert(i);
+//            avlPuu.insert(i);
 //        }
 //        for (int i = 500; i < 505; i++) {
-//            avlPuu.avlInsert(i);
+//            avlPuu.insert(i);
 //        }
 //        for (int i = 30; i < 36; i++) {
-//            avlPuu.avlInsert(i);
+//            avlPuu.insert(i);
 //        }
 //        for (int i = 1000; i < 1005; i++) {
-//            avlPuu.avlInsert(i);
+//            avlPuu.insert(i);
 //        }
 //        avlPuu.tulostaAlkiot(avlPuu.getJuuri());
        
-//        avl.avlInsert(4);
-//        avl.avlInsert(8);
-//        avl.avlInsert(9);
-//        avl.avlInsert(100);
-//        avl.avlInsert(30);
-//        avl.avlInsert(15);
-//        avl.avlInsert(3000);
-//        avl.avlDelete(5);
+//        avl.insert(4);
+//        avl.insert(8);
+//        avl.insert(9);
+//        avl.insert(100);
+//        avl.insert(30);
+//        avl.insert(15);
+//        avl.insert(3000);
+//        avl.delete(5);
             
     }
 }

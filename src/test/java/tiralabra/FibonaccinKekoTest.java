@@ -176,7 +176,7 @@ public class FibonaccinKekoTest {
         assertEquals(1,node2.getDegree());
     }
     @Test
-    public void removeMiljoonaNodea() {
+    public void lisaaJaPoistaMiljoonaNodea() {
         for (int i = 0; i < 1000000; i++) {
             fibKeko.insert(new FibNode(i));
         }
