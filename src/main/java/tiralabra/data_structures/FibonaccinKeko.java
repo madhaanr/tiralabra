@@ -99,9 +99,6 @@ public class FibonaccinKeko {
         int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi))+1;
         
         FibNode[] taulu = new FibNode[size];    
-        for (int i = 0; i < taulu.length; ++i) {
-            taulu[i] = null;
-        }
         
         int juuriNodejenLKM=1;
         FibNode kasiteltava=min;
