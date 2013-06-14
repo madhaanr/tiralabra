@@ -2,17 +2,18 @@ package tiralabra.main;
 
 import java.util.PriorityQueue;
 import tiralabra.data_structures.AVLpuu;
-import tiralabra.data_structures.AvlNode;
 import tiralabra.data_structures.BinaariKeko;
 import tiralabra.data_structures.BinomiKeko;
 import tiralabra.data_structures.FibNode;
 import tiralabra.data_structures.FibonaccinKeko;
 import tiralabra.data_structures.Node;
-
-/* @author mhaanran */
+/**
+ * Vertailija on luokka tietorakenteiden vertailuun.
+ * @author mhaanran
+ */
 public class Vertailija {
     public static void main(String[] args) {
-        int ylaraja=30000000;
+        int ylaraja=50000;
         
         //Alkiot syötetään normaalijärjestyksessä.
         PriorityQueue PQ = new PriorityQueue<Integer>();
@@ -29,74 +30,77 @@ public class Vertailija {
         double timeEndPQ = System.nanoTime();
         double eroPQ = (timeEndPQ-timeStartPQ)/1000000000;
         System.out.println(inserteroPQ+"s PQ lisäys\t\t\t"+eroPQ+"s PQ poisto");
+//        
+//        System.gc();
+//        
+//        BinaariKeko binaariKeko = new BinaariKeko();
+//        double inserttimeStartBinKeko = System.nanoTime();
+//        for (int i = 0; i < ylaraja; i++) {
+//            binaariKeko.heapInsert(i);
+//        }
+//        double inserttimeEndBinKeko = System.nanoTime();
+//        double inserteroBinKeko=(inserttimeEndBinKeko-inserttimeStartBinKeko)/1000000000;
+//        double timeStartBinKeko = System.nanoTime();
+//        for (int i = 0; i < ylaraja; i++) {
+//            binaariKeko.deleteMin();
+//        }
+//        double timeEndBinKeko = System.nanoTime();
+//        double eroBinaariKeko = (timeEndBinKeko-timeStartBinKeko)/1000000000;
+//        System.out.println(inserteroBinKeko+"s binäärikeko lisäys\t\t"+eroBinaariKeko+"s binäärikeko poisto");
+//        
+//        System.gc();
+//        
+//        BinomiKeko binomiKeko = new BinomiKeko();
+//        double inserttimeStartBinomiKeko = System.nanoTime();
+//        for (int i = 0; i < ylaraja; i++) {
+//            binomiKeko.insert(new Node(i));
+//        }
+//        double inserttimeEndBinomiKeko = System.nanoTime();
+//        double inserteroBinomiKeko = (inserttimeEndBinomiKeko-inserttimeStartBinomiKeko)/1000000000;
+//        double timeStartBinomiKeko = System.nanoTime();
+//        for (int i = 0; i < ylaraja; i++) {
+//            binomiKeko.removeMin();
+//        }
+//        double timeEndBinomiKeko = System.nanoTime();
+//        double eroBinomiKeko = (timeEndBinomiKeko-timeStartBinomiKeko)/1000000000;
+//        System.out.println(inserteroBinomiKeko+"s binomikeko lisäys\t\t"+eroBinomiKeko+"s binomikeko poisto");
+//        
+//        System.gc();
+//        
+//        FibonaccinKeko fiboKeko = new FibonaccinKeko();
+//        double inserttimeStartFibonaccinKeko = System.nanoTime();
+//        for (int i = 0; i < ylaraja+1; i++) {
+//            fiboKeko.insert(new FibNode(i));
+//        }
+//        double inserttimeEndFibonaccinKeko = System.nanoTime();
+//        double inserteroFibonaccinKeko = (inserttimeEndFibonaccinKeko-inserttimeStartFibonaccinKeko)/1000000000;
+////        fiboKeko.removeMin();
+//        double timeStartFibonaccinKeko = System.nanoTime();
+//        for (int i = 0; i < ylaraja; i++) {
+//            fiboKeko.removeMin();
+//        }
+//        double timeEndFibonaccinKeko = System.nanoTime();
+//        double eroFibonaccinKeko = (timeEndFibonaccinKeko-timeStartFibonaccinKeko)/1000000000;
+//        System.out.println(inserteroFibonaccinKeko+"s Fibonaccinkeko lisäys\t"+eroFibonaccinKeko+"s Fibonaccinkeko poisto");
+//        
+//        System.gc();
         
-        
-        BinaariKeko binaariKeko = new BinaariKeko();
-        double inserttimeStartBinKeko = System.nanoTime();
-        for (int i = 0; i < ylaraja; i++) {
-            binaariKeko.heapInsert(i);
-        }
-        double inserttimeEndBinKeko = System.nanoTime();
-        double inserteroBinKeko=(inserttimeEndBinKeko-inserttimeStartBinKeko)/1000000000;
-        double timeStartBinKeko = System.nanoTime();
-        for (int i = 0; i < ylaraja; i++) {
-            binaariKeko.deleteMin();
-        }
-        double timeEndBinKeko = System.nanoTime();
-        double eroBinaariKeko = (timeEndBinKeko-timeStartBinKeko)/1000000000;
-        System.out.println(inserteroBinKeko+"s binäärikeko lisäys\t\t"+eroBinaariKeko+"s binäärikeko poisto");
-        
-        System.gc();
-        
-        BinomiKeko binomiKeko = new BinomiKeko();
-        double inserttimeStartBinomiKeko = System.nanoTime();
-        for (int i = 0; i < ylaraja; i++) {
-            binomiKeko.insert(new Node(i));
-        }
-        double inserttimeEndBinomiKeko = System.nanoTime();
-        double inserteroBinomiKeko = (inserttimeEndBinomiKeko-inserttimeStartBinomiKeko)/1000000000;
-        double timeStartBinomiKeko = System.nanoTime();
-        for (int i = 0; i < ylaraja; i++) {
-            binomiKeko.removeMin();
-        }
-        double timeEndBinomiKeko = System.nanoTime();
-        double eroBinomiKeko = (timeEndBinomiKeko-timeStartBinomiKeko)/1000000000;
-        System.out.println(inserteroBinomiKeko+"s binomikeko lisäys\t\t"+eroBinomiKeko+"s binomikeko poisto");
-        
-        System.gc();
-        
-        FibonaccinKeko fiboKeko = new FibonaccinKeko();
-        double inserttimeStartFibonaccinKeko = System.nanoTime();
-        for (int i = 0; i < ylaraja+1; i++) {
-            fiboKeko.insert(new FibNode(i));
-        }
-        double inserttimeEndFibonaccinKeko = System.nanoTime();
-        double inserteroFibonaccinKeko = (inserttimeEndFibonaccinKeko-inserttimeStartFibonaccinKeko)/1000000000;
-        fiboKeko.removeMin();
-        double timeStartFibonaccinKeko = System.nanoTime();
-        for (int i = 0; i < ylaraja; i++) {
-            fiboKeko.removeMin();
-        }
-        double timeEndFibonaccinKeko = System.nanoTime();
-        double eroFibonaccinKeko = (timeEndFibonaccinKeko-timeStartFibonaccinKeko)/1000000000;
-        System.out.println(inserteroFibonaccinKeko+"s Fibonaccinkeko lisäys\t"+eroFibonaccinKeko+"s Fibonaccinkeko poisto");
-        
-        AVLpuu avlPuu = new AVLpuu();
-        double inserttimeStartAvlpuu = System.nanoTime();
-        for (int i = 0; i < ylaraja; i++) {
-            avlPuu.insert(i);
-        }
-        double inserttimeEndAvlpuu = System.nanoTime();
-        double inserteroAvlpuu = (inserttimeEndAvlpuu-inserttimeStartAvlpuu)/1000000000;
-        double timeStartAVLpuu = System.currentTimeMillis();
-        for (int i = 0; i < ylaraja; i++) {
-            avlPuu.delete(avlPuu.getJuuri());
-        }
-        double timeEndAVLpuu = System.currentTimeMillis();
-        double eroAVLpuu = (timeEndAVLpuu-timeStartAVLpuu)/1000;
-        System.out.println(inserteroAvlpuu+"s AVL-puu lisäys\t\t"+eroAVLpuu+"s AVL-puu poisto");
-        System.out.println("----------------------------------------------------------------");
-        System.gc();
+//        AVLpuu avlPuu = new AVLpuu();
+//        double inserttimeStartAvlpuu = System.nanoTime();
+//        for (int i = 0; i < ylaraja; i++) {
+//            avlPuu.insert(i);
+//        }
+//        double inserttimeEndAvlpuu = System.nanoTime();
+//        double inserteroAvlpuu = (inserttimeEndAvlpuu-inserttimeStartAvlpuu)/1000000000;
+//        double timeStartAVLpuu = System.currentTimeMillis();
+//        for (int i = 0; i < ylaraja; i++) {
+//            avlPuu.delete(avlPuu.getJuuri());
+//        }
+//        double timeEndAVLpuu = System.currentTimeMillis();
+//        double eroAVLpuu = (timeEndAVLpuu-timeStartAVLpuu)/1000;
+//        System.out.println(inserteroAvlpuu+"s AVL-puu lisäys\t\t"+eroAVLpuu+"s AVL-puu poisto");
+//        System.out.println("----------------------------------------------------------------");
+//        System.gc();
 
 //        //Alkiot syötetään käänteisessä järjestyksessä.
 //        int vahenna=ylaraja;

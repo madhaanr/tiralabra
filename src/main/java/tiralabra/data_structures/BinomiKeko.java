@@ -28,11 +28,11 @@ public class BinomiKeko {
 
     /**
      * Metodilla voi lisätä kekoon nodeja.
-     * Aluksi luodaan uusi uusi, jonka headiksi laitetaan lisättävä node
-     * Tämän jälkeen mergetään tämä uusi jo olemassa olevan keon kanssa ja
-     * yhdistetty uusi talletetaan uusikeko nimellä. Lopuksi luokkamuuttuja
-     * head pistetään osoittamaan uuden keon headiin.
-     * @param lisattava on lisättävä node
+     * Aluksi luodaan uusi binomikeko, jonka headiksi laitetaan lisättävä node.
+     * Tämän jälkeen mergetään tämä uusi keko jo olemassa olleen keon kanssa ja
+     * yhdistetty keko talletetaan uusikeko nimellä ja ajetaan mergeHeap. 
+     * Lopuksi luokkamuuttuja head pistetään osoittamaan uuden keon headiin.
+     * @param lisattava on lisättävä node.
      */
     public void insert(Node lisattava) {
         BinomiKeko keko = new BinomiKeko();
@@ -92,7 +92,7 @@ public class BinomiKeko {
         return uusi;
     }
     /**
-     * mergeHeap metodin apumetodi.
+     * MergeHeap metodin apumetodi.
      * Yhdistää parametrina annettujen kekojen juurilistat toisiinsa.
      * @param keko1 yhdistettävä keko1.
      * @param uusi yhdistettävä uusi.
@@ -151,7 +151,6 @@ public class BinomiKeko {
     }
     
     /**
-     * Binomial-Heap-Minimum(Heap)
      * Metodi palauttaa keon pienimmän alkion key arvon. 
      * Binomikeon pienin arvo on juurilistan pienin arvon eli tarvitsee 
      * käydä läpi vain juurilista. 

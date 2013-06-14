@@ -213,7 +213,7 @@ public class AVLpuu {
         AvlNode pois = deleteNode(poistettava);
         AvlNode parent = pois.getParent();
         AvlNode vanhempi;
-        AvlNode alipuu = null;
+        AvlNode alipuu;
         while (parent != null) {
             if (height(parent.getLeft()) == height(parent.getRight()) + 2) {
                 vanhempi = parent.getParent();

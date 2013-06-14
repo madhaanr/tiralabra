@@ -1,0 +1,27 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[finnish]{babel}
+\usepackage[utf8]{inputenc}
+
+
+\author{Marko Haanranta}
+\date{\today}
+\title{Tietorakennevertailun toteutusdokumentti}
+
+\begin{document}
+\maketitle
+\section{Ohjelman yleisrakenne}
+Tietorakenteiden harjoitustyönä toteutin neljä eri tietorakennetta ja vertailin perusoperaatioiden ajankäyttöä. Tietorakenteina toteutin binäärikeon, binomikeon, fibonaccin keon ja AVL-puun. Tietorakenteiden perusoperaatiot joita työssä vertailtiin olivat avaimen lisäys, poisto ja tietorakenteen pienimmän avaimen palautus. Kaikki keot on toteutettu minimikekoina.
+\subsection{Binäärikeko}
+Binäärikeko on toteutuksena hieman yksinkertaisempana kuin muut toteutetut tietorakenteet. Kekoon lisättävä avain tallennetaan taulukkoon ja sen jälkeen ajetaan heapify metodi joka vie avaimen sen oikealle paikalle keossa. Jos käytetään int muuttujaa avaimen tallentamiseen niin binäärikeko on selkeästi nopeampi kuin muut toteuttamani tietorakenteet. Mutta muutin toteutustani sen verran, että nyt tallennan taulukkoon Integer olioita ja näin toteutettuna binäärikeko on hitain rakenne.
+\subsection{Binomikeko}
+Binomikeon alkiot tallennetaan node tyyppisinä olioina. Jokaisella node oliolla on seuraavat kentät: key, parent, child, sibling ja degree. Binomikeko rakentuu linkitetystä listasta, johon on tallennettu binomipuita. Puiden solmuilla on degree ja juurilistalla ei voi olla kahta puuta joilla on sama degree, jotta keko olisi binomikeko ehdon mukainen. 
+\subsection{Fibonaccin keko}
+Fibonaccin kekoon lisättävä avain tallentaan FibNode oliona. FibNode oliolla on seuraavat kentät key, parent, child, left, right, degree ja mark. Fibonaccin keko rakentuu puista. Fibonaccin keossa kaikki avaimet lisätään juurilistaan. Fibonaccin keko rakennetaan poisto operaation yhteydessä.
+\subsection{AVL-puu}
+AVL-puu on tietorakenne jonka kaikki perusoperaatiot vievät O(logn) ajan.
+\section{Saavutetut aika- ja tilavaativuudet}
+\section{Suorituskyky- ja O-analyysivertailu}
+
+\section{Työn puutteet ja parannusehdotukset}
+
+\end{document}
