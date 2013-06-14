@@ -6,7 +6,7 @@ package tiralabra.data_structures;
  */
 public class BinaariKeko {
 
-    private int[] binKeko;
+    private Integer[] binKeko;
     private int heapSize;
     private int taulukonKoko = 100;
 
@@ -15,7 +15,7 @@ public class BinaariKeko {
      *
      * @param binKeko Binäärikeko tallennetaan tähän muuttujaan.
      */
-    public BinaariKeko(int[] binKeko) {
+    public BinaariKeko(Integer[] binKeko) {
         this.binKeko = buildHeap(binKeko);
     }
 
@@ -25,7 +25,7 @@ public class BinaariKeko {
      * taulukonKoolle on 100.
      */
     public BinaariKeko() {
-        this.binKeko = new int[taulukonKoko];
+        this.binKeko = new Integer[taulukonKoko];
     }
 
     /**
@@ -75,7 +75,7 @@ public class BinaariKeko {
      * @return binKeko[0] Minimi keon pienin alkio on taulukon indeksissä 0. 
      * Eli palautetaan sen sisältö.
      */
-    public int heapMin(int[] binKeko) {
+    public Integer heapMin(Integer[] binKeko) {
         return binKeko[0];
     }
 
@@ -86,7 +86,7 @@ public class BinaariKeko {
      * jää keosta pois.
      * @return poistettava, keon pienin arvo.
      */
-    public int deleteMin() {
+    public Integer deleteMin() {
         int min = binKeko[0];
         binKeko[0] = binKeko[heapSize - 1];
         binKeko = decreaseHeapSize();
@@ -99,11 +99,11 @@ public class BinaariKeko {
      * taulukon koko jos heapSize on pienempi kuin taulukonKoko/2.
      * @return palauttaa pienemmän keon tai saman keon.
      */
-    private int[] decreaseHeapSize() {
+    private Integer[] decreaseHeapSize() {
         heapSize = heapSize - 1;
         if (heapSize < (taulukonKoko / 2) && taulukonKoko >= 100) {
             taulukonKoko = taulukonKoko / 2;
-            int[] binKeko2 = new int[taulukonKoko];
+            Integer[] binKeko2 = new Integer[taulukonKoko];
             for (int i = 0; i < binKeko2.length; i++) {
                 binKeko2[i] = binKeko[i];
             }
@@ -116,7 +116,7 @@ public class BinaariKeko {
      * Lisää arvon kekoon. Käyttää apumetodina increaseHeapSizea joka 
      * kasvattaa keon kokoa tarpeen vaatiessa.
      */
-    public void heapInsert(int k) {
+    public void heapInsert(Integer k) {
         binKeko = increaseHeapSize();
         int i = heapSize - 1;
         while (i > 0 && binKeko[parent(i)] > k) {
@@ -132,11 +132,11 @@ public class BinaariKeko {
      * on suurempi tai yhtäsuuri kuin nykyinen keon koko.
      * @return palauttaa 2 kertaa suuremman taulukon.
      */
-    private int[] increaseHeapSize() {
+    private Integer[] increaseHeapSize() {
         heapSize = heapSize + 1;
         if (taulukonKoko <= heapSize) {
             taulukonKoko = taulukonKoko * 2;
-            int[] binKeko2 = new int[taulukonKoko];
+            Integer[] binKeko2 = new Integer[taulukonKoko];
             for (int i = 0; i < binKeko.length; i++) {
                 binKeko2[i] = binKeko[i];
             }
@@ -152,7 +152,7 @@ public class BinaariKeko {
      * @param binKeko taulukko josta tehdään keko.
      * @return palautetaan valmis keko kutsujalle.
      */
-    private int[] buildHeap(int[] binKeko) {
+    private Integer[] buildHeap(Integer[] binKeko) {
         heapSize = binKeko.length;
         taulukonKoko = heapSize;
         for (int i = binKeko.length / 2; i >= 0; --i) {
@@ -169,7 +169,7 @@ public class BinaariKeko {
      * @param i taulukon indeksi, josta on poistettu alkio.
      * @return binKeko palauttaa korjatun keon.
      */
-    private int[] heapify(int[] binKeko, int i) {
+    private Integer[] heapify(Integer[] binKeko, int i) {
         int left = left(i);
         int right = right(i);
         int smallest;
@@ -196,7 +196,7 @@ public class BinaariKeko {
      * @param i taulukon indeksi.
      * @param smallest keon pienin arvo.
      */
-    private void swapSmallestwithI(int[] binKeko, int i, int smallest) {
+    private void swapSmallestwithI(Integer[] binKeko, int i, int smallest) {
         int apu = binKeko[i];
         binKeko[i] = binKeko[smallest];
         binKeko[smallest] = apu;

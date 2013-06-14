@@ -13,13 +13,16 @@ public class AvlNode {
     private int key;
     private int height;
 
+    /**
+     * Konstruktori uuden AvlPuun solmun luontia varten.
+     * @param key Avain joka puuhun halutaan tallentaa.
+     */
     public AvlNode(int key) {
         this.key=key;
         this.left=null;
         this.right=null;
         this.parent=null;
-        this.height=0;
-        
+        this.height=0;     
     }
     
     public AvlNode getLeft() {

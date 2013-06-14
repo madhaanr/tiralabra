@@ -1,8 +1,9 @@
 package tiralabra.data_structures;
 
-import java.util.ArrayList;
-
-/* @author mhaanran */
+/**
+ * Luokka toteuttaa Fibonaccin keon. 
+ * @author mhaanran
+ */
 public class FibonaccinKeko {
 
     private FibNode min;

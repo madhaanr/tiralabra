@@ -16,6 +16,10 @@ public class FibNode {
     private int degree;
     private boolean mark;
    
+    /**
+     * Konstruktori uuden fibonaccin keon solmun luomiseen.
+     * @param key Avain joka kekoon laitetaan.
+     */
     public FibNode(int key) {
         this.key=key; 
         parent=null;

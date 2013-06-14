@@ -12,7 +12,7 @@ import tiralabra.data_structures.Node;
 /* @author mhaanran */
 public class Vertailija {
     public static void main(String[] args) {
-        int ylaraja=1000000;
+        int ylaraja=30000000;
         
         //Alkiot syötetään normaalijärjestyksessä.
         PriorityQueue PQ = new PriorityQueue<Integer>();

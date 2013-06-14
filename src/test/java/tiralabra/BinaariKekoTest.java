@@ -16,7 +16,7 @@ import tiralabra.data_structures.BinaariKeko;
 public class BinaariKekoTest {
     
     BinaariKeko binaariKeko;
-    int[] binKeko ={20,5,3,9,6,7,8,10,11};
+    Integer[] binKeko ={20,5,3,9,6,7,8,10,11};
       
     public BinaariKekoTest() {    
         
@@ -56,13 +56,13 @@ public class BinaariKekoTest {
     }
     @Test
     public void heapMinPalauttaaKeonPienimmanAlkion() {
-        assertEquals(3,binaariKeko.heapMin(binKeko));
+        assertEquals(3,(int)binaariKeko.heapMin(binKeko));
     }
     @Test
     public void heapMinPalauttaaKeonPienimmanAlkionIsommallaKeolla() {
-        int[] binKeko2 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
+        Integer[] binKeko2 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
         BinaariKeko binaariKeko2 = new BinaariKeko(binKeko2);
-        assertEquals(1,binaariKeko2.heapMin(binKeko2));
+        assertEquals(1,(int)binaariKeko2.heapMin(binKeko2));
     }
     @Test
     public void konstruktoriRakentaaMinimiKeonOikein() {
@@ -72,7 +72,7 @@ public class BinaariKekoTest {
     }
     @Test
     public void konstruktoriRakentaaMinimiKeonOikeinSuuremmallaKeolla() {
-        int[] binKeko2 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
+        Integer[] binKeko2 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
         BinaariKeko binaariKeko2 = new BinaariKeko(binKeko2);
         String oikeaJarjestys=" 1 3 5 8 6 7 9 10 11 20 100 54 100 111 112 113 114 115 117 118";
         String konstruktoriKutsunAntamaJarjestys = ""+binaariKeko2;
@@ -80,7 +80,7 @@ public class BinaariKekoTest {
     }
     @Test
     public void deleteMinToimiiKunPoistetaanYksi() {
-        int[] binKeko3 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
+        Integer[] binKeko3 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
         BinaariKeko binaariKeko3 = new BinaariKeko(binKeko3);
         String oikeaJarjestys=" 3 5 6 8 11 7 9 10 114 20 100 54 100 111 112 113 118 115 117";
         binaariKeko3.deleteMin();
@@ -89,7 +89,7 @@ public class BinaariKekoTest {
     }
     @Test
     public void heapInsertLisaaYhdenAlkion() {
-        int[] binKeko2 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
+        Integer[] binKeko2 ={20,5,3,9,6,7,8,10,11,1,100,54,100,111,112,113,114,115,117,118};
         BinaariKeko binaariKeko2 = new BinaariKeko(binKeko2);
         String oikeaJarjestys=" 1 3 5 8 6 7 9 10 11 20 44 54 100 111 112 113 114 115 117 118 100";
         binaariKeko2.heapInsert(44);
@@ -98,7 +98,7 @@ public class BinaariKekoTest {
     }
     @Test
     public void heapInsertLisaaPienimmanAlkion() {
-        int[] binKeko2 ={20,5,3,9,6,7,8,10,11,100,54,100,111,112,113,114,115,117,118};
+        Integer[] binKeko2 ={20,5,3,9,6,7,8,10,11,100,54,100,111,112,113,114,115,117,118};
         BinaariKeko binaariKeko2 = new BinaariKeko(binKeko2);
         String oikeaJarjestys=" 1 3 5 8 6 7 9 10 20 11 54 100 111 112 113 114 115 117 118 100";
         binaariKeko2.heapInsert(1);
@@ -108,7 +108,7 @@ public class BinaariKekoTest {
     @Test
     public void kekoonVoiLisataSataTuhattaAlkiota() {
         int maara=100000;
-        int[] numeroita2=new int[maara];
+        Integer[] numeroita2=new Integer[maara];
         for (int i = 1; i< maara; ++i) {
             numeroita2[i]=i;         
         }
@@ -117,12 +117,12 @@ public class BinaariKekoTest {
             binaariKeko5.heapInsert(numeroita2[i]); 
       
         }
-        assertEquals(0,binaariKeko5.heapMin(numeroita2));
+        assertEquals(null,binaariKeko5.heapMin(numeroita2));
     }
     @Test
     public void keostaVoiPoistaaSataTuhattaAlkiota() {
         int maara=100000;
-        int[] numeroita2=new int[maara];
+        Integer[] numeroita2=new Integer[maara];
         for (int i = 1; i< maara; ++i) {
             numeroita2[i]=i;         
         }

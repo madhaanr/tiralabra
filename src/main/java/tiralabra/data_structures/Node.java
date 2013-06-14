@@ -13,6 +13,10 @@ public class Node {
     private Node sibling;
     private int degree;
    
+    /**
+     * Konstruktori binomikeon solmun luomiseen.
+     * @param key Avain joka kekoon tallennetaan.
+     */
     public Node(int key) {
         this.key=key;
         this.parent=null;
@@ -24,11 +28,7 @@ public class Node {
     public int getKey() {
         return key;
     }
-
-//    public void setKey(int key) {
-//        this.key = key;
-//    }
-//
+    
     public Node getParent() {
         return parent;
     }
