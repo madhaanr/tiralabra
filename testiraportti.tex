@@ -9,8 +9,26 @@
 
 \begin{document}
 \maketitle
+Projektissa toteutin binäärikeon, binomikeon, fibonaccin keon ja AVL-puun. Lisäksi käytin vertailussa apunani priority queue:ta. 
+Ja suoritin yksikkö- ja suorituskykytestausta.
+\section{Yksikkötestaus}
+Jotta tietorakenteita oli mahdollista vertailla keskenään niin ensin oli varmistuttava, että toteuttamani tietorakenteet toimivat oikein. Tätä varten tein kattavat yksikkötestit kaikille toteuttamilleni tietorakenteille. Lause- ja haaraumakattavuuden varmistamiseen käytin cobertura työkalua.
 
+Binomikeko, fibonaccin keko ja AVL-puun solmuilla on useita eri parametreja joten ne oli järkevää toteuttaa olioina. Näille solmu luokille ei tehty omia yksikkötestejä, koska niissä ei ole muita metodeja kun gettereitä ja settereitä joiden testaamista ei katsota tarpeelliseksi. Coberturaa käyttäen voi kuitenkin havaita, että näidenkin luokkien testikattavuus on lähes 100\%
+\section{Suorituskykytestaus}
+Tätä varten testasin delete ja insert metodien nopeuksia suurilla syötteillä. Pienimmän alkion haku, kun ei poisteta mitään on kaikilla rakenteilla sen verran nopea operaatio etten katsonut sen testaamisen olevan tarpeellista.
+\subsection{Tilavaativuudet}
+Tilavaativuus kaikkien toteutettujen tietorakenteiden osalta on O(1), koska mikään toiminnallisuutta toteuttava metodi ei käytä kuin vakiotilaisia apumuuttujia.
+\subsection{Aikavaativuudet}
+Teoreettiset aikavaativuudet poikkeavat hieman toisistaan. Kaikkien toteutettujen tietorakenteiden poisto operaation teoreettinen aikavaativuus on O(logn). Fibonaccin keon lisäys operaation teoreettinen aikavaativuus on O(1)(amortized). 
 
-\section{Aika- ja tilavaativuus}
-
+Javan valmiin priority queue-tietorakenteen lisäys ja poisto operaatioille luvataan O(logn) aikavaativuus, joten näin voin kätevästi vertailla toimivatko toteuttamini tietorakenteet niin nopeasti kuin niiden teoreettisesti tulisi toimia.
+\subsection{Testisyötteet ja testien toteutus}
+Testeissä syötin tietorakenteisiin tietyn määrän 100-30 000 000 avainta ja mittasin miten kauan lisäys ja poisto operaatiot veivät aikaa.
+\section{Testitulokset}
+Yleisesti ottaen kaikki toteuttamani tietorakenteet toimivat melko hyvin. 
+\subsection{Avainten lisäys}
+Kaikki toteuttamani tietorakenteet olivat nopeampia kuin javan priority queue joten niiden voi sanoa toimivan O(logn) ajassa. Fibonaccin keon lisäys operaatiolle luvataan kuitenkin O(1)(amortized) aikavaativuus. Suorittamieni testien mukaan tämä ei toteutunut vaan fibonaccin kekoon lisääminen oli samaa luokkaa muiden tietorakenteiden kanssa. Nopeiten alkioita voi lisätä binomikekoon.
+\subsection{Avainten poisto}
+Avainten poisto tietorakenteista sai selkeästi enemmän eroja aikaan kuin lisäys. Binäärikeosta poistaminen oli selkeästi hitain operaatio, jopa melkein 3 kertaa hitaampi kuin poisto seuraavaksi hitaimmasta eli priority queuesta.
 \end{document}
