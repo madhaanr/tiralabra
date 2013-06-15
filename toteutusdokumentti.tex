@@ -10,16 +10,17 @@
 \begin{document}
 \maketitle
 \section{Ohjelman yleisrakenne}
-Tietorakenteiden harjoitustyönä toteutin neljä eri tietorakennetta ja vertailin perusoperaatioiden ajankäyttöä. Tietorakenteina toteutin binäärikeon, binomikeon, fibonaccin keon ja AVL-puun. Tietorakenteiden perusoperaatiot joita työssä vertailtiin olivat avaimen lisäys ja poisto. Myös tietorakenteeseen talletetun pienimmän avaimen palautus on toteutettu, mutta koska se vie niin vähän aikaa ei sen testaaminen ole mielekästä. Kaikki keot on toteutettu minimikekoina.
+Tietorakenteiden harjoitustyönä toteutin neljä eri tietorakennetta ja vertailin lisäys ja poisto operaatioiden ajankäyttöä. Tietorakenteina toteutin binäärikeon, binomikeon, fibonaccin keon ja AVL-puun. Kaikki keot on toteutettu minimikekoina.
 \subsection{Binäärikeko}
-Binäärikeko on toteutuksena hieman yksinkertaisempana kuin muut toteutetut tietorakenteet. Kekoon lisättävä avain tallennetaan taulukkoon ja sen jälkeen ajetaan heapify metodi joka vie avaimen sen oikealle paikalle keossa. Jos käytetään int muuttujaa avaimen tallentamiseen niin binäärikeko on selkeästi nopeampi kuin muut toteuttamani tietorakenteet. Mutta muutin toteutustani sen verran, että nyt tallennan taulukkoon Integer olioita ja näin toteutettuna binäärikeko on hitain rakenne.
+Binäärikeko on toteutuksena hieman yksinkertaisempana kuin muut toteutetut tietorakenteet. Kekoon lisättävä avain tallennetaan taulukkoon ja sen jälkeen ajetaan heapify metodi joka vie avaimen sen oikealle paikalle keossa. Jos käytetään int muuttujaa avaimen tallentamiseen niin binäärikeko on selkeästi nopeampi kuin muut toteuttamani tietorakenteet. Muutin toteutustani sen verran, että nyt tallennan taulukkoon Integer-olioita ja näin toteutettuna binäärikeko on hitain toteuttamani tietorakenne. 
 \subsection{Binomikeko}
-Binomikeon alkiot tallennetaan node tyyppisinä olioina. Jokaisella node oliolla on seuraavat kentät: key, parent, child, sibling ja degree. Binomikeko rakentuu linkitetystä listasta, johon on tallennettu binomipuita. Puiden solmuilla on degree ja juurilistalla ei voi olla kahta puuta joilla on sama degree, jotta keko olisi binomikeko ehdon mukainen. 
+Binomikeon alkiot tallennetaan node tyyppisinä olioina. Jokaisella node oliolla on seuraavat kentät: key, parent, child, sibling ja degree. Binomikeko rakentuu linkitetystä listasta, johon on tallennettu binomipuita. Puiden solmuilla on aste eli degree ja jotta keko olisi binomikeko ehdon mukainen juurilistalla ei voi olla kahta puuta joilla on sama aste. 
 \subsection{Fibonaccin keko}
-Fibonaccin kekoon lisättävä avain tallentaan FibNode oliona. FibNode oliolla on seuraavat kentät key, parent, child, left, right, degree ja mark. Fibonaccin keko rakentuu puista. Fibonaccin keossa kaikki avaimet lisätään juurilistaan. Fibonaccin keko rakennetaan poisto operaation yhteydessä.
+Fibonaccin kekoon lisättävä avain tallentaan FibNode oliona. FibNode oliolla on seuraavat kentät key, parent, child, left, right, degree ja mark. Fibonaccin keko rakentuu puista. Fibonaccin keossa kaikki avaimet lisätään juurisolmulistaan ja varsinainen keko rakennetaan vasta poisto operaation yhteydessä.
 \subsection{AVL-puu}
-AVL-puu on tasapainoinen hakubinääripuu. Puun juuren vasemmassa alipuussa on vain juurta pienemmän avaimen omaavia solmuja. Puun juuren oikeassa alipuussa on vain puun juurta suuremman avaimen omaavia solmuja. AVL-puu pidetään tasapainossa suorittamalla kierto operaatioita, kun puuhun lisätään tai siitä poistetaan solmuja. Sen kaikki perusoperaatiot vievät O(logn) ajan. 
+AVL-puu on tasapainoinen binäärihakupuu eli jokaisella solmulla on kaksi lasta ja vanhempi paitsi juurisolmulla. Puun solmun vasemmassa alipuussa on vain solmua pienemmän avaimen omaavia solmuja. Puun solmun oikeassa alipuussa on vain puun solmua suuremman avaimen omaavia solmuja. AVL-puu pidetään tasapainossa suorittamalla kierto operaatioita, kun puuhun lisätään tai siitä poistetaan solmuja. Sen kaikki perusoperaatiot vievät O(logn) ajan. 
 \section{Saavutetut aika- ja tilavaativuudet}
+Kaikki toteuttamani tietorakenteet saavuttivat O(logn) aikavaativuuden. Fibonaccin keon insert ei syystä tai toisesta toiminut odotetun O(1) aikavaativuuden mukaisesti, mistä enemmän testidokumentissä.
 \section{Suorituskyky- ja O-analyysivertailu}
 
 \section{Työn puutteet ja parannusehdotukset}
