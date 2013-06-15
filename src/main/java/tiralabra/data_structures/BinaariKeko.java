@@ -75,7 +75,7 @@ public class BinaariKeko {
      * @return binKeko[0] Minimi keon pienin alkio on taulukon indeksissä 0. 
      * Eli palautetaan sen sisältö.
      */
-    public Integer heapMin(Integer[] binKeko) {
+    public Integer min(Integer[] binKeko) {
         return binKeko[0];
     }
 
@@ -86,7 +86,7 @@ public class BinaariKeko {
      * jää keosta pois.
      * @return poistettava, keon pienin arvo.
      */
-    public Integer deleteMin() {
+    public Integer delete() {
         int min = binKeko[0];
         binKeko[0] = binKeko[heapSize - 1];
         binKeko = decreaseHeapSize();
@@ -115,8 +115,9 @@ public class BinaariKeko {
     /**
      * Lisää arvon kekoon. Käyttää apumetodina increaseHeapSizea joka 
      * kasvattaa keon kokoa tarpeen vaatiessa.
+     * @param k avain joka kekoon lisätään.
      */
-    public void heapInsert(Integer k) {
+    public void insert(Integer k) {
         binKeko = increaseHeapSize();
         int i = heapSize - 1;
         while (i > 0 && binKeko[parent(i)] > k) {

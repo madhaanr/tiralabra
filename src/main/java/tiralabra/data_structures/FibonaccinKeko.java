@@ -97,8 +97,7 @@ public class FibonaccinKeko {
     private void consolidate() {
               
         double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
-        int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi))+1;
-        
+        int size = (int) Math.floor(Math.log(heapSize) / Math.log(phi))+1; 
         FibNode[] taulu = new FibNode[size];    
         
         int juuriNodejenLKM=1;
@@ -108,9 +107,20 @@ public class FibonaccinKeko {
             juuriNodejenLKM++;
             kasiteltava=kasiteltava.getRight();
         }
-        
+        juuriNodeListanLapiKayntiJaNodejenLinkitys(juuriNodejenLKM, kasiteltava, taulu); 
+        min = null;
+        uudenJuuriNodeListanLuonti(size, taulu);
+    }
+    /**
+     * Consolidate metodin apumetodi uuden juurinodelistan läpikäymiseen
+     * ja nodejen keskinäisten suhteiden asetteluun. Käyttää apumetodina
+     * link metodia, joka hoitaa vanhempi lapsi suhteen asettamisen.
+     * @param juuriNodejenLKM kuinka monta juuri nodea listalla on.
+     * @param kasiteltava juurinode jota käsitellään
+     * @param taulu taulukko johon tallennetaan kaikki puut.
+     */
+    private void juuriNodeListanLapiKayntiJaNodejenLinkitys(int juuriNodejenLKM, FibNode kasiteltava, FibNode[] taulu) {
         while(juuriNodejenLKM>0) {
-//        juuriNodeListan alkio kasiteltava jota käsitellään
             FibNode seuraava = kasiteltava.getRight();
             int xDegree = seuraava.getDegree();
             while (taulu[xDegree] != null) {
@@ -128,16 +138,21 @@ public class FibonaccinKeko {
             kasiteltava=seuraava;
             juuriNodejenLKM--;
             
-        } 
-        min = null;
-        
+        }
+    }
+    /**
+     * Consolidate metodin apumetodi uuden juurinodelistan luomiseen.
+     * @param size uuden juurinodelistan koko
+     * @param taulu taulukko johon juurinodelistalle lisättävät puut on 
+     * allennettu.
+     */
+    private void uudenJuuriNodeListanLuonti(int size, FibNode[] taulu) {
         for (int i = 0; i < size; i++) {
             if (taulu[i] != null) {
                 if (min == null) {
                     min = taulu[i];
                     min.setLeft(min);
                     min.setRight(min);
-//                    System.out.println(min.getKey()+"+++"+i);
                 } 
                 else {
                     taulu[i].setRight(min);
@@ -146,7 +161,6 @@ public class FibonaccinKeko {
                     min.setLeft(taulu[i]);
                     if (taulu[i].getKey() < min.getKey()) {
                         min = taulu[i];   
-//                        System.out.println(min.getKey()+":-:"+taulu[i].getKey()+"--"+i);
                     }
                 }
             }
@@ -154,11 +168,11 @@ public class FibonaccinKeko {
     }
 
     /**
-     * Consolidate metodin apumetodi, joka linkittää kaksi nodea. 
+     * Consolidate metodin apumetodi, joka linkittää kaksi solmua. 
      * Ekana annetusta tulee child ja toisena parametrina annetusta 
      * parent.
-     * @param tauluY node josta tulee child.
-     * @param kasiteltava node josta tulee parent.
+     * @param y solmu josta tulee child.
+     * @param x solmu josta tulee parent
      */
     public void link(FibNode y, FibNode x) {
         FibNode yLeft = y.getLeft();
@@ -207,6 +221,5 @@ public class FibonaccinKeko {
      */
     public int getHeapSize() {
         return heapSize;
-    }
-    
+    }   
 }

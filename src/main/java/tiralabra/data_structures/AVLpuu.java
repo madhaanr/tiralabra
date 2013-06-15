@@ -84,8 +84,8 @@ public class AVLpuu {
     }
 
     /**
-     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään head
-     * solmun oikea lapsi oikealle ja sen jälkeen head solmu vasemmalle.
+     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään 
+     * solmun oikea lapsi oikealle ja sen jälkeen kaannettava solmu vasemmalle.
      *
      * @param kaannettava solmu, joka epätasapainossa.
      * @return palautetaan leftRotate(kaannettava).
@@ -97,8 +97,8 @@ public class AVLpuu {
     }
 
     /**
-     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään head
-     * solmun vasen solmu vasemmalle ja sen jälkeen head solmu oikealle
+     * Kaksoiskierto puun epätasapainon korjaamiseen. Ensin kierretään 
+     * solmun vasen solmu vasemmalle ja sen jälkeen kaannettava solmu oikealle
      *
      * @param kaannettava node jota kaannetaan
      * @return palautetaan rightRotate(kaannettava).
@@ -119,45 +119,11 @@ public class AVLpuu {
     public AvlNode insert(int lisattava) {
         AvlNode uusi = insertNode(lisattava);
         AvlNode parent = uusi.getParent();
-        AvlNode vanhempi;
-        AvlNode alipuu;
         while (parent != null) {
-            if (height(parent.getLeft()) == height(parent.getRight()) + 2) {
-                vanhempi = parent.getParent();
-                if (height(parent.getLeft().getLeft()) > height(parent.getLeft().getRight())) {
-                    alipuu = rightRotate(parent);
-                } else {
-                    alipuu = leftRightRotate(parent);
-                }
-                if (vanhempi == null) {
-                    head = alipuu;
-                } else if (vanhempi.getLeft() == parent) {
-                    vanhempi.setLeft(alipuu);
-                } else {
-                    vanhempi.setRight(alipuu);
-                }
-                if (vanhempi != null) {
-                    vanhempi.setHeight(Math.max(height(vanhempi.getLeft()), height(vanhempi.getRight())) + 1);
-                }
+            if (vasenLapsiAiheuttiEpatasaPainon(parent)) {
                 return uusi;
             }
-            if (height(parent.getRight()) == height(parent.getLeft()) + 2) {
-                vanhempi = parent.getParent();
-                if (height(parent.getRight().getRight()) > height(parent.getRight().getLeft())) {
-                    alipuu = leftRotate(parent);
-                } else {
-                    alipuu = rightLeftRotate(parent);
-                }
-                if (vanhempi == null) {
-                    head = alipuu;
-                } else if (vanhempi.getLeft() == parent) {
-                    vanhempi.setLeft(alipuu);
-                } else {
-                    vanhempi.setRight(alipuu);
-                }
-                if (vanhempi != null) {
-                    vanhempi.setHeight(Math.max(height(vanhempi.getLeft()), height(vanhempi.getRight())) + 1);
-                }
+            if (oikeaLapsiAiheuttiEpatasaPainon(parent)) {
                 return uusi;
             }
             parent.setHeight(Math.max(height(parent.getLeft()), height(parent.getRight())) + 1);
@@ -200,14 +166,75 @@ public class AVLpuu {
         treeSize++;
         return uusi;
     }
+    /**
+     * Apumetodi insert metodille. Jos epätasapainon aiheuttaja on vanhemman
+     * vasen lapsi niin tehdään tasapainon palauttavat kierrot.
+     * @param parent lisätyn solmun vanhempi.
+     * @return palautetaan true jos epätasapaino oli vasemmassa alipuussa.
+     */
+ 
+    private boolean vasenLapsiAiheuttiEpatasaPainon(AvlNode parent) {
+        AvlNode vanhempi;
+        AvlNode alipuu;
+        if (height(parent.getLeft()) == height(parent.getRight()) + 2) {
+            vanhempi = parent.getParent();
+            if (height(parent.getLeft().getLeft()) > height(parent.getLeft().getRight())) {
+                alipuu = rightRotate(parent);
+            } else {
+                alipuu = leftRightRotate(parent);
+            }
+            if (vanhempi == null) {
+                head = alipuu;
+            } else if (vanhempi.getLeft() == parent) {
+                vanhempi.setLeft(alipuu);
+            } else {
+                vanhempi.setRight(alipuu);
+            }
+            if (vanhempi != null) {
+                vanhempi.setHeight(Math.max(height(vanhempi.getLeft()), height(vanhempi.getRight())) + 1);
+            }
+            return true;
+        }
+        return false;
+    }
+    /**
+     * Apumetodi insert metodille. Jos epätasapainon aiheuttaja on vanhemman
+     * oikea lapsi niin tehdään tasapainon palauttavat kierrot.
+     * @param parent lisätyn solmun vanhempi.
+     * @return palautetaan true jos epätasapaino oli oikeassa alipuussa.
+     */
+    private boolean oikeaLapsiAiheuttiEpatasaPainon(AvlNode parent) {
+        AvlNode vanhempi;
+        AvlNode alipuu;
+        if (height(parent.getRight()) == height(parent.getLeft()) + 2) {
+            vanhempi = parent.getParent();
+            if (height(parent.getRight().getRight()) > height(parent.getRight().getLeft())) {
+                alipuu = leftRotate(parent);
+            } else {
+                alipuu = rightLeftRotate(parent);
+            }
+            if (vanhempi == null) {
+                head = alipuu;
+            } else if (vanhempi.getLeft() == parent) {
+                vanhempi.setLeft(alipuu);
+            } else {
+                vanhempi.setRight(alipuu);
+            }
+            if (vanhempi != null) {
+                vanhempi.setHeight(Math.max(height(vanhempi.getLeft()), height(vanhempi.getRight())) + 1);
+            }
+            return true;
+        }
+        return false;
+    }
 
     /**
-     * Metodi jolla poistetaan nodeja AVL-puusta. Varsinainen poistaminen
-     * tapahtuu apumetodissa deleteNode. Kun node on poistettu niin sitten delete
-     * suorittaa tarvittavan määrän kiertoja jotta mahdollinen epätasapaino 
-     * saadaan korjattua.
+     * Metodi jolla poistetaan solmuja AVL-puusta. Varsinainen poistaminen
+     * tapahtuu apumetodissa deleteNode. Kun solmu on poistettu niin sitten 
+     * delete suorittaa tarvittavan määrän kiertoja, jotta mahdollinen 
+     * epätasapaino saadaan korjattua.
      *
-     * @param poistettava avlnode joka poistetaan
+     * @param poistettava AvlNode joka poistetaan.
      */
     public void delete(AvlNode poistettava) {
         AvlNode pois = deleteNode(poistettava);
@@ -255,13 +282,27 @@ public class AVLpuu {
      */
     private AvlNode deleteNode(AvlNode poistettava) {
         AvlNode pois = poistettava;
+        if (poistettavallaEiLapsia(pois)) {
+            return pois;
+        }
+        if (poistettavallaYksiLapsi(pois)) {
+            return pois;
+        }
+        return poistettavallaKaksiLasta(pois);
+    }
+    /**
+     * deleteNode metodin apumetodi. Jos poistettavalla solmulla ei ole 
+     * lapsia niin tehdään metodin määrittelemät operaatiot. 
+     * @param pois poistettava solmu
+     * @return palautetaan true jos poistettavalla ei ollut lapsia.
+     */
+    private boolean poistettavallaEiLapsia(AvlNode pois) {
         AvlNode vanhempi;
-        AvlNode lapsi;
         if (pois.getLeft() == null && pois.getRight() == null) {
             vanhempi = pois.getParent();
             if (vanhempi == null) {
                 head = null;
-                return pois;
+                return true;
             }
             if (pois == vanhempi.getLeft()) {
                 vanhempi.setLeft(null);
@@ -269,8 +310,19 @@ public class AVLpuu {
                 vanhempi.setRight(null);
             }
             treeSize--;
-            return pois;
+            return true;
         }
+        return false;
+    }
+    /**
+     * deleteNode metodin apumetodi. Jos poistettavalla solmulla on yksi
+     * lapsi niin tehdään metodin määrittelemät operaatiot. 
+     * @param pois poistettava solmu
+     * @return palautetaan true jos poistettavalla oli yksi lapsi.
+     */
+    private boolean poistettavallaYksiLapsi(AvlNode pois) {
+        AvlNode lapsi;
+        AvlNode vanhempi;
         if (pois.getLeft() == null || pois.getRight() == null) {
             if (pois.getLeft() != null) {
                 lapsi = pois.getLeft();
@@ -281,7 +333,7 @@ public class AVLpuu {
             lapsi.setParent(vanhempi);
             if (vanhempi == null) {
                 head = lapsi;
-                return pois;
+                return true;
             }
             if (pois == vanhempi.getLeft()) {
                 vanhempi.setLeft(lapsi);
@@ -289,8 +341,19 @@ public class AVLpuu {
                 vanhempi.setRight(lapsi);
             }
             treeSize--;
-            return pois;
+            return true;
         }
+        return false;
+    }
+    /**
+     * deleteNode metodin apumetodi. Jos poistettavalla solmulla on kaksi
+     * lasta niin tehdään metodin määrittelemät operaatiot. 
+     * @param pois poistettava solmu.
+     * @return palautetaan true jos poistettavalla oli kaksi lasta.
+     */
+    private AvlNode poistettavallaKaksiLasta(AvlNode pois) {
+        AvlNode lapsi;
+        AvlNode vanhempi;
         AvlNode seur = min(pois.getRight());
         pois.setKey(seur.getKey());
         lapsi = seur.getRight();
@@ -362,5 +425,5 @@ public class AVLpuu {
             node = node.getLeft();
         }
         return node;
-    }
+    }  
 }

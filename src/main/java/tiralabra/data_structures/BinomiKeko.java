@@ -153,7 +153,7 @@ public class BinomiKeko {
     /**
      * Metodi palauttaa keon pienimmän alkion key arvon. 
      * Binomikeon pienin arvo on juurilistan pienin arvon eli tarvitsee 
-     * käydä läpi vain juurilista. 
+     * käydä läpi vain juurinodelista. 
      * @return palautetaan node1.key eli keon pienin arvo.
      */
     public int min() {
