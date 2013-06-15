@@ -13,7 +13,7 @@ import tiralabra.data_structures.Node;
  */
 public class Vertailija {
     public static void main(String[] args) {
-        int ylaraja=50000;
+        int ylaraja=100;
         
         //Alkiot syötetään normaalijärjestyksessä.
         PriorityQueue PQ = new PriorityQueue<Integer>();
@@ -30,8 +30,8 @@ public class Vertailija {
         double timeEndPQ = System.nanoTime();
         double eroPQ = (timeEndPQ-timeStartPQ)/1000000000;
         System.out.println(inserteroPQ+"s PQ lisäys\t\t\t"+eroPQ+"s PQ poisto");
-//        
-//        System.gc();
+        
+        System.gc();
 //        
 //        BinaariKeko binaariKeko = new BinaariKeko();
 //        double inserttimeStartBinKeko = System.nanoTime();
