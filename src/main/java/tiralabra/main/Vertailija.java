@@ -169,12 +169,12 @@ public class Vertailija {
 //        System.out.println("----------------------------------------------------------------");
 //        System.gc();
 //        //Alkioita syötetään satunnaisessa järjestyksessä.
-        int satunnainenKoko=500000;   
-        int[] satunnainen = new int[satunnainenKoko];
-        for (int i = 0; i < satunnainenKoko; i++) {
-            satunnainen[i]=(int)Math.random() * 5000000;
-        }
-        
+//        int satunnainenKoko=500000;   
+//        int[] satunnainen = new int[satunnainenKoko];
+//        for (int i = 0; i < satunnainenKoko; i++) {
+//            satunnainen[i]=(int)Math.random() * 5000000;
+//        }
+//        
 //        System.gc();
 //        
 //        PriorityQueue PQ3 = new PriorityQueue<Integer>();
@@ -190,17 +190,17 @@ public class Vertailija {
 //        System.out.println(eroPQ3+"s PQ satunnaisjärjestys");
 //        
 ////        System.gc();
-        BinaariKeko binaariKeko3 = new BinaariKeko();
-        for (int i = 0; i < satunnainenKoko; i++) {
-            binaariKeko3.insert(satunnainen[i]);
-        }
-        double timeStartBinKeko3 = System.nanoTime();
-        for (int i = 0; i < satunnainenKoko; i++) {
-            binaariKeko3.delete();
-        }
-        double timeEndBinKeko3 = System.nanoTime();
-        double eroBinaariKeko3 = (timeEndBinKeko3-timeStartBinKeko3)/1000000000;
-        System.out.println(eroBinaariKeko3+"s binäärikeko satunnaisjärjestys ");
+//        BinaariKeko binaariKeko3 = new BinaariKeko();
+//        for (int i = 0; i < satunnainenKoko; i++) {
+//            binaariKeko3.insert(satunnainen[i]);
+//        }
+//        double timeStartBinKeko3 = System.nanoTime();
+//        for (int i = 0; i < satunnainenKoko; i++) {
+//            binaariKeko3.delete();
+//        }
+//        double timeEndBinKeko3 = System.nanoTime();
+//        double eroBinaariKeko3 = (timeEndBinKeko3-timeStartBinKeko3)/1000000000;
+//        System.out.println(eroBinaariKeko3+"s binäärikeko satunnaisjärjestys ");
         
 //        BinomiKeko binomiKeko3 = new BinomiKeko();
 //        for (int i = 0; i < satunnainenKoko; i++) {

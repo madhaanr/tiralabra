@@ -153,8 +153,7 @@ public class BinomiKeko {
     
     /**
      * Metodi palauttaa keon pienimmän alkion key arvon. 
-     * Binomikeon pienin arvo on juurilistan pienin arvon eli tarvitsee 
-     * käydä läpi vain juurinodelista. 
+     * Binomikeon pienin arvo on juurisolmulistan pienin arvo. 
      * @return palautetaan node1.key eli keon pienin arvo.
      */
     public int min() {
@@ -176,9 +175,9 @@ public class BinomiKeko {
 
     /**
      * Metodi poistaa ja palauttaa keon pienimmän alkion. 
-     * Toteutus on aluksi melkein saman kuin pelkässä minimi alkion 
-     * palautuksessa. Mutta nykyistä node1.keytä pienemmän arvon 
-     * löytyessä pidetään myös kirjaa mistä sinne tultiin.
+     * Binomikeon pienin arvo on juurisolmulistan pienin arvo.
+     * Pienimmän arvon poiston yhteydessä saatetaan joutua järjestämään keko
+     * uudestaan.
      * @return Palauttaa node1.key arvon.
      */
     public int remove() {
@@ -191,7 +190,7 @@ public class BinomiKeko {
         Node node2 = node1.getSibling();
         Node node1Prev = null;
         Node node2Prev = node1;
-        
+        //etsitään pienin
         while (node2 != null) {
             if (node2.getKey() < node1.getKey()) {
                 node1 = node2;
@@ -223,7 +222,7 @@ public class BinomiKeko {
 
     
     /**
-     * Metodi jolla saa tietää mikä node on keon head.
+     * Metodi jolla saa tietää mikä solmu on keon head. 
      * @return head palauttaa keon head noden.
      */
     public Node getHead() {
