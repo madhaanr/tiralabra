@@ -1,8 +1,8 @@
 package tiralabra.data_structures;
 
 /**
- *
- * @author mhaanran Luokka toteuttaa minimi binäärikeon.
+ * Luokka toteuttaa minimi binäärikeon. 
+ * @author mhaanran 
  */
 public class BinaariKeko {
 

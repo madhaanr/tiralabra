@@ -1,12 +1,13 @@
 package tiralabra.data_structures;
 
 /**
- * Luokka toteuttaa binomikeon.
+ * Luokka toteuttaa binomikeon. Kyseessä on minimi keko.
  *
  * @author mhaanran
  */
 public class BinomiKeko {
 
+    //linkitetyn listan alku solmu.
     private Node head;
 
     /**
@@ -27,30 +28,30 @@ public class BinomiKeko {
     }
 
     /**
-     * Metodilla voi lisätä kekoon nodeja.
-     * Aluksi luodaan uusi binomikeko, jonka headiksi laitetaan lisättävä node.
-     * Tämän jälkeen mergetään tämä uusi keko jo olemassa olleen keon kanssa ja
-     * yhdistetty keko talletetaan uusikeko nimellä ja ajetaan mergeHeap. 
-     * Lopuksi luokkamuuttuja head pistetään osoittamaan uuden keon headiin.
-     * @param lisattava on lisättävä node.
+     * Metodilla voi lisätä kekoon solmuja.
+     * Aluksi luodaan uusi binomikeko, jonka headiksi laitetaan lisättävä solmu.
+     * Tämän jälkeen yhdistetään tämä uusi keko jo olemassa olevan keon kanssa ja
+     * yhdistetty keko talletetaan uusikeko nimellä.
+     * Lopuksi luokkamuuttuja head pistetään osoittamaan uusiKeko headiin.
+     * @param lisattava on lisättävä solmu.
      */
     public void insert(Node lisattava) {
         BinomiKeko keko = new BinomiKeko();
         keko.head = lisattava;
-        BinomiKeko uusiKeko = this.mergeHeap(keko);
+        BinomiKeko uusiKeko = this.union(keko);
         head = uusiKeko.head;
     }
 
     /**
      * Metodi yhdistää kaksi kekoa yhdeksi keoksi. Käytetään 
-     * kun kekoon lisätään alkioita. Käyttää apumetodina mergeJuuriLista 
+     * kun kekoon lisätään alkioita. Käyttää apumetodina merge 
      * ja pair metodeita. 
      * @param keko insertin parametrina annetusta nodesta luotu uusi.
      * @return uusi palauttaa yhdistetyn keon.
      */
-    public BinomiKeko mergeHeap(BinomiKeko keko) {
+    public BinomiKeko union(BinomiKeko keko) {
         BinomiKeko uusi = new BinomiKeko();
-        uusi.head = mergeJuuriLista(this, keko);
+        uusi.head = merge(this, keko);
         head = null;
         keko.head = null;
 
@@ -92,13 +93,13 @@ public class BinomiKeko {
         return uusi;
     }
     /**
-     * MergeHeap metodin apumetodi.
-     * Yhdistää parametrina annettujen kekojen juurilistat toisiinsa.
+     * Union metodin apumetodi.
+     * Yhdistää parametrina annettujen kekojen juurisolmulistat toisiinsa.
      * @param keko1 yhdistettävä keko1.
-     * @param uusi yhdistettävä uusi.
-     * @return uusiHead palauttaa uuden juurilistan headin eli listan alun.
+     * @param keko2 yhdistettävä keko2.
+     * @return head palauttaa uuden juurilistan headin eli listan alun.
      */
-    private Node mergeJuuriLista(BinomiKeko keko1, BinomiKeko keko2) {
+    private Node merge(BinomiKeko keko1, BinomiKeko keko2) {
         if (keko1.isEmpty()) {
             return keko2.head;
         } 
@@ -106,19 +107,19 @@ public class BinomiKeko {
             return keko1.head;
         } 
         
-        Node uusiHead;
+        Node head;
         Node tail;
         Node k1Head = keko1.head;
         Node k2Head = keko2.head;
         if (k1HeadDegreeSmallerThanK2Heads(k1Head, k2Head)) {
-            uusiHead = keko1.head;
+            head = keko1.head;
             k1Head = k1Head.getSibling();
         } 
         else {
-            uusiHead = keko2.head;
+            head = keko2.head;
             k2Head = k2Head.getSibling();
         }
-        tail = uusiHead;
+        tail = head;
         while (k1HeadAndk2HeadNotNull(k1Head, k2Head)) {
             if (k1HeadDegreeSmallerThanK2Heads(k1Head, k2Head)) {
                 tail.setSibling(k1Head);
@@ -136,7 +137,7 @@ public class BinomiKeko {
         else {
             tail.setSibling(k2Head);
         }
-        return uusiHead;
+        return head;
     }
     /**
      * Parittaa kaksi nodea keskenään.
@@ -180,7 +181,7 @@ public class BinomiKeko {
      * löytyessä pidetään myös kirjaa mistä sinne tultiin.
      * @return Palauttaa node1.key arvon.
      */
-    public int removeMin() {
+    public int remove() {
         int min;
         if (head == null) {
             return Integer.MIN_VALUE;
@@ -215,7 +216,7 @@ public class BinomiKeko {
             keko.head = node1;
             node1 = next;
         }
-        BinomiKeko uusiKeko = this.mergeHeap(keko);
+        BinomiKeko uusiKeko = this.union(keko);
         head = uusiKeko.head;      
         return min;
     }
@@ -253,7 +254,7 @@ public class BinomiKeko {
     }
     
     /**
-     * Metodin mergeJuuriLista apumetodi joka tarkistaa ovatko k1Head ja k2Head null
+     * Metodin merge apumetodi joka tarkistaa ovatko k1Head ja k2Head null
      * @param k1Head keon 1 head.
      * @param k2Head keon 2 head.
      * @return palautetaan true jos molemmat eivät ole null.
@@ -263,7 +264,7 @@ public class BinomiKeko {
     }
     
     /**
-     * Metodin mergeJuuriLista apumetodi jolla tarkistetaan onko k1Head 
+     * Metodin merge apumetodi jolla tarkistetaan onko k1Head 
      * degree pienempi tai sama kuin k2Head degree.
      * @param k1Head keon 1 head node.
      * @param k2Head keon 2 head node
@@ -278,7 +279,7 @@ public class BinomiKeko {
     public String toString() {
         String keko = "";
         while (head != null) {
-            keko += removeMin() + " ";
+            keko += remove() + " ";
         }
         return keko;
     }

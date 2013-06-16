@@ -88,13 +88,13 @@ public class BinomiKekoTest {
     
     @Test
     public void keostaVoiPoistaaPienimmanAlkion() {
-        binomiKeko.removeMin();
+        binomiKeko.remove();
         assertEquals(2,binomiKeko.min());
     }
     @Test
     public void keostaVoiPoistaaUseitaPienimpiaAlkioita() {
         for (int i = 0; i < 10; i++) {
-            binomiKeko.removeMin();
+            binomiKeko.remove();
         }
         assertEquals(17,binomiKeko.min());
     }
@@ -103,7 +103,7 @@ public class BinomiKekoTest {
         Node node = null;
         BinomiKeko binomiKeko4 = new BinomiKeko();
         binomiKeko4.insert(node);
-        int min = binomiKeko4.removeMin();
+        int min = binomiKeko4.remove();
         assertEquals(Integer.MIN_VALUE, min);
     }
     @Test
@@ -116,7 +116,7 @@ public class BinomiKekoTest {
         Node node = new Node(100);
         BinomiKeko binomiKeko4 = new BinomiKeko();
         binomiKeko4.insert(node);
-        binomiKeko4.removeMin();
+        binomiKeko4.remove();
         assertTrue(binomiKeko4.isEmpty());
     }
     @Test

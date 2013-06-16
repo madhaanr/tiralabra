@@ -51,7 +51,7 @@ public class FibonaccinKekoTest {
    
     @Test
     public void tyhjastaKeostaPoistoPalauttaaMinInteger() {
-        assertEquals(Integer.MIN_VALUE,fibKeko.removeMin());
+        assertEquals(Integer.MIN_VALUE,fibKeko.remove());
     }
     @Test
     public void isEmptyTrue() {
@@ -112,7 +112,7 @@ public class FibonaccinKekoTest {
     @Test
     public void removeMinKunKeossaYksi() {
         fibKeko.insert(node1);
-        assertEquals(1,fibKeko.removeMin());
+        assertEquals(1,fibKeko.remove());
     }
     @Test
     public void removeMinKaksiNodea() {
@@ -123,8 +123,8 @@ public class FibonaccinKekoTest {
         fibKeko.insert(node5);
         fibKeko.insert(node89);
         fibKeko.insert(node100);
-        assertEquals(1,fibKeko.removeMin());
-        assertEquals(2,fibKeko.removeMin());
+        assertEquals(1,fibKeko.remove());
+        assertEquals(2,fibKeko.remove());
     }
     @Test
     public void removeMinKolmeNodea() {
@@ -135,9 +135,9 @@ public class FibonaccinKekoTest {
         fibKeko.insert(node5);
         fibKeko.insert(node89);
         fibKeko.insert(node100);
-        assertEquals(1,fibKeko.removeMin());
-        assertEquals(2,fibKeko.removeMin());
-        assertEquals(3,fibKeko.removeMin());
+        assertEquals(1,fibKeko.remove());
+        assertEquals(2,fibKeko.remove());
+        assertEquals(3,fibKeko.remove());
     }   
     @Test
     public void removeMinKuusiNodea() {
@@ -145,14 +145,14 @@ public class FibonaccinKekoTest {
             fibKeko.insert(new FibNode(i));
         }
 //        for (int i = 0; i < 10; i++) {
-//            fibKeko.removeMin();
+//            fibKeko.remove();
 //        }
-        assertEquals(1,fibKeko.removeMin());
-        assertEquals(2,fibKeko.removeMin());
-        assertEquals(3,fibKeko.removeMin());
-        assertEquals(4,fibKeko.removeMin());
-        assertEquals(5,fibKeko.removeMin());
-        assertEquals(6,fibKeko.removeMin());
+        assertEquals(1,fibKeko.remove());
+        assertEquals(2,fibKeko.remove());
+        assertEquals(3,fibKeko.remove());
+        assertEquals(4,fibKeko.remove());
+        assertEquals(5,fibKeko.remove());
+        assertEquals(6,fibKeko.remove());
     }
     @Test
     public void removeMinSataNodea() {
@@ -160,7 +160,7 @@ public class FibonaccinKekoTest {
             fibKeko.insert(new FibNode(i));
         }
         for (int i = 0; i < 100; i++) {
-            fibKeko.removeMin();
+            fibKeko.remove();
         }
         assertEquals(300,fibKeko.min());
     }
@@ -170,7 +170,7 @@ public class FibonaccinKekoTest {
         fibKeko.insert(node1);
         fibKeko.insert(node2);
         fibKeko.insert(node3);
-        assertEquals(0,fibKeko.removeMin());
+        assertEquals(0,fibKeko.remove());
         assertEquals(3,node2.getChildKey());
         assertEquals(2,node3.getParent().getKey());
         assertEquals(1,node2.getDegree());
@@ -180,9 +180,9 @@ public class FibonaccinKekoTest {
         for (int i = 0; i < 1000000; i++) {
             fibKeko.insert(new FibNode(i));
         }
-        fibKeko.removeMin();
+        fibKeko.remove();
         for (int i = 0; i < 999999; i++) {
-            fibKeko.removeMin();
+            fibKeko.remove();
         }
         assertTrue(fibKeko.isEmpty());
     }
@@ -192,7 +192,7 @@ public class FibonaccinKekoTest {
             fibKeko.insert(new FibNode(i));
         }
         for (int i = 0; i < 100; i++) {
-            fibKeko.removeMin();
+            fibKeko.remove();
         }
         assertEquals(301,fibKeko.min());
     }

@@ -1,7 +1,7 @@
 package tiralabra.data_structures;
 
 /**
- * Luokka toteuttaa Fibonaccin keon. 
+ * Luokka toteuttaa Fibonaccin keon. Kyseessä on minimi keko.
  * @author mhaanran
  */
 public class FibonaccinKeko {
@@ -58,14 +58,36 @@ public class FibonaccinKeko {
      * Consolidate metodi tekee keosta Fibonaccin keon.
      * @return palauttaa poistettavan alkion avaimen arvon.
      */
-    public int removeMin() {
+    public int remove() {
         if(min==null) {
             return Integer.MIN_VALUE;
         }
         FibNode vanhaMin = min;      
         FibNode kasiteltava = vanhaMin.getChild();
-        FibNode temp;
+      
+        poistettavanSolmunLapsetLisataanJuuriSolmuListaan(vanhaMin, kasiteltava);
+        //poistetaan vanhaMin juuriSolmuListalta
+        vanhaMin.getLeft().setRight(vanhaMin.getRight());
+        vanhaMin.getRight().setLeft(vanhaMin.getLeft());
         
+        if (vanhaMin == vanhaMin.getRight()) {
+            min = null;
+        } else {
+            min = vanhaMin.getRight();
+            consolidate();
+        }  
+        heapSize--;
+        return vanhaMin.getKey();
+    }
+    /**
+     * Apumetodi jossa poistettavan solmun eli entisen min solmun
+     * lapset lisätään juurisolmulistaan.
+     * @param vanhaMin poistettava solmu
+     * @param kasiteltava poistettavan solmun lapsi jota lisätään juuri
+     * solmulistaan.
+     */
+    private void poistettavanSolmunLapsetLisataanJuuriSolmuListaan(FibNode vanhaMin, FibNode kasiteltava) {
+        FibNode temp;
         for (int i = vanhaMin.getDegree(); i > 0; i--) {
             temp = kasiteltava.getRight();
             kasiteltava.getLeft().setRight(kasiteltava.getRight());
@@ -77,18 +99,8 @@ public class FibonaccinKeko {
             kasiteltava.setParent(null);
             kasiteltava = temp;
         }
-        vanhaMin.getLeft().setRight(vanhaMin.getRight());
-        vanhaMin.getRight().setLeft(vanhaMin.getLeft());
-        if (vanhaMin == vanhaMin.getRight()) {
-            min = null;
-        } else {
-            min = vanhaMin.getRight();
-            consolidate();
-        }  
-        heapSize--;
-        return vanhaMin.getKey();
     }
-
+    
     /**
      * Consolidate metodi luo fibonaccin keon. Metodia kutsutaan 
      * kun keosta poistetaan node. Alussa matemaattinen kaava jolla lasketaan
@@ -107,9 +119,9 @@ public class FibonaccinKeko {
             juuriNodejenLKM++;
             kasiteltava=kasiteltava.getRight();
         }
-        juuriNodeListanLapiKayntiJaNodejenLinkitys(juuriNodejenLKM, kasiteltava, taulu); 
+        juuriSolmuListanLapiKayntiJaSolmujenLinkitys(juuriNodejenLKM, kasiteltava, taulu); 
         min = null;
-        uudenJuuriNodeListanLuonti(size, taulu);
+        uudenJuuriSolmuListanLuonti(size, taulu);
     }
     /**
      * Consolidate metodin apumetodi uuden juurinodelistan läpikäymiseen
@@ -119,7 +131,7 @@ public class FibonaccinKeko {
      * @param kasiteltava juurinode jota käsitellään
      * @param taulu taulukko johon tallennetaan kaikki puut.
      */
-    private void juuriNodeListanLapiKayntiJaNodejenLinkitys(int juuriNodejenLKM, FibNode kasiteltava, FibNode[] taulu) {
+    private void juuriSolmuListanLapiKayntiJaSolmujenLinkitys(int juuriNodejenLKM, FibNode kasiteltava, FibNode[] taulu) {
         while(juuriNodejenLKM>0) {
             FibNode seuraava = kasiteltava.getRight();
             int xDegree = seuraava.getDegree();
@@ -146,7 +158,7 @@ public class FibonaccinKeko {
      * @param taulu taulukko johon juurinodelistalle lisättävät puut on 
      * allennettu.
      */
-    private void uudenJuuriNodeListanLuonti(int size, FibNode[] taulu) {
+    private void uudenJuuriSolmuListanLuonti(int size, FibNode[] taulu) {
         for (int i = 0; i < size; i++) {
             if (taulu[i] != null) {
                 if (min == null) {
@@ -221,5 +233,5 @@ public class FibonaccinKeko {
      */
     public int getHeapSize() {
         return heapSize;
-    }   
+    }      
 }
