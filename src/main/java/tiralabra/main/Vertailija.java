@@ -16,22 +16,22 @@ public class Vertailija {
         int ylaraja=100;
         
         //Alkiot syötetään normaalijärjestyksessä.
-        PriorityQueue PQ = new PriorityQueue<Integer>();
-        double inserttimeStartPQ = System.nanoTime();
-        for (int i = 0; i < ylaraja ; i++) {
-            PQ.add(i);
-        }
-        double inserttimeEndPQ = System.nanoTime();
-        double inserteroPQ=(inserttimeEndPQ-inserttimeStartPQ)/1000000000;
-        double timeStartPQ = System.nanoTime();
-        for (int i = 0; i < ylaraja; i++) {
-            PQ.remove(i);
-        }
-        double timeEndPQ = System.nanoTime();
-        double eroPQ = (timeEndPQ-timeStartPQ)/1000000000;
-        System.out.println(inserteroPQ+"s PQ lisäys\t\t\t"+eroPQ+"s PQ poisto");
-        
-        System.gc();
+//        PriorityQueue PQ = new PriorityQueue<Integer>();
+//        double inserttimeStartPQ = System.nanoTime();
+//        for (int i = 0; i < ylaraja ; i++) {
+//            PQ.add(i);
+//        }
+//        double inserttimeEndPQ = System.nanoTime();
+//        double inserteroPQ=(inserttimeEndPQ-inserttimeStartPQ)/1000000000;
+//        double timeStartPQ = System.nanoTime();
+//        for (int i = 0; i < ylaraja; i++) {
+//            PQ.remove(i);
+//        }
+//        double timeEndPQ = System.nanoTime();
+//        double eroPQ = (timeEndPQ-timeStartPQ)/1000000000;
+//        System.out.println(inserteroPQ+"s PQ lisäys\t\t\t"+eroPQ+"s PQ poisto");
+//        
+//        System.gc();
 //        
 //        BinaariKeko binaariKeko = new BinaariKeko();
 //        double inserttimeStartBinKeko = System.nanoTime();
@@ -169,39 +169,39 @@ public class Vertailija {
 //        System.out.println("----------------------------------------------------------------");
 //        System.gc();
 //        //Alkioita syötetään satunnaisessa järjestyksessä.
-//        int satunnainenKoko=500000;   
-//        int[] satunnainen = new int[satunnainenKoko];
-//        for (int i = 0; i < satunnainenKoko; i++) {
-//            satunnainen[i]=(int)Math.random() * 5000000;
-//        }
-//        
+        int satunnainenKoko=500000;   
+        int[] satunnainen = new int[satunnainenKoko];
+        for (int i = 0; i < satunnainenKoko; i++) {
+            satunnainen[i]=(int)Math.random() * 5000000;
+        }
+        
 //        System.gc();
 //        
-////        PriorityQueue PQ3 = new PriorityQueue<Integer>();
-////        for (int i = 0; i < satunnainenKoko ; i++) {
-////            PQ3.add(satunnainen[i]);
-////        }
-////        double timeStartPQ3 = System.nanoTime();
-////        for (int i = 0; i < satunnainenKoko; i++) {
-////            PQ3.remove(i);
-////        }
-////        double timeEndPQ3 = System.nanoTime();
-////        double eroPQ3 = (timeEndPQ3-timeStartPQ3)/1000000000;
-////        System.out.println(eroPQ3+"s PQ satunnaisjärjestys");
-////        
-////        System.gc();
-//        BinaariKeko binaariKeko3 = new BinaariKeko();
-//        for (int i = 0; i < satunnainenKoko; i++) {
-//            binaariKeko3.heapInsert(satunnainen[i]);
+//        PriorityQueue PQ3 = new PriorityQueue<Integer>();
+//        for (int i = 0; i < satunnainenKoko ; i++) {
+//            PQ3.add(satunnainen[i]);
 //        }
-//        double timeStartBinKeko3 = System.nanoTime();
+//        double timeStartPQ3 = System.nanoTime();
 //        for (int i = 0; i < satunnainenKoko; i++) {
-//            binaariKeko3.deleteMin();
+//            PQ3.remove(i);
 //        }
-//        double timeEndBinKeko3 = System.nanoTime();
-//        double eroBinaariKeko3 = (timeEndBinKeko3-timeStartBinKeko3)/1000000000;
-//        System.out.println(eroBinaariKeko3+"s binäärikeko satunnaisjärjestys ");
+//        double timeEndPQ3 = System.nanoTime();
+//        double eroPQ3 = (timeEndPQ3-timeStartPQ3)/1000000000;
+//        System.out.println(eroPQ3+"s PQ satunnaisjärjestys");
 //        
+////        System.gc();
+        BinaariKeko binaariKeko3 = new BinaariKeko();
+        for (int i = 0; i < satunnainenKoko; i++) {
+            binaariKeko3.insert(satunnainen[i]);
+        }
+        double timeStartBinKeko3 = System.nanoTime();
+        for (int i = 0; i < satunnainenKoko; i++) {
+            binaariKeko3.delete();
+        }
+        double timeEndBinKeko3 = System.nanoTime();
+        double eroBinaariKeko3 = (timeEndBinKeko3-timeStartBinKeko3)/1000000000;
+        System.out.println(eroBinaariKeko3+"s binäärikeko satunnaisjärjestys ");
+        
 //        BinomiKeko binomiKeko3 = new BinomiKeko();
 //        for (int i = 0; i < satunnainenKoko; i++) {
 //            binomiKeko3.insert(new Node(satunnainen[i]));
