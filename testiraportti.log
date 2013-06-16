@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.5.31)  15 JUN 2013 15:17
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.1.22)  16 JUN 2013 16:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -14,8 +14,8 @@ reek, ibycus, ancientgreek, hungarian, bengali, tamil, hindi, telugu, gujarati,
 n, latvian, lithuanian, mongolian, mongolianlmc, nynorsk, bokmal, indonesian, e
 speranto, coptic, welsh, irish, interlingua, serbian, serbianc, slovenian, friu
 lan, romansh, estonian, romanian, armenian, uppersorbian, turkish, afrikaans, i
-celandic, kurmanji, polish, portuguese, galician, catalan, spanish, swedish, lo
-aded.
+celandic, kurmanji, polish, portuguese, galician, catalan, spanish, swedish, uk
+english, loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
@@ -411,19 +411,19 @@ Overfull \hbox (34.87254pt too wide) in paragraph at lines 42--43
 [2 <./alkioidenlisays.png (PNG copy)>] [3 <./alkioidenpoisto.png (PNG copy)>]
 [4] (./testiraportti.aux) ) 
 Here is how much of TeX's memory you used:
- 2029 strings out of 493493
- 27243 string characters out of 3143797
- 86462 words of memory out of 3000000
+ 2029 strings out of 493481
+ 27243 string characters out of 3143393
+ 86477 words of memory out of 3000000
  5318 multiletter control sequences out of 15000+200000
  7887 words of font info for 28 fonts, out of 3000000 for 9000
- 957 hyphenation exceptions out of 8191
+ 965 hyphenation exceptions out of 8191
  37i,7n,24p,495b,221s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
 
-Output written on testiraportti.pdf (4 pages, 91561 bytes).
+Output written on testiraportti.pdf (4 pages, 91531 bytes).
 PDF statistics:
  35 PDF objects out of 1000 (max. 8388607)
  22 compressed objects within 1 object stream

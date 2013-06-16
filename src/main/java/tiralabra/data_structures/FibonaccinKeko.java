@@ -208,24 +208,25 @@ public class FibonaccinKeko {
         y.setMark(false);
     }
 
-    /**
-     * Yhdistää kaksi fibonaccin kekoa toisiinsa. 
-     * @param keko1 Ensimmäinen yhdistettävä keko.
-     * @param keko2 Toinen yhdistettävä keko.
-     * @return yhdistettyKeko palauttaa yhdistetyn keon
-     */
-    public FibonaccinKeko union(FibonaccinKeko keko1, FibonaccinKeko keko2) {
-        FibonaccinKeko yhdistettyKeko = new FibonaccinKeko();
-        yhdistettyKeko.min = keko1.min;
-        if(keko1==null) {
-            yhdistettyKeko.min=keko2.min;
-        }
-        else if(keko2.min!=null&&keko2.min.getKey()<keko1.min.getKey()) {
-            yhdistettyKeko.min=keko2.min;
-        }
-        yhdistettyKeko.heapSize=keko1.heapSize+keko2.heapSize;
-        return yhdistettyKeko;
-    }
+//    /**
+//     * Toteutus ei ole valmis.
+//     * Yhdistää kaksi fibonaccin kekoa toisiinsa. 
+//     * @param keko1 Ensimmäinen yhdistettävä keko.
+//     * @param keko2 Toinen yhdistettävä keko.
+//     * @return yhdistettyKeko palauttaa yhdistetyn keon
+//     */
+//    public FibonaccinKeko union(FibonaccinKeko keko1, FibonaccinKeko keko2) {
+//        FibonaccinKeko yhdistettyKeko = new FibonaccinKeko();
+//        yhdistettyKeko.min = keko1.min;
+//        if(keko1==null) {
+//            yhdistettyKeko.min=keko2.min;
+//        }
+//        else if(keko2.min!=null&&keko2.min.getKey()<keko1.min.getKey()) {
+//            yhdistettyKeko.min=keko2.min;
+//        }
+//        yhdistettyKeko.heapSize=keko1.heapSize+keko2.heapSize;
+//        return yhdistettyKeko;
+//    }
     
     /**
      * Palauttaa fibonaccin keon koon. Käytetään testeissä.

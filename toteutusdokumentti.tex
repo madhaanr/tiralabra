@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage[finnish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage[pdftex]{hyperref}
 
 
 \author{Marko Haanranta}
@@ -10,27 +11,39 @@
 \begin{document}
 \maketitle
 \section{Ohjelman yleisrakenne}
-Tietorakenteiden harjoitustyönä toteutin neljä eri tietorakennetta ja vertailin lisäys ja poisto operaatioiden ajankäyttöä. Tietorakenteina toteutin binäärikeon, binomikeon, fibonaccin keon ja AVL-puun. Kaikki keot on toteutettu minimikekoina. Ohjelman aikavaativuuden testaamisen käytin Vertailija.java luokkaa.
+Tietorakenteiden harjoitustyönä toteutin neljä eri tietorakennetta ja vertailin niiden lisäys ja poisto operaatioiden ajankäyttöä suhteessa javan valmiiseen priority queue tietorakenteeseen. Tietorakenteina toteutin binäärikeon, binomikeon, fibonaccin keon ja AVL-puun. Kaikki keot on toteutettu minimikekoina. 
+
+Ohjelman aikavaativuuden testaamisen käytin Vertailija.java luokkaa.
 \subsection{Binäärikeko}
-Binäärikeko on toteutukseltaan hieman yksinkertaisempi kuin muut toteutetut tietorakenteet. Kekoon lisättävä avain tallennetaan taulukkoon ja sen jälkeen ajetaan heapify metodi joka vie avaimen sen oikealle paikalle keossa. Jos käytetään int-muuttujaa avaimen tallentamiseen niin binäärikeko on selkeästi nopeampi kuin muut toteuttamani tietorakenteet. Muutin toteutustani sen verran, että nyt tallennan taulukkoon Integer-olioita ja näin toteutettuna binäärikeko on hitain toteuttamani tietorakenne. Binäärikeon aikavaativuus lisäys ja poisto operaatioille on O(logn).
+Binäärikeko on toteutukseltaan hieman yksinkertaisempi kuin muut toteutetut tietorakenteet. Kekoon lisättävä avain tallennetaan taulukkoon ja sen jälkeen ajetaan heapify metodi joka vie avaimen sen oikealle paikalle keossa. Jos käytetään int-muuttujaa avaimen tallentamiseen niin binäärikeko on selkeästi nopeampi kuin muut toteuttamani tietorakenteet. Muutin toteutustani sen verran, että nyt tallennan taulukkoon Integer-olioita ja näin toteutettuna binäärikeko on hitain toteuttamani tietorakenne. Binäärikeon aikavaativuus lisäys ja poisto operaatioille on O(logn)\cite{tira}.
 \subsection{Binomikeko}
-Binomikeon solmut tallennetaan Node-olioina. Jokaisella solmu-oliolla on seuraavat kentät: key, parent, child, sibling ja degree. Binomikeko rakentuu linkitetystä listasta, johon on tallennettu binomipuita. Puiden solmuilla on aste eli degree ja jotta keko olisi binomikeko ehdon mukainen juurilistalla ei voi olla kahta puuta joilla on sama aste. Binomikeon aikavaativuus lisäys ja poisto operaatioille on O(logn).
+Binomikeon solmut tallennetaan Node-olioina. Jokaisella solmu-oliolla on seuraavat kentät: key, parent, child, sibling ja degree. Binomikeko rakentuu linkitetystä listasta, johon on tallennettu binomipuita. Puiden solmuilla on aste eli degree ja jotta keko olisi binomikeko ehdon mukainen juurilistalla ei voi olla kahta puuta joilla on sama aste. Binomikeon aikavaativuus lisäys ja poisto operaatioille on O(logn)\cite{tira}.
 \subsection{Fibonaccin keko}
-Fibonaccin kekoon lisättävä avain tallennetaan FibNode-oliona. FibNode oliolla on seuraavat kentät key, parent, child, left, right, degree ja mark. Fibonaccin keko rakentuu puista fibonaccin puista. Fibonaccin keossa kaikki avaimet lisätään juurisolmulistaan ja varsinainen keko rakennetaan vasta poisto operaation yhteydessä. Fibonaccin keon aikavaativuus lisäys operaatiolle on O(1) ja poisto operaatiolle O(logn)
+Fibonaccin kekoon lisättävä avain tallennetaan FibNode-oliona. FibNode oliolla on seuraavat kentät key, parent, child, left, right, degree ja mark\cite{cormen}. Fibonaccin keko rakentuu puista fibonaccin puista. Fibonaccin keossa kaikki avaimet lisätään juurisolmulistaan ja varsinainen keko rakennetaan vasta poisto operaation yhteydessä. Fibonaccin keon aikavaativuus lisäys operaatiolle on O(1) ja poisto operaatiolle O(logn)\cite{heap}.
 \subsection{AVL-puu}
-AVL-puu rakentuu AvlNode-olioista. Jokaisella solmulla on key, left, right, parent ja height kentät.
-AVL-puu on tasapainoinen binäärihakupuu eli jokaisella solmulla on kaksi lasta(child) ja vanhempi(parent). Paitsi tietysti koko puun juurisolmulla jonka parent kentän arvo on null. Puun solmun vasemmassa alipuussa on vain solmua pienemmän avaimen omaavia solmuja. Puun solmun oikeassa alipuussa on vain puun solmua suuremman avaimen omaavia solmuja. AVL-puu pidetään tasapainossa suorittamalla kierto operaatioita, kun puuhun lisätään tai siitä poistetaan solmuja. AVL puun aikavaativuus lisäys ja poisto operaatioille on O(logn). 
+AVL-puu rakentuu AvlNode-olioista. Jokaisella solmulla on key, left, right, parent ja height kentät\cite{tira}.
+AVL-puu on tasapainoinen binäärihakupuu eli jokaisella solmulla on kaksi lasta(child) ja vanhempi(parent). Paitsi tietysti koko puun juurisolmulla jonka parent kentän arvo on null. Puun solmun vasemmassa alipuussa on vain solmua pienemmän avaimen omaavia solmuja. Puun solmun oikeassa alipuussa on vain puun solmua suuremman avaimen omaavia solmuja. AVL-puu pidetään tasapainossa suorittamalla kierto operaatioita, kun puuhun lisätään tai siitä poistetaan solmuja. AVL puun aikavaativuus lisäys ja poisto operaatioille on O(logn)\cite{avl}. 
 \section{Saavutetut aika- ja tilavaativuudet}
 Kaikki toteuttamani tietorakenteet saavuttivat lisäys ja poisto operaatioden aikana O(logn) aikavaativuuden. Fibonaccin keon lisäys ei syystä tai toisesta toiminut odotetun O(1) aikavaativuuden mukaisesti, mistä olen kirjoittanut enemmän pohdintaa testausdokumentin kritiikkiä osioon.
-\section{Työn puutteet ja parannusehdotukset}
-Alkuperäisenä tarkoituksenani oli testata avainten lisäämistä ja poistamista myös käänteisessä ja satunnaisessa järjestetyksessä syötetyillä avaimen arvoilla. 
 
-Testatessani huomasin ettei toteuttamani Vertailija toiminut ihan odotetusti. Jos ajoin kaikki testit kerralla niin sain huomattavasti parempia tuloksia kuin jos ajoin vain yhden testin kerrallaan. Tästä johtuen ajoin kaikki testit erikseen muutamia kertoja ja otin tuloksista keskiarvot. 
+Kaikki toteuttamani algoritmit myös toimivat O(1) tilassa, koska missään operaatiossa tarvita suuria määriä apumuuttujia.
+\section{Työn puutteet ja parannusehdotukset}
+Alkuperäisenä tarkoituksenani oli testata avainten lisäämistä ja poistamista myös käänteisessä ja satunnaisessa järjestetyksessä syötetyillä avaimen arvoilla. Tämä jäi nyt toteuttamatta, koska jouduin käyttämään huomattavan paljon aikaa fibonaccin keon ja avl-puu delete operaatioiden debuggaamiseen. 
+
+Testatessani huomasin ettei toteuttamani Vertailija toiminut ihan odotetusti. Jos ajoin kaikki testit kerralla niin sain huomattavasti parempia tuloksia kuin jos ajoin vain yhden testin kerrallaan. Tästä johtuen ajoin kaikki testit erikseen muutamia kertoja ja otin tuloksista keskiarvot.
+
+Fibonaccin keko ja binomikeko tarjoavat operaation kahden keon yhdistämiseen. En toteuttanut Fibonaccin keon union operaatiota ja tästä johtuen en myöskään erikseen testannut binomikeon merge operaation nopeutta. 
 
 \begin{thebibliography}{9}
-\bibitem{heap} Heap \(data structure\): \newline
-\url{http://en.wikipedia.org/wiki/Heap_data_structure/} 
-\bibitem{kirja} Matti Nykänen: 
-\textit{Parhaat palat} (WSOY, 2013)
+\bibitem{tira} Patrick Floreen, \emph{Tietorakenteet ja algoritmit}, \newline
+\url{http://www.cs.helsinki.fi/u/floreen/tira2013/tira.pdf}, \newline Luentomateriaali 2013.
+\bibitem{cormen}
+Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest ja Clifford Stein:
+\emph{Introduction to Algorithms, third edition}. 
+The MIT Press 2009.
+\bibitem{heap}Heap (data structure), \newline
+\url{http://en.wikipedia.org/wiki/Heap_data_structure/}
+\bibitem{avl} AVL tree, \newline
+\url{http://en.wikipedia.org/wiki/AVL_tree}
 \end{thebibliography}
 \end{document}
